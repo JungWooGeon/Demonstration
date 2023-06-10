@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.police.demonstration.AddContactActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButton"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="시위 추가"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lineRow1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="이름 : "
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@id/nameEditText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/nameEditText"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:background="@drawable/box_border"
+            android:hint="ex) 김아무개"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintTop_toTopOf="@id/name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="번호 : "
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@id/numberEditText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/numberEditText"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:background="@drawable/box_border"
+            android:hint="ex) 010-0000-0000"
+            android:inputType="phone"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/number"
+            app:layout_constraintTop_toTopOf="@id/number" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="직책 : "
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@id/positionEditText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/number" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/positionEditText"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:background="@drawable/box_border"
+            android:hint="ex) 대표자"
+            android:inputType="text"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/position"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/position"
+            app:layout_constraintTop_toTopOf="@id/position" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="추가하기"
+            app:layout_constraintEnd_toEndOf="@id/positionEditText"
+            app:layout_constraintTop_toBottomOf="@id/positionEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

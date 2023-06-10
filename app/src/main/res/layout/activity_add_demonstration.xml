@@ -1,511 +1,528 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:layout_width="60dp"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="시위 추가"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/lineRow1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="activity"
+            type="com.police.demonstration.AddDemonstrationActivity" />
+    </data>
 
-    <View
-        android:id="@+id/lineRow1"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@id/demonstrateName"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrateName"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="시위 명칭"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow2"
-        app:layout_constraintEnd_toStartOf="@+id/lineCol1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow1" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButton"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/demonstrateNameEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@android:color/transparent"
-        android:hint="[ text 입력 ]"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/lineRow2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="시위 추가"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/lineRow2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/groupName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/demonstrateName" />
+        <View
+            android:id="@+id/lineRow1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/demonstrateName"
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/groupName"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="시위 단체명"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow3"
-        app:layout_constraintEnd_toStartOf="@+id/lineCol1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow2" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/demonstrateName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="시위 명칭"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow2"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/groupNameEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@android:color/transparent"
-        android:hint="[ text 입력 ]"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/lineRow3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow2" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/demonstrateNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@android:color/transparent"
+            android:hint="[ text 입력 ]"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/lineRow2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
-    <View
-        android:id="@+id/lineRow3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/demonstrationDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/groupName" />
+        <View
+            android:id="@+id/lineRow2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/groupName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/demonstrateName" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrationDate"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="시위 개최 일시"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow4"
-        app:layout_constraintEnd_toStartOf="@id/lineCol1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/groupName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="시위 단체명"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrationDateDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="00월 00시 00분 ~ 00월 00일 00시"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/timeZoneDay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/groupNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@android:color/transparent"
+            android:hint="[ text 입력 ]"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timeZoneDay"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="주간"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow4"
-        app:layout_constraintEnd_toStartOf="@id/timeZoneNight"
-        app:layout_constraintStart_toStartOf="@id/demonstrationDateDetail"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
+        <View
+            android:id="@+id/lineRow3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/demonstrationDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/groupName" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
-        app:layout_constraintEnd_toStartOf="@id/timeZoneNight"
-        app:layout_constraintStart_toEndOf="@id/timeZoneDay"
-        app:layout_constraintTop_toTopOf="@id/timeZoneDay" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/demonstrationDate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="시위 개최 일시"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timeZoneNight"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="야간"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow4"
-        app:layout_constraintEnd_toStartOf="@id/timeZoneLateNight"
-        app:layout_constraintStart_toEndOf="@id/timeZoneDay"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/demonstrationDateDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="00월 00시 00분 ~ 00월 00일 00시"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/timeZoneDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
-        app:layout_constraintEnd_toStartOf="@id/timeZoneLateNight"
-        app:layout_constraintStart_toEndOf="@id/timeZoneNight"
-        app:layout_constraintTop_toTopOf="@id/timeZoneDay" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/timeZoneDay"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="주간"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toStartOf="@id/timeZoneNight"
+            app:layout_constraintStart_toStartOf="@id/demonstrationDateDetail"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timeZoneLateNight"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="심야"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow4"
-        app:layout_constraintEnd_toEndOf="@id/demonstrationDateDetail"
-        app:layout_constraintStart_toEndOf="@id/timeZoneNight"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
+            app:layout_constraintEnd_toStartOf="@id/timeZoneNight"
+            app:layout_constraintStart_toEndOf="@id/timeZoneDay"
+            app:layout_constraintTop_toTopOf="@id/timeZoneDay" />
 
-    <View
-        android:id="@+id/lineRow4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/demonstrationPlaceDetail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationDate" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/timeZoneNight"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="야간"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toStartOf="@id/timeZoneLateNight"
+            app:layout_constraintStart_toEndOf="@id/timeZoneDay"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrationPlace"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="시위 개최 장소"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow5"
-        app:layout_constraintEnd_toStartOf="@id/lineCol1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
+            app:layout_constraintEnd_toStartOf="@id/timeZoneLateNight"
+            app:layout_constraintStart_toEndOf="@id/timeZoneNight"
+            app:layout_constraintTop_toTopOf="@id/timeZoneDay" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrationPlaceDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="[ 대전 00구 00로 00길 00-00 ]"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/placeZoneHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/timeZoneLateNight"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="심야"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toEndOf="@id/demonstrationDateDetail"
+            app:layout_constraintStart_toEndOf="@id/timeZoneNight"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/placeZoneHome"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="주거지역, 학교"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow5"
-        app:layout_constraintEnd_toStartOf="@id/placeZonePublic"
-        app:layout_constraintStart_toStartOf="@id/demonstrationPlaceDetail"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
+        <View
+            android:id="@+id/lineRow4"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/demonstrationPlaceDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationDate" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
-        app:layout_constraintEnd_toStartOf="@id/placeZonePublic"
-        app:layout_constraintStart_toEndOf="@id/placeZoneHome"
-        app:layout_constraintTop_toTopOf="@id/placeZoneHome" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/demonstrationPlace"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="시위 개최 장소"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/placeZonePublic"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="공공도서관"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow5"
-        app:layout_constraintEnd_toStartOf="@id/placeZoneEtc"
-        app:layout_constraintStart_toEndOf="@id/placeZoneHome"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/demonstrationPlaceDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="[ 대전 00구 00로 00길 00-00 ]"
+            android:inputType="textPostalAddress"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/placeZoneHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
-        app:layout_constraintEnd_toStartOf="@id/placeZoneEtc"
-        app:layout_constraintStart_toEndOf="@id/placeZonePublic"
-        app:layout_constraintTop_toTopOf="@id/placeZoneHome" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/placeZoneHome"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="주거지역, 학교"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toStartOf="@id/placeZonePublic"
+            app:layout_constraintStart_toStartOf="@id/demonstrationPlaceDetail"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/placeZoneEtc"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="그 밖"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow5"
-        app:layout_constraintEnd_toEndOf="@id/demonstrationPlaceDetail"
-        app:layout_constraintStart_toEndOf="@id/placeZonePublic"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
+            app:layout_constraintEnd_toStartOf="@id/placeZonePublic"
+            app:layout_constraintStart_toEndOf="@id/placeZoneHome"
+            app:layout_constraintTop_toTopOf="@id/placeZoneHome" />
 
-    <View
-        android:id="@+id/lineRow5"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/demonstrationOrganizer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/demonstrationPlace" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/placeZonePublic"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="공공도서관"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toStartOf="@id/placeZoneEtc"
+            app:layout_constraintStart_toEndOf="@id/placeZoneHome"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/demonstrationOrganizer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="주최자"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow6"
-        app:layout_constraintEnd_toStartOf="@id/lineCol1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
+            app:layout_constraintEnd_toStartOf="@id/placeZoneEtc"
+            app:layout_constraintStart_toEndOf="@id/placeZonePublic"
+            app:layout_constraintTop_toTopOf="@id/placeZoneHome" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="성명"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/row1"
-        app:layout_constraintEnd_toStartOf="@id/lineCol2"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/placeZoneEtc"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="그 밖"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toEndOf="@id/demonstrationPlaceDetail"
+            app:layout_constraintStart_toEndOf="@id/placeZonePublic"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/nameDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="[ 시위 측 연락망에서 가져옴 ]"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/row1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol2"
-        app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+        <View
+            android:id="@+id/lineRow5"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/demonstrationOrganizer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationPlace" />
 
-    <View
-        android:id="@+id/row1"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/phoneNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/demonstrationOrganizer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="주최자"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/phoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="연락처"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/row2"
-        app:layout_constraintEnd_toStartOf="@id/lineCol2"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/row1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="성명"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/row1"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/phoneNumberDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="[ 시위 측 연락망에서 가져옴 ]"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/row2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol2"
-        app:layout_constraintTop_toBottomOf="@id/row1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="[ 시위 측 연락망에서 가져옴 ]"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/row1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
 
-    <View
-        android:id="@+id/row2"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/position"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumber" />
+        <View
+            android:id="@+id/row1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/phoneNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/name" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/position"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="직책"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow6"
-        app:layout_constraintEnd_toStartOf="@id/lineCol2"
-        app:layout_constraintStart_toEndOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/row2" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="연락처"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/row2"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/row1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/positionDetail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="[ 시위 측 연락망에서 가져옴 ]"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol2"
-        app:layout_constraintTop_toBottomOf="@id/row2" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/phoneNumberDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="[ 시위 측 연락망에서 가져옴 ]"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/row2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/row1" />
 
-    <View
-        android:id="@+id/lineCol2"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/lineRow6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="@id/lineCol1"
-        app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+        <View
+            android:id="@+id/row2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/position"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumber" />
 
-    <View
-        android:id="@+id/lineRow6"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/lineRow1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/position"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="직책"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/row2" />
 
-    <View
-        android:id="@+id/lineCol1"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/lineRow6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/positionDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="[ 시위 측 연락망에서 가져옴 ]"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/row2" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/phoneNumberButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="100dp"
-        android:text="시위 측 연락망"
-        app:layout_constraintBottom_toTopOf="@id/lineRow7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow6" />
+        <View
+            android:id="@+id/lineCol2"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
 
-    <View
-        android:id="@+id/lineRow7"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/backgroundNoiseLevel"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberButton" />
+        <View
+            android:id="@+id/lineRow6"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/lineRow1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/backgroundNoiseLevel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="배경 소음도"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow8"
-        app:layout_constraintEnd_toStartOf="@id/lineCol3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow7" />
+        <View
+            android:id="@+id/lineCol1"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
-    <View
-        android:id="@+id/lineCol3"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/lineRow8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow7" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/phoneNumberButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="100dp"
+            android:text="시위 측 연락망"
+            app:layout_constraintBottom_toTopOf="@id/lineRow7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/box_border"
-        android:hint="입력해주세요."
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@id/lineRow8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lineCol3"
-        app:layout_constraintTop_toBottomOf="@id/lineRow7" />
+        <View
+            android:id="@+id/lineRow7"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/backgroundNoiseLevel"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumberButton" />
 
-    <View
-        android:id="@+id/lineRow8"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow6" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/backgroundNoiseLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="배경 소음도"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toStartOf="@id/lineCol3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="생성"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineRow8" />
+        <View
+            android:id="@+id/lineCol3"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/box_border"
+            android:hint="입력해주세요."
+            android:inputType="number"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol3"
+            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
+
+        <View
+            android:id="@+id/lineRow8"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="생성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
