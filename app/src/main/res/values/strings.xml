@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">Demonstration</string>
+    <string name="app_name">시위 관리</string>
+
+    <string name="management_demonstration">시위 관리</string>
+    <string name="addition_demonstration">시위 추가</string>
+    <string name="list_demonstration">시위 리스트</string>
+
+    <string name="demonstration_name">시위 명칭</string>
+    <string name="input_text">[ text 입력 ]</string>
+    <string name="group_name_demonstration">시위 단체명</string>
+    <string name="date_demonstration">시위 개최 일시</string>
+    <string name="example_date_demonstration">1월 1일 0시 0분 ~ 1월 1일 0시 0분</string>
+
+    <string name="day">주간</string>
+    <string name="night">야간</string>
+    <string name="late_night">심야"</string>
+    <string name="place_demonstration">시위 개최 장소</string>
+    <string name="example_place_demonstration">[ 대전 00구 00로 00길 00-00 ]</string>
+    <string name="example_place_zone_home">주거지역, 학교</string>
+    <string name="example_place_zone_public">공공도서관</string>
+    <string name="example_place_zone_etc">그 밖</string>
+    <string name="organizer">주최자</string>
+    <string name="name">성명</string>
+    <string name="example_organizer">[ 시위 측 연락망에서 가져옴 ]</string>
+    <string name="phone_number">연락처</string>
+    <string name="position">직책</string>
+    <string name="demonstration_phone_number">시위 측 연락망</string>
+    backgroundNoiseLevel
+    <string name="background_noise_level">배경 소음도</string>
+    <string name="plz_input">입력해주세요.</string>
+    <string name="create">생성</string>
 </resources>
