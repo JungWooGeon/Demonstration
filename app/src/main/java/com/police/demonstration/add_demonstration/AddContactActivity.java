@@ -1,4 +1,8 @@
-package com.police.demonstration;
+package com.police.demonstration.add_demonstration;
+
+import static com.police.demonstration.Constants.INTENT_NAME_NAME_DETAIL;
+import static com.police.demonstration.Constants.INTENT_NAME_PHONE_NUMBER_DETAIL;
+import static com.police.demonstration.Constants.INTENT_NAME_POSITION_DETAIL;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.police.demonstration.R;
 import com.police.demonstration.databinding.ActivityAddContactBinding;
 
 public class AddContactActivity extends AppCompatActivity {
@@ -24,14 +29,10 @@ public class AddContactActivity extends AppCompatActivity {
     private void initButton() {
         binding.backButton.setOnClickListener(e -> finish());
         binding.addButton.setOnClickListener(e -> {
-            String name = String.valueOf(binding.nameEditText.getText());
-            String number = String.valueOf(binding.numberEditText.getText());
-            String position = String.valueOf(binding.positionEditText.getText());
-
             Intent intent = new Intent();
-            intent.putExtra ("name", name);
-            intent.putExtra ("number", number);
-            intent.putExtra ("position", position);
+            intent.putExtra (INTENT_NAME_NAME_DETAIL, String.valueOf(binding.nameEditText.getText()));
+            intent.putExtra (INTENT_NAME_PHONE_NUMBER_DETAIL, String.valueOf(binding.numberEditText.getText()));
+            intent.putExtra (INTENT_NAME_POSITION_DETAIL, String.valueOf(binding.positionEditText.getText()));
             setResult (RESULT_OK, intent);
             finish ();
         });

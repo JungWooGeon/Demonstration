@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AddDemonstrationActivity" />
-        <activity android:name=".AddContactActivity" />
+        <activity android:name=".add_demonstration.AddDemonstrationActivity" />
+        <activity android:name=".add_demonstration.AddContactActivity" />
     </application>
 
 </manifest>
