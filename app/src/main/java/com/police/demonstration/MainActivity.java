@@ -1,5 +1,7 @@
 package com.police.demonstration;
 
+import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
+import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
 import static com.police.demonstration.Constants.INTENT_NAME_BACKGROUND_NOISE_LEVEL;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_DATE_DETAIL;
@@ -19,10 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.police.demonstration.adapter.DemonstrationAdapter;
 import com.police.demonstration.add_demonstration.AddDemonstrationActivity;
@@ -30,48 +30,57 @@ import com.police.demonstration.database.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * 메인화면
+ * 1. 시위 리스트 화면에 시위 정보 출력 -> room db, recyclerview
+ * 2. '시위 추가' 버튼 클릭 -> '시위 추가' 화면으로 이동
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    // MainActivity ViewModel
     private MainActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // init data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setActivity(this);
 
+        // init ViewModel
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        // viewModel 에서 시위 데이터 변경 시 recyclerview update
         viewModel.getDemonstrationList().observe(this, this::initRecyclerView);
-
+        // onCreate 에서 시위 데이터 읽기
         viewModel.readDemonstration(this);
 
         initButton();
     }
 
     private void initButton() {
+        // 시위 추가 버튼 클릭 시 시위 추가 화면으로 전환
         binding.addDemonstrateButton.setOnClickListener(e -> {
             Intent intent = new Intent(this, AddDemonstrationActivity.class);
             launcher.launch(intent);
         });
     }
 
-    // registerForActivityResult call back
+    // registerForActivityResult call back 설정 (시위 추가 화면에서 ok 사인이 나올 경우 데이터 저장)
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
         if (data.getResultCode() == Activity.RESULT_OK) {
             Intent intent = data.getData();
             assert intent != null;
 
-            String[] dateDetail = intent.getStringExtra(INTENT_NAME_DEMONSTRATION_DATE_DETAIL).split(" ~ ");
+            String[] dateDetail = intent.getStringExtra(INTENT_NAME_DEMONSTRATION_DATE_DETAIL).split(getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space));
 
             DemonstrationInfo demonstrationInfo = new DemonstrationInfo(
                 intent.getStringExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT),
                 intent.getStringExtra(INTENT_NAME_GROUP_NAME_EDITTEXT),
-                dateDetail[0], dateDetail[1],
+                dateDetail[DATE_DETAIL_START_DATE_IDX], dateDetail[DATE_DETAIL_END_DATE_IDX],
                 intent.getStringExtra(INTENT_NAME_TIMEZONE_IDX),
                 intent.getStringExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL),
                 intent.getStringExtra(INTENT_NAME_PLACE_ZONE_IDX),
@@ -85,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
+    // recyclerview 설정 (demonstrationList 데이터 연결)
     private void initRecyclerView(ArrayList<DemonstrationInfo> demonstrationList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.demonstrationRecyclerView.setLayoutManager(linearLayoutManager);

@@ -14,16 +14,19 @@ import com.police.demonstration.database.DemonstrationInfo;
 
 import java.util.ArrayList;
 
+/**
+ * 메인 화면 시위 리스트 RecyclerView Adapter
+ */
 public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdapter.ViewHolder>{
 
-    private ArrayList<DemonstrationInfo> demonstrationList;
+    private final ArrayList<DemonstrationInfo> demonstrationList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatImageView statusImage;
-        private TextView place;
-        private TextView placeDetail;
-        private AppCompatImageView inputBackNoiseButton;
-        private AppCompatImageView demonstrationDetailButton;
+        private final AppCompatImageView statusImage;
+        private final TextView place;
+        private final TextView placeDetail;
+        private final AppCompatImageView inputBackNoiseButton;
+        private final AppCompatImageView demonstrationDetailButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

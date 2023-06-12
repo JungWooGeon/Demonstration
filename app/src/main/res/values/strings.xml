@@ -15,7 +15,7 @@
     <string name="night">야간</string>
     <string name="late_night">심야"</string>
     <string name="place_demonstration">시위 개최 장소</string>
-    <string name="example_place_demonstration">[ 대전 00구 00로 00길 00-00 ]</string>
+    <string name="example_place_demonstration">[ 대전 00구 00로 00길 00–00 ]</string>
     <string name="example_place_zone_home">주거지역, 학교</string>
     <string name="example_place_zone_public">공공도서관</string>
     <string name="example_place_zone_etc">그 밖</string>
@@ -25,8 +25,34 @@
     <string name="phone_number">연락처</string>
     <string name="position">직책</string>
     <string name="demonstration_phone_number">시위 측 연락망</string>
-    backgroundNoiseLevel
     <string name="background_noise_level">배경 소음도</string>
     <string name="plz_input">입력해주세요.</string>
     <string name="create">생성</string>
+
+    <string name="add_phone_number">연락망 추가하기</string>
+    <string name="name_phone">이름 : </string>
+    <string name="name_phone_example">ex) 김아무개</string>
+    <string name="number_phone">번호 : </string>
+    <string name="number_phone_example">ex) 010–0000–0000</string>
+    <string name="number_position">직책 : </string>
+    <string name="number_position_example">ex) 대표자</string>
+    <string name="add">추가하기</string>
+
+    <string name="example_place">[ 대전 00구 00로 ]</string>
+    <string name="example_place_detail">[ 2023.04.11 ] / [ 00 단체 ]</string>
+
+    <string name="hour">시</string>
+    <string name="minute">분</string>
+    <string name="month">월</string>
+    <string name="day_month">일</string>
+    <string name="input_end_time">마침 시간 입력</string>
+    <string name="input_end_date">마침 날짜 입력</string>
+    <string name="input_start_time">시작 시간 입력</string>
+    <string name="input_start_date">시작 날짜 입력</string>
+    <string name="cancel">취소</string>
+    <string name="example_time">0시 0분</string>
+    <string name="example_date">1월 1일</string>
+
+    <string name="space">&#160;</string>
+    <string name="tilde">~</string>
 </resources>

@@ -1,5 +1,8 @@
 package com.police.demonstration;
 
+/**
+ * 상수 관리 class
+ */
 public class Constants {
     public static final int TIME_ZONE_DAY = 0;
     public static final int TIME_ZONE_NIGHT = 1;
@@ -24,4 +27,7 @@ public class Constants {
     public static final String INTENT_NAME_ORGANIZER_PHONE_NUMBER = "phoneNumber";
     public static final String INTENT_NAME_ORGANIZER_POSITION = "position";
     public static final String INTENT_NAME_BACKGROUND_NOISE_LEVEL = "backgroundNoiseLevel";
+
+    public final static int DATE_DETAIL_START_DATE_IDX = 0;
+    public final static int DATE_DETAIL_END_DATE_IDX = 1;
 }
