@@ -30,11 +30,11 @@
     <string name="create">생성</string>
 
     <string name="add_phone_number">연락망 추가하기</string>
-    <string name="name_phone">이름 : </string>
+    <string name="name_phone">이름 :&#160;</string>
     <string name="name_phone_example">ex) 김아무개</string>
-    <string name="number_phone">번호 : </string>
+    <string name="number_phone">번호 :&#160;</string>
     <string name="number_phone_example">ex) 010–0000–0000</string>
-    <string name="number_position">직책 : </string>
+    <string name="number_position">직책 :&#160;</string>
     <string name="number_position_example">ex) 대표자</string>
     <string name="add">추가하기</string>
 
@@ -55,4 +55,5 @@
 
     <string name="space">&#160;</string>
     <string name="tilde">~</string>
+    <string name="dash">-</string>
 </resources>

@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity
 public class DemonstrationInfo {
     @PrimaryKey(autoGenerate = true) int id;
@@ -23,6 +25,7 @@ public class DemonstrationInfo {
     public String getPlace() { return place; }
     public String getStartDate() { return startDate; }
     public String getEndDate() { return endDate; }
+    public String getGroupName() { return groupName; }
 
     public DemonstrationInfo(String name, String groupName, String startDate, String endDate, String timeZone, String place, String placeZone, String organizerName, String organizerPosition, String organizerPhoneNumber, String backgroundNoiseLevel) {
         this.name = name;

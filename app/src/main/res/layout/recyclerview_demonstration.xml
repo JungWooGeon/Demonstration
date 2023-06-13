@@ -23,6 +23,7 @@
         android:maxLines="1"
         android:text="@string/example_place"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/placeDetail"
         app:layout_constraintStart_toEndOf="@id/statusImage"
         app:layout_constraintTop_toTopOf="parent"

@@ -30,4 +30,7 @@ public class Constants {
 
     public final static int DATE_DETAIL_START_DATE_IDX = 0;
     public final static int DATE_DETAIL_END_DATE_IDX = 1;
+
+    public final static String INTENT_NAME_START_YEAR = "startYear";
+    public final static String INTENT_NAME_END_YEAR = "endYear";
 }

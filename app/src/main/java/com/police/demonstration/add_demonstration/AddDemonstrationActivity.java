@@ -4,6 +4,7 @@ import static com.police.demonstration.Constants.INTENT_NAME_BACKGROUND_NOISE_LE
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_DATE_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_PLACE_DETAIL;
+import static com.police.demonstration.Constants.INTENT_NAME_END_YEAR;
 import static com.police.demonstration.Constants.INTENT_NAME_GROUP_NAME_EDITTEXT;
 import static com.police.demonstration.Constants.INTENT_NAME_NAME_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_NAME;
@@ -12,6 +13,7 @@ import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_POSITION;
 import static com.police.demonstration.Constants.INTENT_NAME_PHONE_NUMBER_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_PLACE_ZONE_IDX;
 import static com.police.demonstration.Constants.INTENT_NAME_POSITION_DETAIL;
+import static com.police.demonstration.Constants.INTENT_NAME_START_YEAR;
 import static com.police.demonstration.Constants.INTENT_NAME_TIMEZONE_IDX;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
 import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
@@ -51,6 +53,9 @@ public class AddDemonstrationActivity extends AppCompatActivity {
     // '주거지역, 학교 / 공공도서관 / 그 밖' 에서 현재 선택되어 있는 Index (순서대로 0, 1, 2 로 저장)
     private int placeZoneIdx = 0;
 
+    private String startYear = "";
+    private String endYear = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +80,8 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         // '생성' 버튼 클릭 시 입력된 정보들을 모두 intent 에 put 하고, setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
         binding.addButton.setOnClickListener(e -> {
             Intent intent = new Intent();
+            intent.putExtra(INTENT_NAME_START_YEAR, startYear);
+            intent.putExtra(INTENT_NAME_END_YEAR, endYear);
             intent.putExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT, String.valueOf(binding.demonstrateNameEditText.getText()));
             intent.putExtra(INTENT_NAME_GROUP_NAME_EDITTEXT, String.valueOf(binding.groupNameEditText.getText()));
             intent.putExtra(INTENT_NAME_DEMONSTRATION_DATE_DETAIL, String.valueOf(binding.demonstrationDateDetail.getText()));
@@ -117,11 +124,11 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding.demonstrationDateDetail.setOnClickListener(e -> {
             Calendar calendar = Calendar.getInstance();
 
-            // 마침 시간 입력 TimePicker (한국 시간 +9)
+            // 마침 시간 입력 TimePicker
             TimePickerDialog endTimePickerDialog = new TimePickerDialog(AddDemonstrationActivity.this, (timePicker, selectedHour, selectedMinute) -> {
                 String text = binding.demonstrationDateDetail.getText().toString() + selectedHour + getString(R.string.hour) + getString(R.string.space) + selectedMinute + getString(R.string.minute);
                 binding.demonstrationDateDetail.setText(text);
-            }, calendar.get(Calendar.HOUR_OF_DAY) + 9, calendar.get(Calendar.MINUTE), true);
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             endTimePickerDialog.setTitle(getString(R.string.input_end_time));
             endTimePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time);
@@ -135,6 +142,8 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 String month = Integer.toString(selectedMonth + 1);
                 String text = binding.demonstrationDateDetail.getText().toString() + month + getString(R.string.month) + getString(R.string.space) + selectedDay + getString(R.string.day_month) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
+
+                endYear = String.valueOf(selectedYear);
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             endDatePickerDialog.setTitle(getString(R.string.input_end_date));
             endDatePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
@@ -143,11 +152,11 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             });
             endDatePickerDialog.show();
 
-            // 시작 시간 입력 TimePicker (한국 시간 + 9)
+            // 시작 시간 입력 TimePicker
             TimePickerDialog startTimePickerDialog = new TimePickerDialog(AddDemonstrationActivity.this, (timePicker, selectedHour, selectedMinute) -> {
                 String text = binding.demonstrationDateDetail.getText().toString() + selectedHour + getString(R.string.hour) + getString(R.string.space) + selectedMinute + getString(R.string.minute) + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
-            }, calendar.get(Calendar.HOUR_OF_DAY) + 9, calendar.get(Calendar.MINUTE), true);
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             startTimePickerDialog.setTitle(getString(R.string.input_start_time));
             startTimePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time) + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space);
@@ -155,12 +164,14 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             });
             startTimePickerDialog.show();
 
-            // 마침 시간 입력 DatePicker
+            // 시작 날짜 입력 DatePicker
             DatePickerDialog startDatePickerDialog = new DatePickerDialog(AddDemonstrationActivity.this, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
                 // 0월부터 시작하여 +1 숫자 조정
                 String month = Integer.toString(selectedMonth + 1);
                 String text = month + getString(R.string.month) + getString(R.string.space) + selectedDay + getString(R.string.day_month) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
+
+                startYear = String.valueOf(selectedYear);
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             startDatePickerDialog.setTitle(getString(R.string.input_start_date));
             startDatePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
