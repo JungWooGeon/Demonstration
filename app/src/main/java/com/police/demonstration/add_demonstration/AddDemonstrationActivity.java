@@ -21,7 +21,9 @@ import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
 import static com.police.demonstration.Constants.TIME_ZONE_DAY;
 import static com.police.demonstration.Constants.TIME_ZONE_LATE_NIGHT;
 import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
+import static com.police.demonstration.Constants.YEAR_DATE_FORMAT;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -36,7 +38,9 @@ import androidx.databinding.DataBindingUtil;
 import com.police.demonstration.R;
 import com.police.demonstration.databinding.ActivityAddDemonstrationBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 시위 추가 화면
@@ -63,6 +67,12 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_demonstration);
         binding.setActivity(this);
 
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat(YEAR_DATE_FORMAT);
+        String nowYear = formatter.format(new Date(System.currentTimeMillis()));
+        startYear = nowYear;
+        endYear = nowYear;
+
         initButton();
         initTextView();
     }
@@ -85,9 +95,9 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             intent.putExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT, String.valueOf(binding.demonstrateNameEditText.getText()));
             intent.putExtra(INTENT_NAME_GROUP_NAME_EDITTEXT, String.valueOf(binding.groupNameEditText.getText()));
             intent.putExtra(INTENT_NAME_DEMONSTRATION_DATE_DETAIL, String.valueOf(binding.demonstrationDateDetail.getText()));
-            intent.putExtra(INTENT_NAME_TIMEZONE_IDX, timeZoneIdx);
+            intent.putExtra(INTENT_NAME_TIMEZONE_IDX, String.valueOf(timeZoneIdx));
             intent.putExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL, String.valueOf(binding.demonstrationPlaceDetail.getText()));
-            intent.putExtra(INTENT_NAME_PLACE_ZONE_IDX, placeZoneIdx);
+            intent.putExtra(INTENT_NAME_PLACE_ZONE_IDX, String.valueOf(placeZoneIdx));
             intent.putExtra(INTENT_NAME_ORGANIZER_NAME, String.valueOf(binding.nameDetail.getText()));
             intent.putExtra(INTENT_NAME_ORGANIZER_PHONE_NUMBER, String.valueOf(binding.phoneNumberDetail.getText()));
             intent.putExtra(INTENT_NAME_ORGANIZER_POSITION, String.valueOf(binding.positionDetail.getText()));

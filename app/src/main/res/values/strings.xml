@@ -52,8 +52,14 @@
     <string name="cancel">취소</string>
     <string name="example_time">0시 0분</string>
     <string name="example_date">1월 1일</string>
+    <string name="organization">단체</string>
 
     <string name="space">&#160;</string>
     <string name="tilde">~</string>
     <string name="dash">-</string>
+    <string name="split_space">\\s</string>
+    <string name="dot">.</string>
+    <string name="slash">/</string>
+    <string name="open_bracket">[</string>
+    <string name="close_bracket">]</string>
 </resources>

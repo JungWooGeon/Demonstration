@@ -33,4 +33,7 @@ public class Constants {
 
     public final static String INTENT_NAME_START_YEAR = "startYear";
     public final static String INTENT_NAME_END_YEAR = "endYear";
+
+    public final static String SIMPLE_DATE_FORMAT = "yyyy-MM-dd-hh-mm";
+    public final static String YEAR_DATE_FORMAT = "yyyy";
 }

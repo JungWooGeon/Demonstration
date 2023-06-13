@@ -1,7 +1,9 @@
 package com.police.demonstration.adapter;
 
+import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
+
 import android.annotation.SuppressLint;
-import android.util.Log;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,8 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
     private final static int STATUS_POST = 2;
 
     private final ArrayList<DemonstrationInfo> demonstrationList;
+
+    private Resources resources;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatImageView statusImage;
@@ -58,6 +62,8 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
                 .inflate(R.layout.recyclerview_demonstration, parent, false);
         DemonstrationAdapter.ViewHolder viewHolder = new DemonstrationAdapter.ViewHolder(view);
 
+        resources = parent.getResources();
+
         return viewHolder;
     }
 
@@ -75,9 +81,9 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
                 break;
         }
 
-        String[] startDate = demonstrationList.get(position).getStartDate().split("-");
-        String placeDetail = startDate[0] + "." + startDate[1] + "." + startDate[2] + " / " + demonstrationList.get(position).getGroupName() + " [ 단체 ]";
-        String placeText = "[ " + demonstrationList.get(position).getPlace() + " ]";
+        String[] startDate = demonstrationList.get(position).getStartDate().split(resources.getString(R.string.dash));
+        String placeDetail = startDate[0] + resources.getString(R.string.dot) + startDate[1] + resources.getString(R.string.dot) + startDate[2] + resources.getString(R.string.space) + resources.getString(R.string.slash) + resources.getString(R.string.space) + demonstrationList.get(position).getGroupName() + resources.getString(R.string.space) + resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.organization) + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
+        String placeText = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + demonstrationList.get(position).getPlace() + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
 
         holder.placeDetail.setText(placeDetail);
         holder.place.setText(placeText);
@@ -90,7 +96,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
     private int overCurrentDate(String sD, String eD) {
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd-hh-mm");
+        SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
 
         Date startDate;
         Date endDate;
