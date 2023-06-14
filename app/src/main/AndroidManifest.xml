@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Demonstration"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,8 @@
 
         <activity android:name=".add_demonstration.AddDemonstrationActivity" />
         <activity android:name=".add_demonstration.AddContactActivity" />
+
+        <activity android:name=".manage_demonstration.ManageDemonstrationActivity" />
     </application>
 
 </manifest>

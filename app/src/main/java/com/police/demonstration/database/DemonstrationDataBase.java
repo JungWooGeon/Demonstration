@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {DemonstrationInfo.class}, version = 2)
+@Database(entities = {DemonstrationInfo.class}, version = 2, exportSchema = false)
 public abstract class DemonstrationDataBase extends RoomDatabase {
     public abstract DemonstrationDao demonstrationDao();
 

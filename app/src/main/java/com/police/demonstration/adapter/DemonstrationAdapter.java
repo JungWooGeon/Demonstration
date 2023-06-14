@@ -30,9 +30,19 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
     private final static int STATUS_ING = 1;
     private final static int STATUS_POST = 2;
 
+    public interface AdapterListener {
+        void onDetailButtonClick(View view, int position);
+    }
+
+    private AdapterListener listener = null;
+
     private final ArrayList<DemonstrationInfo> demonstrationList;
 
     private Resources resources;
+
+    public void setListener(AdapterListener listener) {
+        this.listener = listener;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatImageView statusImage;
@@ -87,6 +97,8 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
         holder.placeDetail.setText(placeDetail);
         holder.place.setText(placeText);
+
+        holder.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
     }
 
     @Override

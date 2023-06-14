@@ -1,4 +1,4 @@
-package com.police.demonstration;
+package com.police.demonstration.main;
 
 import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
 import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
@@ -22,21 +22,19 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.police.demonstration.R;
 import com.police.demonstration.adapter.DemonstrationAdapter;
 import com.police.demonstration.add_demonstration.AddDemonstrationActivity;
 import com.police.demonstration.database.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityMainBinding;
+import com.police.demonstration.manage_demonstration.ManageDemonstrationActivity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
 
 /**
  * 메인화면
@@ -113,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.demonstrationRecyclerView.setLayoutManager(linearLayoutManager);
         DemonstrationAdapter demonstrationAdapter = new DemonstrationAdapter(demonstrationList);
+        demonstrationAdapter.setListener(new DemonstrationAdapter.AdapterListener() {
+            @Override
+            public void onDetailButtonClick(View view, int position) {
+                Intent intent = new Intent(view.getContext(), ManageDemonstrationActivity.class);
+                startActivity(intent);
+            }
+        });
         binding.demonstrationRecyclerView.setAdapter(demonstrationAdapter);
     }
 

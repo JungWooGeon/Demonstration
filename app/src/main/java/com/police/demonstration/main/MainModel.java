@@ -1,4 +1,4 @@
-package com.police.demonstration;
+package com.police.demonstration.main;
 
 import android.content.Context;
 

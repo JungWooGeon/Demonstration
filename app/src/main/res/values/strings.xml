@@ -62,4 +62,8 @@
     <string name="slash">/</string>
     <string name="open_bracket">[</string>
     <string name="close_bracket">]</string>
+
+    <string name="measurement">측정</string>
+    <string name="record">기록</string>
+    <string name="notification">고지</string>
 </resources>

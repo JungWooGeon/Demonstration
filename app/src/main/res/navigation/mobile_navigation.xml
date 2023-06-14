@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_measurement">
+
+    <fragment
+        android:id="@+id/navigation_measurement"
+        android:name="com.police.demonstration.manage_demonstration.measurement.MeasurementFragment"
+        android:label="@string/measurement"
+        tools:layout="@layout/fragment_measurement" />
+
+    <fragment
+        android:id="@+id/navigation_record"
+        android:name="com.police.demonstration.manage_demonstration.record.RecordFragment"
+        android:label="@string/record"
+        tools:layout="@layout/fragment_record" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.police.demonstration.manage_demonstration.notification.NotificationFragment"
+        android:label="@string/notification"
+        tools:layout="@layout/fragment_notification" />
+
+</navigation>
