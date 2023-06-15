@@ -44,48 +44,9 @@
             android:layout_height="2dp"
             android:layout_marginTop="10dp"
             android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/demonstrateName"
+            app:layout_constraintBottom_toTopOf="@id/groupName"
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:layout_editor_absoluteX="0dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/demonstrateName"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="@string/demonstration_name"
-            android:textAlignment="center"
-            android:textColor="@color/subheading"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow2"
-            app:layout_constraintEnd_toStartOf="@+id/lineCol1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/demonstrateNameEditText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="@android:color/transparent"
-            android:hint="@string/input_text"
-            android:textAlignment="center"
-            android:textColorHint="@color/sky_blue"
-            app:layout_constraintBottom_toTopOf="@id/lineRow2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/lineCol1"
-            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
-
-        <View
-            android:id="@+id/lineRow2"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/groupName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/demonstrateName" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/groupName"
@@ -97,10 +58,10 @@
             android:textColor="@color/subheading"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow3"
-            app:layout_constraintEnd_toStartOf="@+id/lineCol1"
+            app:layout_constraintBottom_toTopOf="@id/lineRow2"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow2" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/groupNameEditText"
@@ -108,16 +69,16 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:background="@android:color/transparent"
-            android:hint="@string/input_text"
+            android:hint="@string/example_group"
             android:textAlignment="center"
-            android:textColorHint="@color/sky_blue"
-            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            android:textColorHint="@color/content_purple"
+            app:layout_constraintBottom_toTopOf="@id/lineRow2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lineCol1"
-            app:layout_constraintTop_toBottomOf="@id/lineRow2" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
         <View
-            android:id="@+id/lineRow3"
+            android:id="@+id/lineRow2"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/line"
@@ -136,26 +97,26 @@
             android:textColor="@color/subheading"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/demonstrationDateDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="@string/example_date_demonstration"
-            android:textAlignment="center"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:textColor="@color/sky_blue"
+            android:gravity="center"
+            android:text="@string/example_date_demonstration2"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/timeZoneDay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lineCol1"
-            app:layout_constraintTop_toBottomOf="@id/lineRow3"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2"
             tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -165,10 +126,10 @@
             android:gravity="center"
             android:text="@string/day"
             android:textAlignment="center"
-            android:textColor="@color/contents"
+            android:textColor="@color/content_purple"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
             app:layout_constraintEnd_toStartOf="@id/timeZoneNight"
             app:layout_constraintStart_toStartOf="@id/demonstrationDateDetail"
             app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
@@ -192,7 +153,7 @@
             android:textColor="@color/contents_light"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
             app:layout_constraintEnd_toStartOf="@id/timeZoneLateNight"
             app:layout_constraintStart_toEndOf="@id/timeZoneDay"
             app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
@@ -216,17 +177,17 @@
             android:textColor="@color/contents_light"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
             app:layout_constraintEnd_toEndOf="@id/demonstrationDateDetail"
             app:layout_constraintStart_toEndOf="@id/timeZoneNight"
             app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
         <View
-            android:id="@+id/lineRow4"
+            android:id="@+id/lineRow3"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/demonstrationPlaceDetail"
+            app:layout_constraintBottom_toTopOf="@id/demonstrationPlace"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/demonstrationDate" />
@@ -241,28 +202,28 @@
             android:textColor="@color/subheading"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/demonstrationPlaceDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
             android:hint="@string/example_place_demonstration"
             android:inputType="textPostalAddress"
             android:textAlignment="center"
-            android:textColorHint="@color/sky_blue"
+            android:textColorHint="@color/content_purple"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/placeZoneHome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lineCol1"
-            app:layout_constraintTop_toBottomOf="@id/lineRow4"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3"
             tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -275,7 +236,7 @@
             android:textColor="@color/contents"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
             app:layout_constraintEnd_toStartOf="@id/placeZonePublic"
             app:layout_constraintStart_toStartOf="@id/demonstrationPlaceDetail"
             app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
@@ -299,7 +260,7 @@
             android:textColor="@color/contents_light"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
             app:layout_constraintEnd_toStartOf="@id/placeZoneEtc"
             app:layout_constraintStart_toEndOf="@id/placeZoneHome"
             app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
@@ -323,13 +284,13 @@
             android:textColor="@color/contents_light"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
             app:layout_constraintEnd_toEndOf="@id/demonstrationPlaceDetail"
             app:layout_constraintStart_toEndOf="@id/placeZonePublic"
             app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
         <View
-            android:id="@+id/lineRow5"
+            android:id="@+id/lineRow4"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/line"
@@ -348,10 +309,10 @@
             android:textColor="@color/subheading"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
@@ -366,21 +327,21 @@
             app:layout_constraintBottom_toTopOf="@id/row1"
             app:layout_constraintEnd_toStartOf="@id/lineCol2"
             app:layout_constraintStart_toEndOf="@id/lineCol1"
-            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/nameDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/example_organizer"
+            android:text="@string/example_organizer_name_detail"
             android:textAlignment="center"
-            android:textColor="@color/contents"
+            android:textColor="@color/content_purple"
             android:textSize="13sp"
             app:layout_constraintBottom_toTopOf="@id/row1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lineCol2"
-            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
         <View
             android:id="@+id/row1"
@@ -412,9 +373,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/example_organizer"
+            android:text="@string/example_organizer_phone_number_detail"
             android:textAlignment="center"
-            android:textColor="@color/contents"
+            android:textColor="@color/content_purple"
             android:textSize="13sp"
             app:layout_constraintBottom_toTopOf="@id/row2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -441,7 +402,7 @@
             android:textColor="@color/contents"
             android:textSize="13sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
             app:layout_constraintEnd_toStartOf="@id/lineCol2"
             app:layout_constraintStart_toEndOf="@id/lineCol1"
             app:layout_constraintTop_toBottomOf="@id/row2" />
@@ -451,11 +412,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/example_organizer"
+            android:text="@string/example_organizer_position_detail"
             android:textAlignment="center"
-            android:textColor="@color/contents"
+            android:textColor="@color/content_purple"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lineCol2"
             app:layout_constraintTop_toBottomOf="@id/row2" />
@@ -465,9 +426,153 @@
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+
+        <View
+            android:id="@+id/lineRow5"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/standardNoiseLevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/demonstrationOrganizer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoiseLevel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/standard_noise_level"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/equivalentNoise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/equivalent_noise"
+            android:textAlignment="center"
+            android:textColor="@color/contents"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/row3"
+            app:layout_constraintEnd_toStartOf="@id/lineCol3"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/equivalentNoiseDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/row3"
+            app:layout_constraintEnd_toStartOf="@id/lineCol4"
+            app:layout_constraintStart_toEndOf="@id/lineCol3"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/backgroundNoise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/background_noise"
+            android:textAlignment="center"
+            android:textColor="@color/contents"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/row3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol4"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+
+        <View
+            android:id="@+id/row3"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/highestNoise"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/equivalentNoise" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/highestNoise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/highest_noise"
+            android:textAlignment="center"
+            android:textColor="@color/contents"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol3"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/row3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/highestNoiseDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol4"
+            app:layout_constraintStart_toEndOf="@id/lineCol3"
+            app:layout_constraintTop_toBottomOf="@id/row3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/backgroundNoiseDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol4"
+            app:layout_constraintTop_toBottomOf="@id/row3" />
+
+        <View
+            android:id="@+id/lineCol3"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5" />
+
+        <View
+            android:id="@+id/lineCol4"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="@id/lineCol1"
             app:layout_constraintTop_toBottomOf="@id/lineRow5" />
 
@@ -479,7 +584,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/lineRow1" />
+            app:layout_constraintTop_toTopOf="@id/lineRow1"
+            app:layout_constraintVertical_bias="0.7" />
 
         <View
             android:id="@+id/lineCol1"
@@ -493,83 +599,15 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/phoneNumberButton"
+            android:id="@+id/inputRecordMeasurementButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="100dp"
-            android:text="@string/demonstration_phone_number"
-            app:layout_constraintBottom_toTopOf="@id/lineRow7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
-
-        <View
-            android:id="@+id/lineRow7"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/backgroundNoiseLevel"
-            app:layout_constraintTop_toBottomOf="@id/phoneNumberButton" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/backgroundNoiseLevel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/background_noise_level"
-            android:textAlignment="center"
-            android:textColor="@color/contents"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/lineRow8"
-            app:layout_constraintEnd_toStartOf="@id/lineCol3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
-
-        <View
-            android:id="@+id/lineCol3"
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/lineRow8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/backgroundNoiseLevelDetail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/box_border"
-            android:hint="@string/plz_input"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textColorHint="@color/contents"
-            app:layout_constraintBottom_toTopOf="@id/lineRow8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/lineCol3"
-            app:layout_constraintTop_toBottomOf="@id/lineRow7" />
-
-        <View
-            android:id="@+id/lineRow8"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/create"
+            android:text="@string/input_record_measurement"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineRow8" />
+            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

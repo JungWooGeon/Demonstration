@@ -66,4 +66,16 @@
     <string name="measurement">측정</string>
     <string name="record">기록</string>
     <string name="notification">고지</string>
+
+    <string name="standard_noise_level">기준 소음도</string>
+    <string name="equivalent_noise">등가 소음</string>
+    <string name="highest_noise">최고 소음</string>
+    <string name="example_noise">[ 00 ] dB</string>
+    <string name="input_record_measurement">측정 기록 입력</string>
+    <string name="example_group">[단체명]</string>
+    <string name="example_date_demonstration2">[] 월 []일 []시 []분 ~ []월 []일 []시 []분</string>
+    <string name="example_organizer_name_detail">[ 000 ]</string>
+    <string name="example_organizer_phone_number_detail">[ 010–0000–0000 ]</string>
+    <string name="example_organizer_position_detail">[ 대표자 ]</string>
+    <string name="background_noise">배경 소음도</string>
 </resources>
