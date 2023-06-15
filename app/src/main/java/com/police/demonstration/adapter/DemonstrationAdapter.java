@@ -4,17 +4,17 @@ import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.police.demonstration.R;
 import com.police.demonstration.database.DemonstrationInfo;
+import com.police.demonstration.databinding.RecyclerviewDemonstrationBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,19 +45,12 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatImageView statusImage;
-        private final TextView place;
-        private final TextView placeDetail;
-        private final AppCompatImageView inputBackNoiseButton;
-        private final AppCompatImageView demonstrationDetailButton;
+        private final RecyclerviewDemonstrationBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            statusImage = itemView.findViewById(R.id.statusImage);
-            place = itemView.findViewById(R.id.place);
-            placeDetail = itemView.findViewById(R.id.placeDetail);
-            inputBackNoiseButton = itemView.findViewById(R.id.inputBackNoiseButton);
-            demonstrationDetailButton = itemView.findViewById(R.id.demonstrationDetailButton);
+
+            this.binding = RecyclerviewDemonstrationBinding.bind(itemView);
         }
     }
 
@@ -81,13 +74,13 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         switch (overCurrentDate(demonstrationList.get(position).getStartDate(), demonstrationList.get(position).getEndDate())) {
             case STATUS_PRE:
-                holder.statusImage.setImageResource(R.drawable.shape_circle_green);
+                holder.binding.statusImage.setImageResource(R.drawable.shape_circle_green);
                 break;
             case STATUS_ING:
-                holder.statusImage.setImageResource(R.drawable.shape_circle_red);
+                holder.binding.statusImage.setImageResource(R.drawable.shape_circle_red);
                 break;
             case STATUS_POST:
-                holder.statusImage.setImageResource(R.drawable.shape_circle_gray);
+                holder.binding.statusImage.setImageResource(R.drawable.shape_circle_gray);
                 break;
         }
 
@@ -95,10 +88,12 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         String placeDetail = startDate[0] + resources.getString(R.string.dot) + startDate[1] + resources.getString(R.string.dot) + startDate[2] + resources.getString(R.string.space) + resources.getString(R.string.slash) + resources.getString(R.string.space) + demonstrationList.get(position).getGroupName() + resources.getString(R.string.space) + resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.organization) + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
         String placeText = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + demonstrationList.get(position).getPlace() + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
 
-        holder.placeDetail.setText(placeDetail);
-        holder.place.setText(placeText);
+        holder.binding.placeDetail.setText(placeDetail);
+        holder.binding.place.setText(placeText);
 
-        holder.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
+        Log.d("테스트", holder.binding.place.getText().toString());
+
+        holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
     }
 
     @Override
