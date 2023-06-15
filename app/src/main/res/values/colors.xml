@@ -14,4 +14,6 @@
     <color name="line">#868686</color>
     <color name="contents">#323232</color>
     <color name="contents_light">#9A9A9A</color>
+    <color name="heading_purple">#8D44AC</color>
+    <color name="content_purple">#914AAF</color>
 </resources>
