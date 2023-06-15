@@ -36,4 +36,8 @@ public class Constants {
 
     public final static String SIMPLE_DATE_FORMAT = "yyyy-MM-dd-hh-mm";
     public final static String YEAR_DATE_FORMAT = "yyyy";
+
+    public final static int STATUS_ING = 0;
+    public final static int STATUS_PRE = 1;
+    public final static int STATUS_POST = 2;
 }

@@ -1,10 +1,12 @@
 package com.police.demonstration.adapter;
 
 import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
+import static com.police.demonstration.Constants.STATUS_ING;
+import static com.police.demonstration.Constants.STATUS_POST;
+import static com.police.demonstration.Constants.STATUS_PRE;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +27,6 @@ import java.util.Date;
  * 메인 화면 시위 리스트 RecyclerView Adapter
  */
 public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdapter.ViewHolder> {
-
-    private final static int STATUS_PRE = 0;
-    private final static int STATUS_ING = 1;
-    private final static int STATUS_POST = 2;
 
     public interface AdapterListener {
         void onDetailButtonClick(View view, int position);
@@ -90,8 +88,6 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
         holder.binding.placeDetail.setText(placeDetail);
         holder.binding.place.setText(placeText);
-
-        Log.d("테스트", holder.binding.place.getText().toString());
 
         holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
     }
