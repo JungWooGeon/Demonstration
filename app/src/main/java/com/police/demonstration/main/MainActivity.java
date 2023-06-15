@@ -6,12 +6,14 @@ import static com.police.demonstration.Constants.INTENT_NAME_BACKGROUND_NOISE_LE
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_DATE_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_PLACE_DETAIL;
+import static com.police.demonstration.Constants.INTENT_NAME_END_DATE;
 import static com.police.demonstration.Constants.INTENT_NAME_END_YEAR;
 import static com.police.demonstration.Constants.INTENT_NAME_GROUP_NAME_EDITTEXT;
 import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_NAME;
 import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_PHONE_NUMBER;
 import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_POSITION;
 import static com.police.demonstration.Constants.INTENT_NAME_PLACE_ZONE_IDX;
+import static com.police.demonstration.Constants.INTENT_NAME_START_DATE;
 import static com.police.demonstration.Constants.INTENT_NAME_START_YEAR;
 import static com.police.demonstration.Constants.INTENT_NAME_TIMEZONE_IDX;
 
@@ -80,26 +82,18 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = data.getData();
             assert intent != null;
 
-            final int START_DATE_IDX = 0;
-            final int END_DATE_IDX = 1;
-
-            String[] startEndDate = getStartEndDate(
-                    intent.getStringExtra(INTENT_NAME_DEMONSTRATION_DATE_DETAIL),
-                    intent.getStringExtra(INTENT_NAME_START_YEAR),
-                    intent.getStringExtra(INTENT_NAME_END_YEAR)
-            );
-
             DemonstrationInfo demonstrationInfo = new DemonstrationInfo(
-                intent.getStringExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT),
-                intent.getStringExtra(INTENT_NAME_GROUP_NAME_EDITTEXT),
-                startEndDate[START_DATE_IDX], startEndDate[END_DATE_IDX],
-                intent.getStringExtra(INTENT_NAME_TIMEZONE_IDX),
-                intent.getStringExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL),
-                intent.getStringExtra(INTENT_NAME_PLACE_ZONE_IDX),
-                intent.getStringExtra(INTENT_NAME_ORGANIZER_NAME),
-                intent.getStringExtra(INTENT_NAME_ORGANIZER_PHONE_NUMBER),
-                intent.getStringExtra(INTENT_NAME_ORGANIZER_POSITION),
-                intent.getStringExtra(INTENT_NAME_BACKGROUND_NOISE_LEVEL)
+                    intent.getStringExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT),
+                    intent.getStringExtra(INTENT_NAME_GROUP_NAME_EDITTEXT),
+                    intent.getStringExtra(INTENT_NAME_START_DATE),
+                    intent.getStringExtra(INTENT_NAME_END_DATE),
+                    intent.getStringExtra(INTENT_NAME_TIMEZONE_IDX),
+                    intent.getStringExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL),
+                    intent.getStringExtra(INTENT_NAME_PLACE_ZONE_IDX),
+                    intent.getStringExtra(INTENT_NAME_ORGANIZER_NAME),
+                    intent.getStringExtra(INTENT_NAME_ORGANIZER_PHONE_NUMBER),
+                    intent.getStringExtra(INTENT_NAME_ORGANIZER_POSITION),
+                    intent.getStringExtra(INTENT_NAME_BACKGROUND_NOISE_LEVEL)
             );
 
             viewModel.addDemonstration(this, demonstrationInfo);
@@ -119,28 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         binding.demonstrationRecyclerView.setAdapter(demonstrationAdapter);
-    }
-
-    // 시작 날짜와 마침 날짜 정제 ( [시작 날짜, 마침 날짜] )
-    private String[] getStartEndDate(String stringDateDetail, String startYear, String endYear) {
-        String[] dateDetail = stringDateDetail.split(getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space));
-
-        String[] startDetail = dateDetail[DATE_DETAIL_START_DATE_IDX].split(getString(R.string.split_space));
-        String[] endDetail = dateDetail[DATE_DETAIL_END_DATE_IDX].split(getString(R.string.split_space));
-
-        String startMonth = startDetail[0].split(getString(R.string.month))[0];
-        String startDay = startDetail[1].split(getString(R.string.day_month))[0];
-        String startHour = startDetail[2].split(getString(R.string.hour))[0];
-        String startMinute = startDetail[3].split(getString(R.string.minute))[0];
-
-        String endMonth = endDetail[0].split(getString(R.string.month))[0];
-        String endDay = endDetail[1].split(getString(R.string.day_month))[0];
-        String endHour = endDetail[2].split(getString(R.string.hour))[0];
-        String endMinute = endDetail[3].split(getString(R.string.minute))[0];
-
-        String date1 = startYear + getString(R.string.dash) + startMonth + getString(R.string.dash) + startDay + getString(R.string.dash) + startHour + getString(R.string.dash) + startMinute;
-        String date2 = endYear + getString(R.string.dash) + endMonth + getString(R.string.dash) + endDay + getString(R.string.dash) + endHour + getString(R.string.dash) + endMinute;
-
-        return new String[]{date1, date2};
     }
 }

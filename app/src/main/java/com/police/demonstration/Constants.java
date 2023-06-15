@@ -40,4 +40,7 @@ public class Constants {
     public final static int STATUS_ING = 0;
     public final static int STATUS_PRE = 1;
     public final static int STATUS_POST = 2;
+
+    public static final String INTENT_NAME_START_DATE = "startDate";
+    public static final String INTENT_NAME_END_DATE = "endDate";
 }
