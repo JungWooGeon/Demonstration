@@ -1,21 +1,7 @@
 package com.police.demonstration.main;
 
-import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
-import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
-import static com.police.demonstration.Constants.INTENT_NAME_BACKGROUND_NOISE_LEVEL;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_DATE_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_PLACE_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_END_DATE;
-import static com.police.demonstration.Constants.INTENT_NAME_END_YEAR;
-import static com.police.demonstration.Constants.INTENT_NAME_GROUP_NAME_EDITTEXT;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_NAME;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_PHONE_NUMBER;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_POSITION;
-import static com.police.demonstration.Constants.INTENT_NAME_PLACE_ZONE_IDX;
-import static com.police.demonstration.Constants.INTENT_NAME_START_DATE;
-import static com.police.demonstration.Constants.INTENT_NAME_START_YEAR;
-import static com.police.demonstration.Constants.INTENT_NAME_TIMEZONE_IDX;
+import static com.police.demonstration.Constants.INTENT_NAME_IS_ADD_BACKGROUND_NOISE;
+import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -28,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.police.demonstration.R;
 import com.police.demonstration.adapter.DemonstrationAdapter;
@@ -72,33 +59,10 @@ public class MainActivity extends AppCompatActivity {
         // 시위 추가 버튼 클릭 시 시위 추가 화면으로 전환
         binding.addDemonstrateButton.setOnClickListener(e -> {
             Intent intent = new Intent(this, AddDemonstrationActivity.class);
-            launcher.launch(intent);
+            intent.putExtra(INTENT_NAME_IS_ADD_BACKGROUND_NOISE, false);
+            addLauncher.launch(intent);
         });
     }
-
-    // registerForActivityResult call back 설정 (시위 추가 화면에서 ok 사인이 나올 경우 데이터 저장)
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
-        if (data.getResultCode() == Activity.RESULT_OK) {
-            Intent intent = data.getData();
-            assert intent != null;
-
-            DemonstrationInfo demonstrationInfo = new DemonstrationInfo(
-                    intent.getStringExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT),
-                    intent.getStringExtra(INTENT_NAME_GROUP_NAME_EDITTEXT),
-                    intent.getStringExtra(INTENT_NAME_START_DATE),
-                    intent.getStringExtra(INTENT_NAME_END_DATE),
-                    intent.getStringExtra(INTENT_NAME_TIMEZONE_IDX),
-                    intent.getStringExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL),
-                    intent.getStringExtra(INTENT_NAME_PLACE_ZONE_IDX),
-                    intent.getStringExtra(INTENT_NAME_ORGANIZER_NAME),
-                    intent.getStringExtra(INTENT_NAME_ORGANIZER_PHONE_NUMBER),
-                    intent.getStringExtra(INTENT_NAME_ORGANIZER_POSITION),
-                    intent.getStringExtra(INTENT_NAME_BACKGROUND_NOISE_LEVEL)
-            );
-
-            viewModel.addDemonstration(this, demonstrationInfo);
-        }
-    });
 
     // recyclerview 설정 (demonstrationList 데이터 연결)
     private void initRecyclerView(ArrayList<DemonstrationInfo> demonstrationList) {
@@ -108,10 +72,45 @@ public class MainActivity extends AppCompatActivity {
         demonstrationAdapter.setListener(new DemonstrationAdapter.AdapterListener() {
             @Override
             public void onDetailButtonClick(View view, int position) {
+                // '>' 버튼 클릭 이벤트
                 Intent intent = new Intent(view.getContext(), ManageDemonstrationActivity.class);
                 startActivity(intent);
+            }
+
+            @Override
+            public void inputBackNoiseButtonClick(View view, DemonstrationInfo demonstrationInfo) {
+                // 배경 소음도 추가 버튼 클릭 이벤트
+                Intent intent = new Intent(view.getContext(), AddDemonstrationActivity.class);
+                intent.putExtra(INTENT_NAME_IS_ADD_BACKGROUND_NOISE, true);
+                intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+
+                addBackgroundNoiseLauncher.launch(intent);
             }
         });
         binding.demonstrationRecyclerView.setAdapter(demonstrationAdapter);
     }
+
+    // registerForActivityResult call back 설정 (시위 추가 화면에서 ok 사인이 나올 경우 데이터 저장)
+    ActivityResultLauncher<Intent> addLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
+        if (data.getResultCode() == Activity.RESULT_OK) {
+            Toast.makeText(this, getString(R.string.complete_add_demonstration), Toast.LENGTH_SHORT).show();
+
+            Intent intent = data.getData();
+            assert intent != null;
+
+            viewModel.addDemonstration(this, intent.getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION));
+        }
+    });
+
+    // registerForActivityResult call back 설정 (배경 소음도 추가 화면에서 ok 사인이 나올 경우 배경 소음도 데이터 추가)
+    ActivityResultLauncher<Intent> addBackgroundNoiseLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
+        if (data.getResultCode() == Activity.RESULT_OK) {
+            Toast.makeText(this, getString(R.string.complete_update_background_noise), Toast.LENGTH_SHORT).show();
+
+            Intent intent = data.getData();
+            assert intent != null;
+
+            viewModel.updateBackgroundNoise(this, intent.getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION));
+        }
+    });
 }

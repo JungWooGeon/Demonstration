@@ -1,13 +1,15 @@
 package com.police.demonstration.database;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity
-public class DemonstrationInfo {
+public class DemonstrationInfo implements Parcelable {
     @PrimaryKey(autoGenerate = true) int id;
     @ColumnInfo(name = "name") String name;
     @ColumnInfo (name = "groupName") String groupName;
@@ -21,12 +23,6 @@ public class DemonstrationInfo {
     @ColumnInfo (name = "organizerPosition") String organizerPosition;
     @ColumnInfo (name = "backgroundNoiseLevel") String backgroundNoiseLevel;
 
-    public String getName() { return name; }
-    public String getPlace() { return place; }
-    public String getStartDate() { return startDate; }
-    public String getEndDate() { return endDate; }
-    public String getGroupName() { return groupName; }
-
     public DemonstrationInfo(String name, String groupName, String startDate, String endDate, String timeZone, String place, String placeZone, String organizerName, String organizerPosition, String organizerPhoneNumber, String backgroundNoiseLevel) {
         this.name = name;
         this.groupName = groupName;
@@ -39,5 +35,68 @@ public class DemonstrationInfo {
         this.organizerPhoneNumber = organizerPhoneNumber;
         this.organizerPosition = organizerPosition;
         this.backgroundNoiseLevel = backgroundNoiseLevel;
+    }
+
+    protected DemonstrationInfo(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        groupName = in.readString();
+        startDate = in.readString();
+        endDate = in.readString();
+        timeZone = in.readString();
+        place = in.readString();
+        placeZone = in.readString();
+        organizerName = in.readString();
+        organizerPhoneNumber = in.readString();
+        organizerPosition = in.readString();
+        backgroundNoiseLevel = in.readString();
+    }
+
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getPlace() { return place; }
+    public String getStartDate() { return startDate; }
+    public String getEndDate() { return endDate; }
+    public String getGroupName() { return groupName; }
+    public int getTimeZone() { return Integer.parseInt(timeZone); }
+    public int getPlaceZone() { return Integer.parseInt(placeZone); }
+    public String getOrganizerName() { return organizerName; }
+    public String getOrganizerPhoneNumber() { return organizerPhoneNumber; }
+    public String getOrganizerPosition() { return organizerPosition; }
+    public String getBackgroundNoiseLevel() { return backgroundNoiseLevel; }
+
+    public void setBackgroundNoiseLevel(String backgroundNoiseLevel) { this.backgroundNoiseLevel = backgroundNoiseLevel;}
+
+    public static final Creator<DemonstrationInfo> CREATOR = new Creator<DemonstrationInfo>() {
+        @Override
+        public DemonstrationInfo createFromParcel(Parcel in) {
+            return new DemonstrationInfo(in);
+        }
+
+        @Override
+        public DemonstrationInfo[] newArray(int size) {
+            return new DemonstrationInfo[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(groupName);
+        parcel.writeString(startDate);
+        parcel.writeString(endDate);
+        parcel.writeString(timeZone);
+        parcel.writeString(place);
+        parcel.writeString(placeZone);
+        parcel.writeString(organizerName);
+        parcel.writeString(organizerPhoneNumber);
+        parcel.writeString(organizerPosition);
+        parcel.writeString(backgroundNoiseLevel);
     }
 }

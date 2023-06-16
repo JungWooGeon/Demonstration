@@ -2,23 +2,11 @@ package com.police.demonstration.add_demonstration;
 
 import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
 import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
-import static com.police.demonstration.Constants.INTENT_NAME_BACKGROUND_NOISE_LEVEL;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_DATE_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_PLACE_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_END_DATE;
-import static com.police.demonstration.Constants.INTENT_NAME_END_YEAR;
-import static com.police.demonstration.Constants.INTENT_NAME_GROUP_NAME_EDITTEXT;
+import static com.police.demonstration.Constants.INTENT_NAME_IS_ADD_BACKGROUND_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_NAME_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_NAME;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_PHONE_NUMBER;
-import static com.police.demonstration.Constants.INTENT_NAME_ORGANIZER_POSITION;
+import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PHONE_NUMBER_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_PLACE_ZONE_IDX;
 import static com.police.demonstration.Constants.INTENT_NAME_POSITION_DETAIL;
-import static com.police.demonstration.Constants.INTENT_NAME_START_DATE;
-import static com.police.demonstration.Constants.INTENT_NAME_START_YEAR;
-import static com.police.demonstration.Constants.INTENT_NAME_TIMEZONE_IDX;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
 import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
 import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
@@ -42,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.police.demonstration.R;
+import com.police.demonstration.database.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityAddDemonstrationBinding;
 
 import java.text.ParseException;
@@ -78,14 +67,20 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_demonstration);
         binding.setActivity(this);
 
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat(YEAR_DATE_FORMAT);
-        String nowYear = formatter.format(new Date(System.currentTimeMillis()));
-        startYear = nowYear;
-        endYear = nowYear;
+        if (getIntent().getBooleanExtra(INTENT_NAME_IS_ADD_BACKGROUND_NOISE, false)) {
+            // 배경 소음도 추가 화면 셋팅
+            setAddBackgroundNoiseScreen();
+        } else {
+            // 시위 추가 화면
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat formatter = new SimpleDateFormat(YEAR_DATE_FORMAT);
+            String nowYear = formatter.format(new Date(System.currentTimeMillis()));
+            startYear = nowYear;
+            endYear = nowYear;
 
-        initButton();
-        initTextView();
+            initButton();
+            initTextView();
+        }
     }
 
     private void initButton() {
@@ -114,7 +109,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 throw new RuntimeException(ex);
             }
 
-            if ((startDate != null ? startDate.compareTo(endDate) : 0) < 0) {
+            if ((startDate != null ? startDate.compareTo(endDate) : 0) > 0) {
                 // 종료 날짜가 시작 날짜보다 작을 경우 토스트 메시지 출력
                 Toast.makeText(this, getString(R.string.plz_reset_date), Toast.LENGTH_SHORT).show();
             } else if (Objects.requireNonNull(binding.demonstrateNameEditText.getText()).toString().equals("")) {
@@ -130,19 +125,21 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 // '주최자' 미입력 시 토스트 메시지 출력
                 Toast.makeText(this, getString(R.string.plz_input_organizer), Toast.LENGTH_SHORT).show();
             } else {
-                // 입력된 정보들을 모두 intent 에 put 하고, setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
+                // 입력된 정보들을 setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
                 Intent intent = new Intent();
-                intent.putExtra(INTENT_NAME_START_DATE, startEndDate[START_DATE_IDX]);
-                intent.putExtra(INTENT_NAME_END_DATE, startEndDate[END_DATE_IDX]);
-                intent.putExtra(INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT, String.valueOf(binding.demonstrateNameEditText.getText()));
-                intent.putExtra(INTENT_NAME_GROUP_NAME_EDITTEXT, String.valueOf(binding.groupNameEditText.getText()));
-                intent.putExtra(INTENT_NAME_TIMEZONE_IDX, String.valueOf(timeZoneIdx));
-                intent.putExtra(INTENT_NAME_DEMONSTRATION_PLACE_DETAIL, String.valueOf(binding.demonstrationPlaceDetail.getText()));
-                intent.putExtra(INTENT_NAME_PLACE_ZONE_IDX, String.valueOf(placeZoneIdx));
-                intent.putExtra(INTENT_NAME_ORGANIZER_NAME, String.valueOf(binding.nameDetail.getText()));
-                intent.putExtra(INTENT_NAME_ORGANIZER_PHONE_NUMBER, String.valueOf(binding.phoneNumberDetail.getText()));
-                intent.putExtra(INTENT_NAME_ORGANIZER_POSITION, String.valueOf(binding.positionDetail.getText()));
-                intent.putExtra(INTENT_NAME_BACKGROUND_NOISE_LEVEL, String.valueOf(binding.backgroundNoiseLevelDetail.getText()));
+                DemonstrationInfo demonstrationInfo = new DemonstrationInfo(
+                        String.valueOf(binding.demonstrateNameEditText.getText()),
+                        String.valueOf(binding.groupNameEditText.getText()),
+                        startEndDate[START_DATE_IDX], startEndDate[END_DATE_IDX],
+                        String.valueOf(timeZoneIdx),
+                        String.valueOf(binding.demonstrationPlaceDetail.getText()),
+                        String.valueOf(placeZoneIdx),
+                        String.valueOf(binding.nameDetail.getText()),
+                        String.valueOf(binding.phoneNumberDetail.getText()),
+                        String.valueOf(binding.positionDetail.getText()),
+                        String.valueOf(binding.backgroundNoiseLevelDetail.getText())
+                );
+                intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -323,5 +320,71 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         String date2 = endYear + getString(R.string.dash) + endMonth + getString(R.string.dash) + endDay + getString(R.string.dash) + endHour + getString(R.string.dash) + endMinute;
 
         return new String[]{date1, date2};
+    }
+
+    // 배경 소음도 추가 화면 셋팅
+    private void setAddBackgroundNoiseScreen() {
+        binding.title.setText(getString(R.string.manage_background_noise));
+
+        DemonstrationInfo demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
+
+        binding.demonstrateNameEditText.setText(demonstrationInfo.getName());
+        binding.demonstrateNameEditText.setEnabled(false);
+
+        binding.groupNameEditText.setText(demonstrationInfo.getGroupName());
+        binding.groupNameEditText.setEnabled(false);
+
+        String date = demonstrationInfo.getStartDate() + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space) + demonstrationInfo.getEndDate();
+        binding.demonstrationDateDetail.setText(date);
+        binding.demonstrationDateDetail.setTextColor(getColor(R.color.contents_light));
+
+        switch (demonstrationInfo.getTimeZone()) {
+            case TIME_ZONE_NIGHT:
+                binding.timeZoneDay.setTextColor(getColor(R.color.contents_light));
+                binding.timeZoneNight.setTextColor(getColor(R.color.contents));
+                break;
+            case TIME_ZONE_LATE_NIGHT:
+                binding.timeZoneDay.setTextColor(getColor(R.color.contents_light));
+                binding.timeZoneLateNight.setTextColor(getColor(R.color.contents));
+                break;
+            default:
+                break;
+        }
+
+        binding.demonstrationPlaceDetail.setText(demonstrationInfo.getPlace());
+        binding.demonstrationPlaceDetail.setEnabled(false);
+
+        switch (demonstrationInfo.getPlaceZone()) {
+            case PLACE_ZONE_PUBLIC:
+                binding.placeZoneHome.setTextColor(getColor(R.color.contents_light));
+                binding.placeZonePublic.setTextColor(getColor(R.color.contents));
+                break;
+            case PLACE_ZONE_ETC:
+                binding.placeZoneHome.setTextColor(getColor(R.color.contents_light));
+                binding.placeZoneEtc.setTextColor(getColor(R.color.contents));
+                break;
+            default:
+                break;
+        }
+
+        binding.nameDetail.setText(demonstrationInfo.getOrganizerName());
+        binding.phoneNumberDetail.setText(demonstrationInfo.getOrganizerPhoneNumber());
+        binding.positionDetail.setText(demonstrationInfo.getOrganizerPosition());
+
+        binding.backgroundNoiseLevelDetail.setText(demonstrationInfo.getBackgroundNoiseLevel());
+
+        binding.backButton.setOnClickListener(e -> finish());
+        binding.addButton.setText(getString(R.string.update));
+        binding.addButton.setOnClickListener(e -> {
+            if (Objects.requireNonNull(binding.backgroundNoiseLevelDetail.getText()).toString().equals("")) {
+                Toast.makeText(this, getString(R.string.plz_input_background_noise), Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent();
+                demonstrationInfo.setBackgroundNoiseLevel(Objects.requireNonNull(binding.backgroundNoiseLevelDetail.getText()).toString());
+                intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 }

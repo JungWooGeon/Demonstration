@@ -16,6 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 /**
  * MainActivityViewModel Model
  * room db 를 사용하여 시위 데이터 관리
@@ -24,26 +27,61 @@ public class MainModel {
 
     // 시위 리스트
     private final ArrayList<DemonstrationInfo> demonstrationList = new ArrayList<>();
+    private DatabaseListener databaseListener;
 
     public ArrayList<DemonstrationInfo> getDemonstrationList() {
         return this.demonstrationList;
     }
 
+    public void setOnDatabaseListener(DatabaseListener databaseListener) {
+        this.databaseListener = databaseListener;
+    }
+
     // room db 사용하여 시위 정보 추가
     public void addDemonstration(Context context, DemonstrationInfo demonstrationInfo) {
-        DemonstrationDataBase db = DemonstrationDataBase.getInstance(context);
-        db.demonstrationDao().addDemonstration(demonstrationInfo);
+        // DB 에 add (Rxjava 비동기)
+        DemonstrationDataBase.getInstance(context)
+                .demonstrationDao()
+                .addDemonstration(demonstrationInfo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
 
+        // demonstrationList 에 add 반영
         demonstrationList.add(demonstrationInfo);
         sortDemonstrationList();
     }
 
     // room db 사용하여 시위 리스트 읽기
     public void readDemonstration(Context context) {
-        DemonstrationDataBase db = DemonstrationDataBase.getInstance(context);
-        demonstrationList.addAll(db.demonstrationDao().getAll());
+        // DB 에서 read (Rxjava 비동기) 후 listener 를 통해 변경 알림 (onChanged())
+        DemonstrationDataBase.getInstance(context)
+                .demonstrationDao()
+                .getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(list -> {
+                    demonstrationList.addAll(list);
+                    sortDemonstrationList();
+                    databaseListener.onChanged();
+                }).subscribe();
+    }
 
-        sortDemonstrationList();
+    public void updateBackgroundNoise(Context context, DemonstrationInfo demonstrationInfo) {
+        // DB 에 update (Rxjava 비동기)
+        DemonstrationDataBase.getInstance(context)
+                .demonstrationDao()
+                .updateDemonstration(demonstrationInfo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+
+        // demonstrationList 에 update 반영
+        for (int i = 0; i < demonstrationList.size(); i++) {
+            if (demonstrationList.get(i).getId() == demonstrationInfo.getId()) {
+                demonstrationList.get(i).setBackgroundNoiseLevel(demonstrationInfo.getBackgroundNoiseLevel());
+            }
+        }
     }
 
     // 시위 리스트 순서에 맞게 정렬
@@ -87,6 +125,7 @@ public class MainModel {
         });
     }
 
+    // 현재 날짜와 비교 후 진행 예정, 진행 중, 종료 상태 중 return
     private int getCompareToCurrentDateStatus(Date startDate, Date endDate) {
         Date currentDate = new Date(System.currentTimeMillis());
         if (currentDate.compareTo(startDate) < 0) {
@@ -99,5 +138,10 @@ public class MainModel {
             // 종료
             return STATUS_POST;
         }
+    }
+
+    // DB thread 완료를 전달하는 listener 역할
+    public interface DatabaseListener {
+        void onChanged();
     }
 }

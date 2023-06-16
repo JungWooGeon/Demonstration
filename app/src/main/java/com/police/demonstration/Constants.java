@@ -16,23 +16,8 @@ public class Constants {
     public static final String INTENT_NAME_PHONE_NUMBER_DETAIL = "number";
     public static final String INTENT_NAME_POSITION_DETAIL = "position";
 
-    public static final String INTENT_NAME_DEMONSTRATE_NAME_EDITTEXT = "demonstrateNameEditText";
-    public static final String INTENT_NAME_GROUP_NAME_EDITTEXT = "groupNameEditText";
-    public static final String INTENT_NAME_DEMONSTRATION_DATE_DETAIL = "demonstrationDateDetail";
-    public static final String INTENT_NAME_TIMEZONE_IDX = "timeZoneIdx";
-    public static final String INTENT_NAME_DEMONSTRATION_PLACE_DETAIL = "demonstrationPlaceDetail";
-    public static final String INTENT_NAME_PLACE_ZONE_IDX = "placeZoneIdx";
-
-    public static final String INTENT_NAME_ORGANIZER_NAME = "demonstrationOrganizer";
-    public static final String INTENT_NAME_ORGANIZER_PHONE_NUMBER = "phoneNumber";
-    public static final String INTENT_NAME_ORGANIZER_POSITION = "position";
-    public static final String INTENT_NAME_BACKGROUND_NOISE_LEVEL = "backgroundNoiseLevel";
-
     public final static int DATE_DETAIL_START_DATE_IDX = 0;
     public final static int DATE_DETAIL_END_DATE_IDX = 1;
-
-    public final static String INTENT_NAME_START_YEAR = "startYear";
-    public final static String INTENT_NAME_END_YEAR = "endYear";
 
     public final static String SIMPLE_DATE_FORMAT = "yyyy-MM-dd-hh-mm";
     public final static String YEAR_DATE_FORMAT = "yyyy";
@@ -41,6 +26,7 @@ public class Constants {
     public final static int STATUS_PRE = 1;
     public final static int STATUS_POST = 2;
 
-    public static final String INTENT_NAME_START_DATE = "startDate";
-    public static final String INTENT_NAME_END_DATE = "endDate";
+    public static final String INTENT_NAME_IS_ADD_BACKGROUND_NOISE = "isAddBackgroundNoise";
+
+    public static final String INTENT_NAME_PARCELABLE_DEMONSTRATION = "parcelableDemonstration";
 }

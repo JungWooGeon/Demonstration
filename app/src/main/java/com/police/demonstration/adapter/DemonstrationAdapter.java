@@ -30,6 +30,8 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
     public interface AdapterListener {
         void onDetailButtonClick(View view, int position);
+
+        void inputBackNoiseButtonClick(View view, DemonstrationInfo demonstrationInfo);
     }
 
     private AdapterListener listener = null;
@@ -90,6 +92,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         holder.binding.place.setText(placeText);
 
         holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
+        holder.binding.inputBackNoiseButton.setOnClickListener(e -> listener.inputBackNoiseButtonClick(holder.itemView, demonstrationList.get(position)));
     }
 
     @Override
