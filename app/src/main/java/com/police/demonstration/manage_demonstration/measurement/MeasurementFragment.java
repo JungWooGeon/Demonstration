@@ -66,7 +66,9 @@ public class MeasurementFragment extends Fragment {
 
     private void initTextView() {
         binding.title.setText(demonstrationInfo.getName());
-        binding.groupName.setText(demonstrationInfo.getGroupName());
+        binding.groupNameDetail.setText(demonstrationInfo.getGroupName());
+
+        binding.demonstrationDate.setText(getString(R.string.demonstration_time));
 
         String dateDetail = demonstrationInfo.getStartDate() + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space) + demonstrationInfo.getEndDate();
         binding.demonstrationDateDetail.setText(dateDetail);
@@ -155,7 +157,7 @@ public class MeasurementFragment extends Fragment {
     private void initButton() {
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
         binding.inputRecordMeasurementButton.setOnClickListener(e -> {
-            
+
         });
     }
 }

@@ -41,7 +41,7 @@
         <View
             android:id="@+id/lineRow1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/groupName"
@@ -64,10 +64,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow1" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/groupNameEditText"
+            android:id="@+id/groupNameDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="2"
             android:gravity="center"
             android:text="@string/example_group"
             android:textAlignment="center"
@@ -80,7 +79,7 @@
         <View
             android:id="@+id/lineRow2"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/demonstrationDate"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +136,7 @@
             app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
@@ -161,7 +160,7 @@
             app:layout_constraintTop_toBottomOf="@id/demonstrationDateDetail" />
 
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="@id/timeZoneNight"
@@ -187,7 +186,7 @@
         <View
             android:id="@+id/lineRow3"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/demonstrationPlace"
             app:layout_constraintEnd_toEndOf="parent"
@@ -244,7 +243,7 @@
             app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
@@ -268,7 +267,7 @@
             app:layout_constraintTop_toBottomOf="@id/demonstrationPlaceDetail" />
 
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="@id/placeZonePublic"
@@ -294,7 +293,7 @@
         <View
             android:id="@+id/lineRow4"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/demonstrationOrganizer"
             app:layout_constraintEnd_toEndOf="parent"
@@ -348,7 +347,7 @@
         <View
             android:id="@+id/row1"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/phoneNumber"
             app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +386,7 @@
         <View
             android:id="@+id/row2"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/position"
             app:layout_constraintEnd_toEndOf="parent"
@@ -425,7 +424,7 @@
 
         <View
             android:id="@+id/lineCol2"
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/lineRow5"
@@ -437,7 +436,7 @@
         <View
             android:id="@+id/lineRow5"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/standardNoiseLevel"
             app:layout_constraintEnd_toEndOf="parent"
@@ -506,7 +505,7 @@
         <View
             android:id="@+id/row3"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/highestNoise"
             app:layout_constraintEnd_toEndOf="parent"
@@ -558,7 +557,7 @@
 
         <View
             android:id="@+id/lineCol3"
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
@@ -569,7 +568,7 @@
 
         <View
             android:id="@+id/lineCol4"
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
@@ -581,7 +580,7 @@
         <View
             android:id="@+id/lineRow6"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -591,7 +590,7 @@
 
         <View
             android:id="@+id/lineCol1"
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
