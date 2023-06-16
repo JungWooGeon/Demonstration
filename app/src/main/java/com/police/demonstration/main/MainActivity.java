@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -71,15 +72,20 @@ public class MainActivity extends AppCompatActivity {
         DemonstrationAdapter demonstrationAdapter = new DemonstrationAdapter(demonstrationList);
         demonstrationAdapter.setListener(new DemonstrationAdapter.AdapterListener() {
             @Override
-            public void onDetailButtonClick(View view, int position) {
+            public void onDetailButtonClick(View view, DemonstrationInfo demonstrationInfo) {
                 // '>' 버튼 클릭 이벤트
-                Intent intent = new Intent(view.getContext(), ManageDemonstrationActivity.class);
-                startActivity(intent);
+                if (demonstrationInfo.getBackgroundNoiseLevel().equals("")) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.plz_input_background_noise), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(view.getContext(), ManageDemonstrationActivity.class);
+                    intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void inputBackNoiseButtonClick(View view, DemonstrationInfo demonstrationInfo) {
-                // 배경 소음도 추가 버튼 클릭 이벤트
+                // 배경 소음도 추가 버튼 클릭 이벤트 - 배경 소음도 수정 화면으로 전환
                 Intent intent = new Intent(view.getContext(), AddDemonstrationActivity.class);
                 intent.putExtra(INTENT_NAME_IS_ADD_BACKGROUND_NOISE, true);
                 intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);

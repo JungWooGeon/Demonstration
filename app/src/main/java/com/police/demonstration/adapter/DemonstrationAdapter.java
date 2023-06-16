@@ -29,7 +29,7 @@ import java.util.Date;
 public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdapter.ViewHolder> {
 
     public interface AdapterListener {
-        void onDetailButtonClick(View view, int position);
+        void onDetailButtonClick(View view, DemonstrationInfo demonstrationInfo);
 
         void inputBackNoiseButtonClick(View view, DemonstrationInfo demonstrationInfo);
     }
@@ -91,7 +91,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         holder.binding.placeDetail.setText(placeDetail);
         holder.binding.place.setText(placeText);
 
-        holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, position));
+        holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, demonstrationList.get(position)));
         holder.binding.inputBackNoiseButton.setOnClickListener(e -> listener.inputBackNoiseButtonClick(holder.itemView, demonstrationList.get(position)));
     }
 

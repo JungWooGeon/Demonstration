@@ -29,4 +29,22 @@ public class Constants {
     public static final String INTENT_NAME_IS_ADD_BACKGROUND_NOISE = "isAddBackgroundNoise";
 
     public static final String INTENT_NAME_PARCELABLE_DEMONSTRATION = "parcelableDemonstration";
+
+    public static final int DEFAULT_EQUIVALENT_NOISE_DAY_HOME = 65;
+    public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME = 60;
+    public static final int DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME = 55;
+    public static final int DEFAULT_EQUIVALENT_NOISE_DAY_PUBLIC = 65;
+    public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_PUBLIC = 60;
+    public static final int DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_PUBLIC = 60;
+    public static final int DEFAULT_EQUIVALENT_NOISE_DAY_ETC = 75;
+    public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC = 65;
+    public static final int DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC = 65;
+
+    public static final int DEFAULT_HIGHEST_NOISE_DAY_HOME = 85;
+    public static final int DEFAULT_HIGHEST_NOISE_NIGHT_HOME = 80;
+    public static final int DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME = 75;
+    public static final int DEFAULT_HIGHEST_NOISE_DAY_PUBLIC = 85;
+    public static final int DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC = 80;
+    public static final int DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC = 80;
+    public static final int DEFAULT_HIGHEST_NOISE_ETC = 95;
 }

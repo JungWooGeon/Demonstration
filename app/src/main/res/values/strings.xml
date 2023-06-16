@@ -94,4 +94,6 @@
 
     <string name="complete_add_demonstration">시위 정보가 추가되었습니다.</string>
     <string name="complete_update_background_noise">배경 소음도가 수정되었습니다.</string>
+
+    <string name="decibel">dB</string>
 </resources>
