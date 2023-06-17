@@ -24,6 +24,7 @@ import static com.police.demonstration.Constants.TIME_ZONE_DAY;
 import static com.police.demonstration.Constants.TIME_ZONE_LATE_NIGHT;
 import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,7 +158,8 @@ public class MeasurementFragment extends Fragment {
     private void initButton() {
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
         binding.inputRecordMeasurementButton.setOnClickListener(e -> {
-
+            Intent intent = new Intent(requireActivity(), AddMeasurementActivity.class);
+            startActivity(intent);
         });
     }
 }

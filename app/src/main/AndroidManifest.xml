@@ -23,8 +23,8 @@
 
         <activity android:name=".add_demonstration.AddDemonstrationActivity" />
         <activity android:name=".add_demonstration.AddContactActivity" />
-
         <activity android:name=".manage_demonstration.ManageDemonstrationActivity" />
+        <activity android:name=".manage_demonstration.measurement.AddMeasurementActivity" />
     </application>
 
 </manifest>

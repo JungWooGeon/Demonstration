@@ -97,4 +97,21 @@
 
     <string name="decibel">dB</string>
     <string name="demonstration_time">시위 시간</string>
+
+    <string name="input_measurement">측정 입력</string>
+    <string name="measurement_time">측정 시간</string>
+    <string name="measurement_time_example">[ 00 : 00 ]</string>
+    <string name="measurement_place">측정 위치</string>
+    <string name="detail_address_example">[ ]</string>
+    <string name="detail_address">상세 주소</string>
+    <string name="measurement_distance"><u>측정 거리</u></string>
+    <string name="measurement_distance_example">[ 0m ]</string>
+    <string name="wind_speed"><u>풍속</u></string>
+    <string name="wind_speed_example">[ 0.0 m/s ]</string>
+    <string name="input_measurement_value">측정값 입력</string>
+    <string name="equivalent">등가</string>
+    <string name="highest">최고</string>
+    <string name="correction_value">보정치 적용값</string>
+    <string name="standard_noise">기준 소음도</string>
+    <string name="reset">초기화</string>
 </resources>

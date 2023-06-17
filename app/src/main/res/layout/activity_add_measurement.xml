@@ -1,0 +1,726 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.police.demonstration.manage_demonstration.measurement.AddMeasurementActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButton"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/input_measurement"
+            android:textColor="@color/heading"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lineRow1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/measurementTime"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/measurementTime"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:autoSizeMaxTextSize="23sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="@string/measurement_time"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow1"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/measurementStartTime"
+            app:layout_constraintTop_toBottomOf="@id/measurementTime" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/measurementStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="16sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/measurement_time_example"
+            android:textAlignment="center"
+            android:textColor="@color/sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            app:layout_constraintEnd_toStartOf="@id/tilde"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tilde"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="@string/tilde"
+            android:textAlignment="center"
+            android:textColor="@color/heading"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            app:layout_constraintEnd_toStartOf="@id/measurementEndTime"
+            app:layout_constraintStart_toEndOf="@id/measurementStartTime"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/measurementEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="16sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/measurement_time_example"
+            android:textAlignment="center"
+            android:textColor="@color/sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tilde"
+            app:layout_constraintTop_toBottomOf="@id/lineRow2"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/measurementPlace"
+            app:layout_constraintTop_toBottomOf="@id/measurementStartTime" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/measurementPlace"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="@string/measurement_place"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/measurementPlaceDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/example_place_demonstration"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/detailAddress"
+            app:layout_constraintTop_toBottomOf="@id/measurementPlace" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/detailAddress"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="@string/detail_address"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/detailAddressDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/detail_address_example"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/measurementDistance"
+            app:layout_constraintTop_toBottomOf="@id/detailAddress" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/measurementDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/measurement_distance"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/measurementDistanceDetail"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/measurementDistanceDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/measurement_distance_example"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/measurementDistance"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/windSpeed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/wind_speed"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/windSpeedDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow5"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/windSpeedDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/wind_speed_example"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@id/lineRow6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/windSpeed"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/inputMeasurementValue"
+            app:layout_constraintTop_toBottomOf="@id/measurementDistanceDetail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/inputMeasurementValue"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/input_measurement_value"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/inputMeasurementEquivalent"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/equivalent"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow7"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputMeasurementEquivalentDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/example_noise"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            app:layout_constraintBottom_toTopOf="@id/lineRow7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow7"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/inputMeasurementHighest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/inputMeasurementEquivalent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/inputMeasurementHighest"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/highest"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow7"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputMeasurementHighestDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/example_noise"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColorHint="@color/sky_blue"
+            app:layout_constraintBottom_toTopOf="@id/lineRow8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow7"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/correctionValue"
+            app:layout_constraintTop_toBottomOf="@id/inputMeasurementValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctionValue"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/correction_value"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow10"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctionValueEquivalent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/equivalent"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow9"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctionValueEquivalentDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            app:layout_constraintBottom_toTopOf="@id/lineRow9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow9"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/correctionValueHighest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/correctionValueEquivalent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctionValueHighest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/highest"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow10"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow9"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctionValueHighestDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            app:layout_constraintBottom_toTopOf="@id/lineRow10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow9"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow10"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/standardNoise"
+            app:layout_constraintTop_toBottomOf="@id/correctionValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/standard_noise"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow12"
+            app:layout_constraintEnd_toStartOf="@id/lineCol2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow10"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoiseEquivalent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/equivalent"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow11"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow10"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoiseEquivalentDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            app:layout_constraintBottom_toTopOf="@id/lineRow11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow10"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow11"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/standardNoiseHighest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/standardNoiseEquivalent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoiseHighest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/highest"
+            android:textAlignment="center"
+            android:textColor="@color/subheading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/lineRow12"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toEndOf="@id/lineCol2"
+            app:layout_constraintTop_toBottomOf="@id/lineRow11"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/standardNoiseHighestDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:text="@string/example_noise"
+            android:textAlignment="center"
+            android:textColor="@color/content_purple"
+            app:layout_constraintBottom_toTopOf="@id/lineRow12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow11"
+            tools:ignore="UnusedAttribute" />
+
+        <View
+            android:id="@+id/lineRow12"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintVertical_bias="0.8" />
+
+        <View
+            android:id="@+id/lineCol1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/lineRow12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+
+        <View
+            android:id="@+id/lineCol2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/lineRow12"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow6" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/resetButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/recordButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow12" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/recordButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/record"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/resetButton"
+            app:layout_constraintTop_toBottomOf="@id/lineRow12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
