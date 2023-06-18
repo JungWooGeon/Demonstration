@@ -37,7 +37,7 @@ public class MainModel {
         this.databaseListener = databaseListener;
     }
 
-    // room db 사용하여 시위 정보 추가
+    // room db 사용 - 시위 정보 추가
     public void addDemonstration(Context context, DemonstrationInfo demonstrationInfo) {
         // DB 에 add (Rxjava 비동기)
         DemonstrationDataBase.getInstance(context)
@@ -52,7 +52,7 @@ public class MainModel {
         sortDemonstrationList();
     }
 
-    // room db 사용하여 시위 리스트 읽기
+    // room db 사용 - 시위 리스트 읽기 (listener 를 사용해 callback event 적용)
     public void readDemonstration(Context context) {
         // DB 에서 read (Rxjava 비동기) 후 listener 를 통해 변경 알림 (onChanged())
         DemonstrationDataBase.getInstance(context)
@@ -67,6 +67,7 @@ public class MainModel {
                 }).subscribe();
     }
 
+    // room db 사용 - 배경 소음도 update
     public void updateBackgroundNoise(Context context, DemonstrationInfo demonstrationInfo) {
         // DB 에 update (Rxjava 비동기)
         DemonstrationDataBase.getInstance(context)
@@ -85,9 +86,13 @@ public class MainModel {
     }
 
     // 시위 리스트 순서에 맞게 정렬
+    // 1. 진행 중, 진행 예정, 종료 순서
+    // 2. 현재 시간과 가까운 순서
     private void sortDemonstrationList() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
+        
+        // 시위 리스트 정렬
         demonstrationList.sort((info1, info2) -> {
             Date startDate1;
             Date endDate1;
@@ -100,15 +105,17 @@ public class MainModel {
                 startDate2 = formatter.parse(info2.getStartDate());
                 endDate2 = formatter.parse(info2.getEndDate());
 
+                // 날짜의 진행 중, 진행 예정, 종료 상태를 저장
                 int infoStatus1 = getCompareToCurrentDateStatus(startDate1, endDate1);
                 int infoStatus2 = getCompareToCurrentDateStatus(startDate2, endDate2);
 
+                // 진행 중, 진행 예정, 종료 상태 순으로 정렬
                 if (infoStatus1 < infoStatus2) {
                     return -1;
                 } else if (infoStatus1 > infoStatus2) {
                     return 1;
                 } else {
-                    // 같다면 start date 가 최근인 순서로 정렬
+                    // 상태가 같다면 start date 기준 현재 시간과 가까운 순으로 정렬
                     assert startDate1 != null;
 
                     if (infoStatus1 == STATUS_ING) {
@@ -140,7 +147,7 @@ public class MainModel {
         }
     }
 
-    // DB thread 완료를 전달하는 listener 역할
+    // DB 비동기 작업 완료를 알리는 listener 역할
     public interface DatabaseListener {
         void onChanged();
     }

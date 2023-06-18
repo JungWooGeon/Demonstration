@@ -57,6 +57,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
     // '주거지역, 학교 / 공공도서관 / 그 밖' 에서 현재 선택되어 있는 Index (순서대로 0, 1, 2 로 저장)
     private int placeZoneIdx = 0;
 
+    // 시작 연도와 종료 연도
     private String startYear = "";
     private String endYear = "";
 
@@ -68,13 +69,15 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         if (getIntent().getBooleanExtra(INTENT_NAME_IS_ADD_BACKGROUND_NOISE, false)) {
-            // 배경 소음도 추가 화면 셋팅
+            // 배경 소음도 추가 화면
             setAddBackgroundNoiseScreen();
         } else {
             // 시위 추가 화면
             @SuppressLint("SimpleDateFormat")
             SimpleDateFormat formatter = new SimpleDateFormat(YEAR_DATE_FORMAT);
             String nowYear = formatter.format(new Date(System.currentTimeMillis()));
+
+            // 시작 연도와 종료 연도를 현재 날짜로 계산하여 초기화
             startYear = nowYear;
             endYear = nowYear;
 
@@ -149,6 +152,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
     // registerForActivityResult call back 설정 (연락망 추가하기 화면에서 ok 사인이 나올 경우 화면에 연락망 데이터 반영)
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
         if (data.getResultCode() == Activity.RESULT_OK) {
+            // RESULT_OK 를 전달 받은 경우 성명, 연락처, 직책 TextView 에 반영
             Intent intent = data.getData();
             assert intent != null;
 
@@ -170,16 +174,19 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding.placeZoneEtc.setOnClickListener(e -> setDemonstrationOrganizer(PLACE_ZONE_ETC));
 
         // 시위 개최 일시 textview click event -> Date Picker 와 Time Picker 를 사용하여 입력
+        // 시작 날짜 -> 시작 시간 -> 마침 날짜 -> 마침 시간 순으로 picker show
         binding.demonstrationDateDetail.setOnClickListener(e -> {
             Calendar calendar = Calendar.getInstance();
 
             // 마침 시간 입력 TimePicker
             TimePickerDialog endTimePickerDialog = new TimePickerDialog(AddDemonstrationActivity.this, (timePicker, selectedHour, selectedMinute) -> {
+                // 마침 시간 입력 시 마침 시간 textView 에 시간 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + selectedHour + getString(R.string.hour) + getString(R.string.space) + selectedMinute + getString(R.string.minute);
                 binding.demonstrationDateDetail.setText(text);
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             endTimePickerDialog.setTitle(getString(R.string.input_end_time));
             endTimePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
+                // '취소 버튼' 클릭 시 마침 시간 textView 에 '0시 0분' 으로 시간 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time);
                 binding.demonstrationDateDetail.setText(text);
             });
@@ -189,6 +196,8 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             DatePickerDialog endDatePickerDialog = new DatePickerDialog(AddDemonstrationActivity.this, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
                 // 0월부터 시작하여 +1 숫자 조정
                 String month = Integer.toString(selectedMonth + 1);
+
+                // 마침 날짜 입력 시 마침 날짜 textView 에 날짜 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + month + getString(R.string.month) + getString(R.string.space) + selectedDay + getString(R.string.day_month) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
 
@@ -196,6 +205,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             endDatePickerDialog.setTitle(getString(R.string.input_end_date));
             endDatePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
+                // '취소 버튼' 클릭 시 마침 날짜 textView 에 '1월 1일' 로 날짜 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_date) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
@@ -203,11 +213,13 @@ public class AddDemonstrationActivity extends AppCompatActivity {
 
             // 시작 시간 입력 TimePicker
             TimePickerDialog startTimePickerDialog = new TimePickerDialog(AddDemonstrationActivity.this, (timePicker, selectedHour, selectedMinute) -> {
+                // 시작 시간 입력 시 시작 시간 textView 에 시간 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + selectedHour + getString(R.string.hour) + getString(R.string.space) + selectedMinute + getString(R.string.minute) + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             startTimePickerDialog.setTitle(getString(R.string.input_start_time));
             startTimePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
+                // '취소 버튼' 클릭 시 시작 시간 textView 에 '0시 0분 ~ ' 으로 시간 반영
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time) + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
@@ -217,6 +229,8 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             DatePickerDialog startDatePickerDialog = new DatePickerDialog(AddDemonstrationActivity.this, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
                 // 0월부터 시작하여 +1 숫자 조정
                 String month = Integer.toString(selectedMonth + 1);
+
+                // 시작 날짜 입력 시 시작 날짜 textView 에 날짜 반영
                 String text = month + getString(R.string.month) + getString(R.string.space) + selectedDay + getString(R.string.day_month) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
 
@@ -224,6 +238,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             startDatePickerDialog.setTitle(getString(R.string.input_start_date));
             startDatePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> {
+                // '취소 버튼' 클릭 시 시작 날짜 textView 에 '1월 1일' 로 날짜 반영
                 String text = getString(R.string.example_date) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
@@ -233,7 +248,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         });
     }
 
-    // "시위 개최 일시" -> '주간' - '야간' - '심야' click event
+    // "시위 개최 일시" -> '주간' - '야간' - '심야' click event - color 변경
     private void setDemonstrationDate(int idx) {
         switch (timeZoneIdx) {
             case TIME_ZONE_DAY:
@@ -266,7 +281,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         timeZoneIdx = idx;
     }
 
-    // "시위 개최 장소" -> '주거지역, 학교' - '공공도서관' - '그 밖' click event
+    // "시위 개최 장소" -> '주거지역, 학교' - '공공도서관' - '그 밖' click event - color 변경
     private void setDemonstrationOrganizer(int idx) {
         switch (placeZoneIdx) {
             case PLACE_ZONE_HOME:
@@ -322,8 +337,12 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         return new String[]{date1, date2};
     }
 
-    // 배경 소음도 추가 화면 셋팅
+    // 배경 소음도 추가 화면일 경우 화면 셋팅
     private void setAddBackgroundNoiseScreen() {
+        // 1. 제목을 '배경 소음도 관리' 로 변경
+        // 2. 기본 정보들을 클릭하거나 수정하지 못하도록 변경
+        // 3. 기본 정보들을 화면에 반영
+        
         binding.title.setText(getString(R.string.manage_background_noise));
 
         DemonstrationInfo demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
@@ -374,11 +393,15 @@ public class AddDemonstrationActivity extends AppCompatActivity {
         binding.backgroundNoiseLevelDetail.setText(demonstrationInfo.getBackgroundNoiseLevel());
 
         binding.backButton.setOnClickListener(e -> finish());
+        
+        // add button 을 수정 버튼으로 변경
         binding.addButton.setText(getString(R.string.update));
         binding.addButton.setOnClickListener(e -> {
             if (Objects.requireNonNull(binding.backgroundNoiseLevelDetail.getText()).toString().equals("")) {
+                // 배경 소음도 미 입력시 토스트 메시지 출력
                 Toast.makeText(this, getString(R.string.plz_input_background_noise), Toast.LENGTH_SHORT).show();
             } else {
+                // 배경 소음도 입력 시 시위 정보 객체의 데이터를 변경 후 intent 에 객체를 담아 setResult 로 상황 전달
                 Intent intent = new Intent();
                 demonstrationInfo.setBackgroundNoiseLevel(Objects.requireNonNull(binding.backgroundNoiseLevelDetail.getText()).toString());
                 intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);

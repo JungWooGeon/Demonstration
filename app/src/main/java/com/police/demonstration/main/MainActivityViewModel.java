@@ -22,6 +22,11 @@ public class MainActivityViewModel extends ViewModel {
 
     public MainActivityViewModel() {
         model = new MainModel();
+
+        // model 에서 DB 에 관련된 비동기 작업이 완료 되었을 경우
+        // LiveDate 에 해당 값을 반영함
+        // 현재 readDemonstration() 에서만 listener 를 사용하고,
+        // 다른 DB 에 관련된 작업들은 data 반영과 DB 비동기 작업을 따로 실행
         model.setOnDatabaseListener(() -> demonstrationList.setValue(model.getDemonstrationList()));
     }
 
@@ -29,18 +34,18 @@ public class MainActivityViewModel extends ViewModel {
         return this.demonstrationList;
     }
 
-    // 시위 읽기 기능 동작 후 LiveData update
+    // 시위 읽기 기능 -> model 에 시위 읽기 함수 실행
     public void readDemonstration(Context context) {
         model.readDemonstration(context);
     }
 
-    // 시위 추가 기능 동작 후 LiveData update
+    // 시위 추가 기능 -> model 에 시위 추가 함수 실행 후 LiveData 에 반영
     public void addDemonstration(Context context, DemonstrationInfo demonstrationInfo) {
         model.addDemonstration(context, demonstrationInfo);
         demonstrationList.setValue(model.getDemonstrationList());
     }
 
-    // 배경 소음도 수정
+    // 배경 소음도 수정 -> model 에 배경 소음도 update 함수 실행 후 LiveData 에 반영
     public void updateBackgroundNoise(Context context, DemonstrationInfo demonstrationInfo) {
         model.updateBackgroundNoise(context, demonstrationInfo);
         demonstrationList.setValue(model.getDemonstrationList());

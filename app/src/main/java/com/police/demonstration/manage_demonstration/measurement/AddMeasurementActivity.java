@@ -20,6 +20,13 @@ import com.police.demonstration.databinding.ActivityAddMeasurementBinding;
 import java.util.Calendar;
 import java.util.Objects;
 
+/**
+ * 측정 입력 화면
+ * 1. 기준 소음도를 보여줌
+ * 2. 측정값 입력에 따라 보정치를 적용하여 보여줌
+ * 3. 상세 측정 정보들 입력 (Timepicker, EditText)
+ * 4. 입력된 정보들을 setResult() 를 통해 전달
+ */
 public class AddMeasurementActivity extends AppCompatActivity {
 
     private ActivityAddMeasurementBinding binding;
@@ -33,6 +40,7 @@ public class AddMeasurementActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_measurement);
         binding.setActivity(this);
 
+        // Intent 로 전달 받은 시위 정보를 저장
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
 
         initTextView();
@@ -60,7 +68,7 @@ public class AddMeasurementActivity extends AppCompatActivity {
         binding.measurementEndTime.setOnClickListener(e -> {
             // 마침 시간 입력 TimePicker
             TimePickerDialog timePickerDialog = new TimePickerDialog(AddMeasurementActivity.this, (timePicker, selectedHour, selectedMinute) -> {
-                // 마침 시간 입력 시 시작 시간 textView 에 반영
+                // 마침 시간 입력 시 마침 시간 textView 에 반영
                 binding.measurementEndTime.setText(getTimeText(selectedHour, selectedMinute));
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             timePickerDialog.setTitle(getString(R.string.input_end_time));
@@ -139,9 +147,8 @@ public class AddMeasurementActivity extends AppCompatActivity {
         });
     }
 
+    // 배경 소음도와 입력한 소음도를 기준으로 계산한 보정치 값 return
     private String getTargetNoise(double noise) {
-        // 배경 소음도와 입력한 소음도를 기준으로 계산한 보정치 값 return
-
         double backgroundNoise = Double.parseDouble(demonstrationInfo.getBackgroundNoiseLevel());
 
         // 소음도의 차이는 소수 첫째 자리 까지 표시

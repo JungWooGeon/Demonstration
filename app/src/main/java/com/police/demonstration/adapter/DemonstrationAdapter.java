@@ -28,6 +28,7 @@ import java.util.Date;
  */
 public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdapter.ViewHolder> {
 
+    // Adapter 에서 MainActivity 로 통신할 수 있는 listener
     public interface AdapterListener {
         void onDetailButtonClick(View view, DemonstrationInfo demonstrationInfo);
 
@@ -36,8 +37,10 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
     private AdapterListener listener = null;
 
+    // RecyclerView 를 표시하기 위한 ArrayList -> 시위 정보
     private final ArrayList<DemonstrationInfo> demonstrationList;
 
+    // string.xml 을 사용하기 위한 resources
     private Resources resources;
 
     public void setListener(AdapterListener listener) {
@@ -50,6 +53,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // data binding
             this.binding = RecyclerviewDemonstrationBinding.bind(itemView);
         }
     }
@@ -72,6 +76,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // 상태 표시 그림 반영 (진행 중 -> 빨강, 진행 예정 -> 초록, 종료 -> 회색)
         switch (overCurrentDate(demonstrationList.get(position).getStartDate(), demonstrationList.get(position).getEndDate())) {
             case STATUS_PRE:
                 holder.binding.statusImage.setImageResource(R.drawable.shape_circle_green);
@@ -84,6 +89,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
                 break;
         }
 
+        // 시위의 간단한 데이터들을 정제하여 화면에 표시
         String[] startDate = demonstrationList.get(position).getStartDate().split(resources.getString(R.string.dash));
         String placeDetail = startDate[0] + resources.getString(R.string.dot) + startDate[1] + resources.getString(R.string.dot) + startDate[2] + resources.getString(R.string.space) + resources.getString(R.string.slash) + resources.getString(R.string.space) + demonstrationList.get(position).getGroupName() + resources.getString(R.string.space) + resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.organization) + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
         String placeText = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + demonstrationList.get(position).getPlace() + resources.getString(R.string.space) + resources.getString(R.string.close_bracket);
@@ -91,7 +97,9 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         holder.binding.placeDetail.setText(placeDetail);
         holder.binding.place.setText(placeText);
 
+        // '배경 소음도' 버튼 클릭 이벤트 -> 배경 소음도 추가 화면으로 전환
         holder.binding.demonstrationDetailButton.setOnClickListener(e -> listener.onDetailButtonClick(holder.itemView, demonstrationList.get(position)));
+        // '>' 버튼 클릭 이벤트 -> 시위 정보 관리 화면으로 전환
         holder.binding.inputBackNoiseButton.setOnClickListener(e -> listener.inputBackNoiseButtonClick(holder.itemView, demonstrationList.get(position)));
     }
 
@@ -100,6 +108,7 @@ public class DemonstrationAdapter extends RecyclerView.Adapter<DemonstrationAdap
         return demonstrationList.size();
     }
 
+    // 현재 시간과 비교하여 시위의 상태 return (진행 중, 진행 예정, 종료)
     private int overCurrentDate(String sD, String eD) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
