@@ -16,6 +16,8 @@ import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGH
 import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC;
 import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_HOME;
 import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC;
+import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
+import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
 import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
@@ -38,6 +40,9 @@ import com.police.demonstration.R;
 import com.police.demonstration.database.DemonstrationInfo;
 import com.police.demonstration.databinding.FragmentMeasurementBinding;
 
+/**
+ *
+ */
 public class MeasurementFragment extends Fragment {
 
     private FragmentMeasurementBinding binding;
@@ -159,6 +164,9 @@ public class MeasurementFragment extends Fragment {
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
         binding.inputRecordMeasurementButton.setOnClickListener(e -> {
             Intent intent = new Intent(requireActivity(), AddMeasurementActivity.class);
+            intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+            intent.putExtra(INTENT_NAME_EQUIVALENT_NOISE, binding.equivalentNoiseDetail.getText());
+            intent.putExtra(INTENT_NAME_HIGHEST_NOISE, binding.highestNoiseDetail.getText());
             startActivity(intent);
         });
     }

@@ -62,6 +62,7 @@
     <string name="slash">/</string>
     <string name="open_bracket">[</string>
     <string name="close_bracket">]</string>
+    <string name="colon">:</string>
 
     <string name="measurement">측정</string>
     <string name="record">기록</string>
@@ -105,13 +106,18 @@
     <string name="detail_address_example">[ ]</string>
     <string name="detail_address">상세 주소</string>
     <string name="measurement_distance"><u>측정 거리</u></string>
-    <string name="measurement_distance_example">[ 0m ]</string>
+    <string name="measurement_distance_example">[ 0 ]</string>
     <string name="wind_speed"><u>풍속</u></string>
-    <string name="wind_speed_example">[ 0.0 m/s ]</string>
+    <string name="wind_speed_example">[ 0.0 ]</string>
     <string name="input_measurement_value">측정값 입력</string>
     <string name="equivalent">등가</string>
     <string name="highest">최고</string>
     <string name="correction_value">보정치 적용값</string>
     <string name="standard_noise">기준 소음도</string>
     <string name="reset">초기화</string>
+
+    <string name="noise_example">[ 00 ]</string>
+    <string name="meter">m</string>
+    <string name="meter_per_second">m/s</string>
+    <string name="number_zero">0</string>
 </resources>

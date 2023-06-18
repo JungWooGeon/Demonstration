@@ -558,7 +558,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/box_border"
             android:hint="@string/plz_input"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:padding="10dp"
             android:textColorHint="@color/contents"
             app:layout_constraintBottom_toTopOf="@id/lineRow8"
