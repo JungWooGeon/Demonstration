@@ -1,4 +1,4 @@
-package com.police.demonstration.database;
+package com.police.demonstration.main.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

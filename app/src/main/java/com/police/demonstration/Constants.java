@@ -52,6 +52,8 @@ public class Constants {
     public static final String INTENT_NAME_EQUIVALENT_NOISE = "equivalentNoise";
     public static final String INTENT_NAME_HIGHEST_NOISE = "highestNoise";
 
+    public static final String INTENT_NAME_PARCELABLE_MEASUREMENT = "parcelableMeasurement";
+
     // 소음도 보정치 기준표
     public static Map<Double, Double> STANDARD_CORRECTION_NOISE = Map.<Double, Double>ofEntries(
             Map.entry(3.0, -3.0), Map.entry(3.1, -2.9),

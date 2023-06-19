@@ -17,9 +17,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.police.demonstration.R;
-import com.police.demonstration.adapter.DemonstrationAdapter;
-import com.police.demonstration.add_demonstration.AddDemonstrationActivity;
-import com.police.demonstration.database.DemonstrationInfo;
+import com.police.demonstration.main.adapter.DemonstrationAdapter;
+import com.police.demonstration.main.add_demonstration.AddDemonstrationActivity;
+import com.police.demonstration.main.database.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityMainBinding;
 import com.police.demonstration.manage_demonstration.ManageDemonstrationActivity;
 

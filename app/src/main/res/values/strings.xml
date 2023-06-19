@@ -120,4 +120,15 @@
     <string name="meter">m</string>
     <string name="meter_per_second">m/s</string>
     <string name="number_zero">0</string>
+
+    <string name="complete_add_measurement">측정 정보가 기록되었습니다.</string>
+
+    <string name="plz_input_start_time">시작 시간을 입력해주세요.</string>
+    <string name="plz_input_end_time">마침 시간을 입력해주세요.</string>
+    <string name="plz_input_measurement_place">측정 위치를 입력해주세요.</string>
+    <string name="plz_input_measurement_place_detail">상세 주소를 입력해주세요.</string>
+    <string name="plz_input_measurement_distance">측정 거리를 입력해주세요.</string>
+    <string name="plz_input_measurement_wind_speed">풍속을 입력해주세요.</string>
+    <string name="plz_input_measurement">측정값을 입력해주세요.</string>
+
 </resources>

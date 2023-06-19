@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.police.demonstration.add_demonstration.AddContactActivity" />
+            type="com.police.demonstration.main.add_demonstration.AddContactActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

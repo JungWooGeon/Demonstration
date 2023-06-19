@@ -3,18 +3,22 @@ package com.police.demonstration.manage_demonstration.measurement;
 import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
+import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.STANDARD_CORRECTION_NOISE;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.police.demonstration.R;
-import com.police.demonstration.database.DemonstrationInfo;
+import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.manage_demonstration.measurement.database.MeasurementInfo;
 import com.police.demonstration.databinding.ActivityAddMeasurementBinding;
 
 import java.util.Calendar;
@@ -144,6 +148,54 @@ public class AddMeasurementActivity extends AppCompatActivity {
             binding.inputMeasurementHighestDetail.setText("");
             binding.correctionValueEquivalentDetail.setText(getString(R.string.example_noise));
             binding.correctionValueHighestDetail.setText(getString(R.string.example_noise));
+        });
+
+        // 기록 버튼 클릭 이벤트
+        binding.recordButton.setOnClickListener(e -> {
+            if (binding.measurementStartTime.getText().toString().equals(getString(R.string.measurement_time_example))) {
+                // '시작 시간' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_start_time), Toast.LENGTH_SHORT).show();
+            } else if (binding.measurementEndTime.getText().toString().equals(getString(R.string.measurement_time_example))) {
+                // '마침 시간' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_end_time), Toast.LENGTH_SHORT).show();
+            } else if (Objects.requireNonNull(binding.measurementPlaceDetail.getText()).toString().equals("")) {
+                // '측정 위치' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_measurement_place), Toast.LENGTH_SHORT).show();
+            } else if (Objects.requireNonNull(binding.detailAddressDetail.getText()).toString().equals("")) {
+                // '상세 주소' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_measurement_place_detail), Toast.LENGTH_SHORT).show();
+            } else if (Objects.requireNonNull(binding.measurementDistanceDetail.getText()).toString().equals("")) {
+                // '측정 거리' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_measurement_distance), Toast.LENGTH_SHORT).show();
+            } else if (Objects.requireNonNull(binding.windSpeedDetail.getText()).toString().equals("")) {
+                // '풍속' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_measurement_wind_speed), Toast.LENGTH_SHORT).show();
+            } else if (Objects.requireNonNull(binding.inputMeasurementEquivalentDetail.getText()).toString().equals("") ||
+                    Objects.requireNonNull(binding.inputMeasurementHighestDetail.getText()).toString().equals("")) {
+                // '측정값' 미입력 시 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.plz_input_measurement), Toast.LENGTH_SHORT).show();
+            } else {
+                // 입력된 정보들 (측정 정보) 을 setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
+                Intent intent = new Intent();
+                MeasurementInfo measurementInfo = new MeasurementInfo(
+                        demonstrationInfo.getId(),
+                        binding.measurementStartTime.getText().toString(),
+                        binding.measurementEndTime.getText().toString(),
+                        Objects.requireNonNull(binding.measurementPlaceDetail.getText()).toString(),
+                        Objects.requireNonNull(binding.detailAddressDetail.getText()).toString(),
+                        Objects.requireNonNull(binding.measurementDistanceDetail.getText()).toString(),
+                        Objects.requireNonNull(binding.windSpeedDetail.getText()).toString(),
+                        Objects.requireNonNull(binding.inputMeasurementEquivalentDetail.getText()).toString(),
+                        Objects.requireNonNull(binding.inputMeasurementHighestDetail.getText()).toString(),
+                        binding.correctionValueEquivalentDetail.getText().toString(),
+                        binding.correctionValueHighestDetail.getText().toString(),
+                        binding.standardNoiseEquivalentDetail.getText().toString(),
+                        binding.standardNoiseHighestDetail.getText().toString()
+                );
+                intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
         });
     }
 

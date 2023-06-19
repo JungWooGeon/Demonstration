@@ -19,6 +19,7 @@ import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_PUB
 import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
+import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
 import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
 import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
@@ -26,18 +27,22 @@ import static com.police.demonstration.Constants.TIME_ZONE_DAY;
 import static com.police.demonstration.Constants.TIME_ZONE_LATE_NIGHT;
 import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.police.demonstration.R;
-import com.police.demonstration.database.DemonstrationInfo;
+import com.police.demonstration.main.database.DemonstrationInfo;
 import com.police.demonstration.databinding.FragmentMeasurementBinding;
 
 /**
@@ -184,7 +189,21 @@ public class MeasurementFragment extends Fragment {
             intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
             intent.putExtra(INTENT_NAME_EQUIVALENT_NOISE, binding.equivalentNoiseDetail.getText());
             intent.putExtra(INTENT_NAME_HIGHEST_NOISE, binding.highestNoiseDetail.getText());
-            startActivity(intent);
+
+            addLauncher.launch(intent);
         });
     }
+
+    // registerForActivityResult call back 설정 (측정 입력 화면에서 ok 사인이 나올 경우 데이터 저장)
+    ActivityResultLauncher<Intent> addLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), data -> {
+        if (data.getResultCode() == Activity.RESULT_OK) {
+            // RESULT_OK 를 전달 받은 경우 토스트 메시지를 띄우고, viewModel 에 측정 기록 추가 함수를 실행
+            Toast.makeText(requireActivity(), getString(R.string.complete_add_measurement), Toast.LENGTH_SHORT).show();
+
+            Intent intent = data.getData();
+            assert intent != null;
+
+            viewModel.addDemonstration(requireActivity(), intent.getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT));
+        }
+    });
 }

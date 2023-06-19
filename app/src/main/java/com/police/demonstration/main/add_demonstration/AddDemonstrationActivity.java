@@ -1,4 +1,4 @@
-package com.police.demonstration.add_demonstration;
+package com.police.demonstration.main.add_demonstration;
 
 import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
 import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.police.demonstration.R;
-import com.police.demonstration.database.DemonstrationInfo;
+import com.police.demonstration.main.database.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityAddDemonstrationBinding;
 
 import java.text.ParseException;

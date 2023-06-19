@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".add_demonstration.AddDemonstrationActivity" />
-        <activity android:name=".add_demonstration.AddContactActivity" />
+        <activity android:name=".main.add_demonstration.AddDemonstrationActivity" />
+        <activity android:name=".main.add_demonstration.AddContactActivity" />
         <activity android:name=".manage_demonstration.ManageDemonstrationActivity" />
         <activity android:name=".manage_demonstration.measurement.AddMeasurementActivity" />
     </application>

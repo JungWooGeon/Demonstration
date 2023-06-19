@@ -1,4 +1,4 @@
-package com.police.demonstration.add_demonstration;
+package com.police.demonstration.main.add_demonstration;
 
 import static com.police.demonstration.Constants.INTENT_NAME_NAME_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_PHONE_NUMBER_DETAIL;

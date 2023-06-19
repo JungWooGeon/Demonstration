@@ -8,7 +8,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.police.demonstration.R;
 import com.police.demonstration.databinding.ActivityManageDemonstrationBinding;
 

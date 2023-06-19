@@ -1,4 +1,4 @@
-package com.police.demonstration.database;
+package com.police.demonstration.main.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;

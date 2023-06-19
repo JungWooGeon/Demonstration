@@ -1,4 +1,4 @@
-package com.police.demonstration.database;
+package com.police.demonstration.main.database;
 
 import android.content.Context;
 
@@ -13,8 +13,7 @@ public abstract class DemonstrationDataBase extends RoomDatabase {
     private static DemonstrationDataBase database;
     private static final String DEMONSTRATION_DATABASE_NAME = "demonstrationDatabaseName";
 
-    public synchronized static DemonstrationDataBase getInstance(Context context)
-    {
+    public synchronized static DemonstrationDataBase getInstance(Context context) {
         if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(), DemonstrationDataBase.class, DEMONSTRATION_DATABASE_NAME)
                     .allowMainThreadQueries()

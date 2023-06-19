@@ -7,7 +7,7 @@
 
         <variable
             name="adapter"
-            type="com.police.demonstration.adapter.DemonstrationAdapter" />
+            type="com.police.demonstration.main.adapter.DemonstrationAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
