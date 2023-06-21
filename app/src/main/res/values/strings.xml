@@ -131,4 +131,29 @@
     <string name="plz_input_measurement_wind_speed">풍속을 입력해주세요.</string>
     <string name="plz_input_measurement">측정값을 입력해주세요.</string>
 
+    <string name="send_notice">안내문 발송</string>
+    <string name="maintenance_order">유지 명령</string>
+    <string name="stop_order">중지 명령</string>
+    <string name="temporary_storage">일시 보관</string>
+
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="number_six">6</string>
+    <string name="number_seven">7</string>
+    <string name="number_eight">8</string>
+    <string name="number_nine">9</string>
+    <string name="number_ten">10</string>
+    <string name="number_eleven">11</string>
+
+    <string name="exceed_highest_noise">최고소음 초과</string>
+    <string name="exceed_equivalent_noise">등가소음 초과</string>
+    <string name="highest_noise_violation">최고소음 위반</string>
+    <string name="skip_maintenance_order_equivalent">유지명령 생략(등가)</string>
+    <string name="skip_maintenance_order_highest">유지명령 생략(최고)</string>
+    <string name="skip_stop_order">중지명령 생략(유지명령 후)</string>
+    <string name="violation_after_a_stop_order">중지명령 후 위반 시</string>
+    <string name="returning_temporary_storage">일시보관 반환 중</string>
 </resources>
