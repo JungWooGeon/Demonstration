@@ -156,4 +156,9 @@
     <string name="skip_stop_order">중지명령 생략(유지명령 후)</string>
     <string name="violation_after_a_stop_order">중지명령 후 위반 시</string>
     <string name="returning_temporary_storage">일시보관 반환 중</string>
+
+    <string name="record_list">기록 리스트</string>
+    <string name="number_textview_example">1.</string>
+    <string name="example_content">[ 00시 00분 ] / [ 대전 00구 00로 00길 00 - 00 ]</string>
+    <string name="example_content_detail">[ 최고소음초과, 비고지 ]</string>
 </resources>

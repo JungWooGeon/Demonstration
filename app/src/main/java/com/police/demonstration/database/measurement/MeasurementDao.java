@@ -1,4 +1,4 @@
-package com.police.demonstration.manage_demonstration.measurement.database;
+package com.police.demonstration.database.measurement;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -16,4 +16,7 @@ public interface MeasurementDao {
 
     @Insert
     Completable addMeasurement(MeasurementInfo measurementInfo);
+
+    @Query("SELECT * FROM measurementinfo WHERE demonstrationId == :demonstrationId")
+    Single<List<MeasurementInfo>> getMeasurement(int demonstrationId);
 }

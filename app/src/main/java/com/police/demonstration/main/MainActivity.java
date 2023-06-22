@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.police.demonstration.R;
 import com.police.demonstration.main.adapter.DemonstrationAdapter;
 import com.police.demonstration.main.add_demonstration.AddDemonstrationActivity;
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityMainBinding;
 import com.police.demonstration.manage_demonstration.ManageDemonstrationActivity;
 

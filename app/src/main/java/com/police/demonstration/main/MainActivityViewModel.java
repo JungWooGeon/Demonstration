@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 
 import java.util.ArrayList;
 

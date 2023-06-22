@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.police.demonstration.manage_demonstration.measurement.AddMeasurementActivity" />
+            type="com.police.demonstration.manage_demonstration.measurement.add_measurement.AddMeasurementActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

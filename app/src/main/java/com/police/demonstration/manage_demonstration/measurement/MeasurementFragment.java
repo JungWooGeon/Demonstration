@@ -42,8 +42,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.police.demonstration.R;
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.databinding.FragmentMeasurementBinding;
+import com.police.demonstration.manage_demonstration.measurement.add_measurement.AddMeasurementActivity;
 
 /**
  * 시위 정보 화면 측정 부분 Fragment
@@ -135,8 +136,8 @@ public class MeasurementFragment extends Fragment {
         int timeZone = demonstrationInfo.getTimeZone();
         int placeZone = demonstrationInfo.getPlaceZone();
 
-        String equivalentNoise = getString(R.string.space) + getString(R.string.decibel);
-        String highestNoise = getString(R.string.space) + getString(R.string.decibel);
+        String equivalentNoise = getString(R.string.space);
+        String highestNoise = getString(R.string.space);
 
         if (timeZone == TIME_ZONE_DAY) {
             if (placeZone == PLACE_ZONE_HOME) {
@@ -172,6 +173,8 @@ public class MeasurementFragment extends Fragment {
                 highestNoise = DEFAULT_HIGHEST_NOISE_ETC + highestNoise;
             }
         }
+        equivalentNoise += getString(R.string.decibel);
+        highestNoise += getString(R.string.decibel);
 
         // 등가 소음, 최고 소음 변경
         binding.equivalentNoiseDetail.setText(equivalentNoise);
@@ -203,7 +206,7 @@ public class MeasurementFragment extends Fragment {
             Intent intent = data.getData();
             assert intent != null;
 
-            viewModel.addDemonstration(requireActivity(), intent.getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT));
+            viewModel.addMeasurement(requireActivity(), intent.getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT));
         }
     });
 }

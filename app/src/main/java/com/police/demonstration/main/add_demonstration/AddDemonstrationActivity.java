@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.police.demonstration.R;
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.databinding.ActivityAddDemonstrationBinding;
 
 import java.text.ParseException;

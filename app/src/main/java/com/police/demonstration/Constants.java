@@ -30,6 +30,7 @@ public class Constants {
 
     public static final String INTENT_NAME_IS_ADD_BACKGROUND_NOISE = "isAddBackgroundNoise";
     public static final String INTENT_NAME_PARCELABLE_DEMONSTRATION = "parcelableDemonstration";
+    public static final String INTENT_NAME_DEMONSTRATION_ID = "demonstrationId";
 
     public static final int DEFAULT_EQUIVALENT_NOISE_DAY_HOME = 65;
     public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME = 60;

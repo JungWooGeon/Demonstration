@@ -1,11 +1,13 @@
-package com.police.demonstration.manage_demonstration.measurement;
+package com.police.demonstration.manage_demonstration.measurement.add_measurement;
 
 import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
+import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 import static com.police.demonstration.Constants.STANDARD_CORRECTION_NOISE;
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.police.demonstration.R;
-import com.police.demonstration.main.database.DemonstrationInfo;
-import com.police.demonstration.manage_demonstration.measurement.database.MeasurementInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
+import com.police.demonstration.database.measurement.MeasurementInfo;
 import com.police.demonstration.databinding.ActivityAddMeasurementBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -176,6 +180,9 @@ public class AddMeasurementActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.plz_input_measurement), Toast.LENGTH_SHORT).show();
             } else {
                 // 입력된 정보들 (측정 정보) 을 setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
+
                 Intent intent = new Intent();
                 MeasurementInfo measurementInfo = new MeasurementInfo(
                         demonstrationInfo.getId(),
@@ -190,7 +197,8 @@ public class AddMeasurementActivity extends AppCompatActivity {
                         binding.correctionValueEquivalentDetail.getText().toString(),
                         binding.correctionValueHighestDetail.getText().toString(),
                         binding.standardNoiseEquivalentDetail.getText().toString(),
-                        binding.standardNoiseHighestDetail.getText().toString()
+                        binding.standardNoiseHighestDetail.getText().toString(),
+                        formatter.format(new Date(System.currentTimeMillis()))
                 );
                 intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
                 setResult(RESULT_OK, intent);

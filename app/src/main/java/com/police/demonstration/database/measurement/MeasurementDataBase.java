@@ -1,4 +1,4 @@
-package com.police.demonstration.manage_demonstration.measurement.database;
+package com.police.demonstration.database.measurement;
 
 import android.content.Context;
 

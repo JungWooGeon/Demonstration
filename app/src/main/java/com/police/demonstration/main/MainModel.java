@@ -8,8 +8,8 @@ import static com.police.demonstration.Constants.STATUS_PRE;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.police.demonstration.main.database.DemonstrationDataBase;
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationDataBase;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.police.demonstration.R;
-import com.police.demonstration.main.database.DemonstrationInfo;
+import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.databinding.RecyclerviewDemonstrationBinding;
 
 import java.text.ParseException;
