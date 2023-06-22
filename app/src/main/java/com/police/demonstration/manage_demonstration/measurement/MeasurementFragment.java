@@ -12,7 +12,6 @@ import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,6 @@ public class MeasurementFragment extends Fragment {
 
         // Intent 로 전달 받은 시위 정보를 저장
         demonstrationInfo = requireActivity().getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
-        Log.d("테스트", demonstrationInfo.getId() + " " + demonstrationInfo.getPlace());
 
         initTextView();
         initButton();

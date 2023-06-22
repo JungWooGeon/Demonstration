@@ -42,7 +42,6 @@ public class MainActivityViewModel extends ViewModel {
     // 시위 추가 기능 -> model 에 시위 추가 함수 실행 후 LiveData 에 반영
     public void addDemonstration(Context context, DemonstrationInfo demonstrationInfo) {
         model.addDemonstration(context, demonstrationInfo);
-        demonstrationList.setValue(model.getDemonstrationList());
     }
 
     // 배경 소음도 수정 -> model 에 배경 소음도 update 함수 실행 후 LiveData 에 반영

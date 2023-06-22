@@ -30,7 +30,6 @@ import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationDataBase;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 
@@ -112,15 +111,15 @@ public class MainModel {
                 .addDemonstration(demonstrationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
-
-        // demonstrationList 에 add 반영
-        demonstrationList.add(demonstrationInfo);
-        sortDemonstrationList();
+                .doOnSubscribe(d -> {
+                    readDemonstration(context);
+                }).subscribe();
     }
 
     // room db 사용 - 시위 리스트 읽기 (listener 를 사용해 callback event 적용)
     public void readDemonstration(Context context) {
+        demonstrationList.clear();
+
         // DB 에서 read (Rxjava 비동기) 후 listener 를 통해 변경 알림 (onChanged())
         DemonstrationDataBase.getInstance(context)
                 .demonstrationDao()

@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     // 배경 소음도가 입력되었을 경우 시위 정보 관리 화면으로 전환
                     // Intent 에 클릭한 시위 정보 객체를 담아 데이터 전달
                     Intent intent = new Intent(view.getContext(), ManageDemonstrationActivity.class);
-                    Log.d("테스트", demonstrationInfo.getId() + " " + demonstrationInfo.getPlace());
                     intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
                     startActivity(intent);
                 }

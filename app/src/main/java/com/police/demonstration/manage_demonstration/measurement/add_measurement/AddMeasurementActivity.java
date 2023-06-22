@@ -4,16 +4,13 @@ import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
-import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 import static com.police.demonstration.Constants.STANDARD_CORRECTION_NOISE;
 
-import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +21,7 @@ import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
 import com.police.demonstration.databinding.ActivityAddMeasurementBinding;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -215,7 +210,6 @@ public class AddMeasurementActivity extends AppCompatActivity {
             noise = 0;
         } else if (differenceNoise <= 9.9) {
             // 배경 소음도와 입력한 소음도의 차이가 3 dB 이상 10 dB 미만일 경우 보정
-            Log.d("테스트", String.valueOf(differenceNoise));
             Double correction = STANDARD_CORRECTION_NOISE.get(differenceNoise);
             assert correction != null;
 
