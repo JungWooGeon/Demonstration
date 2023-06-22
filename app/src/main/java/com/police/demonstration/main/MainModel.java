@@ -111,9 +111,8 @@ public class MainModel {
                 .addDemonstration(demonstrationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(d -> {
-                    readDemonstration(context);
-                }).subscribe();
+                .doOnComplete(() -> readDemonstration(context))
+                .subscribe();
     }
 
     // room db 사용 - 시위 리스트 읽기 (listener 를 사용해 callback event 적용)
@@ -141,7 +140,7 @@ public class MainModel {
                 .updateDemonstration(demonstrationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(list -> {
+                .doOnComplete(() -> {
                     // demonstrationList 에 update 반영
                     for (int i = 0; i < demonstrationList.size(); i++) {
                         if (demonstrationList.get(i).getId() == demonstrationInfo.getId()) {

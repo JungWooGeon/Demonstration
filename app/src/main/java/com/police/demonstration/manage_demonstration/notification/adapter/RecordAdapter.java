@@ -1,7 +1,6 @@
 package com.police.demonstration.manage_demonstration.notification.adapter;
 
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
