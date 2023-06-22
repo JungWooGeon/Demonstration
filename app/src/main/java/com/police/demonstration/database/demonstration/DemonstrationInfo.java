@@ -22,6 +22,8 @@ public class DemonstrationInfo implements Parcelable {
     @ColumnInfo (name = "organizerPhoneNumber") String organizerPhoneNumber;
     @ColumnInfo (name = "organizerPosition") String organizerPosition;
     @ColumnInfo (name = "backgroundNoiseLevel") String backgroundNoiseLevel;
+    @ColumnInfo(name = "standardEquivalent") String standardEquivalent;
+    @ColumnInfo(name = "standardHighest") String standardHighest;
 
     public DemonstrationInfo(String name, String groupName, String startDate, String endDate, String timeZone, String place, String placeZone, String organizerName, String organizerPosition, String organizerPhoneNumber, String backgroundNoiseLevel) {
         this.name = name;
@@ -50,6 +52,8 @@ public class DemonstrationInfo implements Parcelable {
         organizerPhoneNumber = in.readString();
         organizerPosition = in.readString();
         backgroundNoiseLevel = in.readString();
+        standardEquivalent = in.readString();
+        standardHighest = in.readString();
     }
 
     public int getId() { return id; }
@@ -64,8 +68,12 @@ public class DemonstrationInfo implements Parcelable {
     public String getOrganizerPhoneNumber() { return organizerPhoneNumber; }
     public String getOrganizerPosition() { return organizerPosition; }
     public String getBackgroundNoiseLevel() { return backgroundNoiseLevel; }
+    public String getStandardEquivalent() { return standardEquivalent; }
+    public String getStandardHighest() { return standardHighest; }
 
     public void setBackgroundNoiseLevel(String backgroundNoiseLevel) { this.backgroundNoiseLevel = backgroundNoiseLevel;}
+    public void setStandardEquivalent(String standardEquivalent) { this.standardEquivalent = standardEquivalent; }
+    public void setStandardHighest(String standardHighest) { this.standardHighest = standardHighest; }
 
     public static final Creator<DemonstrationInfo> CREATOR = new Creator<DemonstrationInfo>() {
         @Override
@@ -98,5 +106,7 @@ public class DemonstrationInfo implements Parcelable {
         parcel.writeString(organizerPhoneNumber);
         parcel.writeString(organizerPosition);
         parcel.writeString(backgroundNoiseLevel);
+        parcel.writeString(standardEquivalent);
+        parcel.writeString(standardHighest);
     }
 }

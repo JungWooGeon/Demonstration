@@ -1,13 +1,36 @@
 package com.police.demonstration.main;
 
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_ETC;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_HOME;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_PUBLIC;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_PUBLIC;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME;
+import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_PUBLIC;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_DAY_HOME;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_DAY_PUBLIC;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_ETC;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_HOME;
+import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC;
+import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
+import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
+import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
 import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 import static com.police.demonstration.Constants.STATUS_ING;
 import static com.police.demonstration.Constants.STATUS_POST;
 import static com.police.demonstration.Constants.STATUS_PRE;
+import static com.police.demonstration.Constants.TIME_ZONE_DAY;
+import static com.police.demonstration.Constants.TIME_ZONE_LATE_NIGHT;
+import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationDataBase;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 
@@ -39,6 +62,50 @@ public class MainModel {
 
     // room db 사용 - 시위 정보 추가
     public void addDemonstration(Context context, DemonstrationInfo demonstrationInfo) {
+        // 등가 소음, 최고 소음 설정 (시간대와 장소대를 기준으로 설정)
+        int timeZone = demonstrationInfo.getTimeZone();
+        int placeZone = demonstrationInfo.getPlaceZone();
+
+        String equivalentNoise = "";
+        String highestNoise = "";
+
+        if (timeZone == TIME_ZONE_DAY) {
+            if (placeZone == PLACE_ZONE_HOME) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_DAY_HOME);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_DAY_HOME);
+            } else if (placeZone == PLACE_ZONE_PUBLIC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_DAY_PUBLIC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_DAY_PUBLIC);
+            } else if (placeZone == PLACE_ZONE_ETC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_DAY_ETC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_ETC);
+            }
+        } else if (timeZone == TIME_ZONE_NIGHT) {
+            if (placeZone == PLACE_ZONE_HOME) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_NIGHT_HOME);
+            } else if (placeZone == PLACE_ZONE_PUBLIC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_NIGHT_PUBLIC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC);
+            } else if (placeZone == PLACE_ZONE_ETC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_ETC);
+            }
+        } else if (timeZone == TIME_ZONE_LATE_NIGHT) {
+            if (placeZone == PLACE_ZONE_HOME) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME);
+            } else if (placeZone == PLACE_ZONE_PUBLIC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_PUBLIC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC);
+            } else if (placeZone == PLACE_ZONE_ETC) {
+                equivalentNoise = String.valueOf(DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC);
+                highestNoise = String.valueOf(DEFAULT_HIGHEST_NOISE_ETC);
+            }
+        }
+        demonstrationInfo.setStandardEquivalent(equivalentNoise);
+        demonstrationInfo.setStandardHighest(highestNoise);
+
         // DB 에 add (Rxjava 비동기)
         DemonstrationDataBase.getInstance(context)
                 .demonstrationDao()
@@ -75,14 +142,15 @@ public class MainModel {
                 .updateDemonstration(demonstrationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
-
-        // demonstrationList 에 update 반영
-        for (int i = 0; i < demonstrationList.size(); i++) {
-            if (demonstrationList.get(i).getId() == demonstrationInfo.getId()) {
-                demonstrationList.get(i).setBackgroundNoiseLevel(demonstrationInfo.getBackgroundNoiseLevel());
-            }
-        }
+                .doOnSubscribe(list -> {
+                    // demonstrationList 에 update 반영
+                    for (int i = 0; i < demonstrationList.size(); i++) {
+                        if (demonstrationList.get(i).getId() == demonstrationInfo.getId()) {
+                            demonstrationList.get(i).setBackgroundNoiseLevel(demonstrationInfo.getBackgroundNoiseLevel());
+                        }
+                    }
+                    databaseListener.onChanged();
+                }).subscribe();
     }
 
     // 시위 리스트 순서에 맞게 정렬
@@ -91,7 +159,7 @@ public class MainModel {
     private void sortDemonstrationList() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
-        
+
         // 시위 리스트 정렬
         demonstrationList.sort((info1, info2) -> {
             Date startDate1;

@@ -1,35 +1,18 @@
 package com.police.demonstration.manage_demonstration.measurement;
 
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_ETC;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_HOME;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_DAY_PUBLIC;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_PUBLIC;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME;
-import static com.police.demonstration.Constants.DEFAULT_EQUIVALENT_NOISE_NIGHT_PUBLIC;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_DAY_HOME;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_DAY_PUBLIC;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_ETC;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_HOME;
-import static com.police.demonstration.Constants.DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC;
 import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
-import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
 import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
-import static com.police.demonstration.Constants.TIME_ZONE_DAY;
 import static com.police.demonstration.Constants.TIME_ZONE_LATE_NIGHT;
 import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +50,7 @@ public class MeasurementFragment extends Fragment {
 
         // Intent 로 전달 받은 시위 정보를 저장
         demonstrationInfo = requireActivity().getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
+        Log.d("테스트", demonstrationInfo.getId() + " " + demonstrationInfo.getPlace());
 
         initTextView();
         initButton();
@@ -82,17 +66,17 @@ public class MeasurementFragment extends Fragment {
 
     // 시위 정보로 화면 정보 변경 (제목, 단체명, 시간, 장소, 주최자 정보, 소음도)
     private void initTextView() {
-        // 시위 제목 변경
+        // 시위 제목 반영
         binding.title.setText(demonstrationInfo.getName());
 
-        // 시위 그룹명 변경
+        // 시위 그룹명 반영
         binding.groupNameDetail.setText(demonstrationInfo.getGroupName());
 
-        // 시위 시간 변경
+        // 시위 시간 반영
         String dateDetail = demonstrationInfo.getStartDate() + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space) + demonstrationInfo.getEndDate();
         binding.demonstrationDateDetail.setText(dateDetail);
 
-        // 시위 시간대 변경 (주간 | 야간 | 심야)
+        // 시위 시간대 반영 (주간 | 야간 | 심야)
         switch (demonstrationInfo.getTimeZone()) {
             case TIME_ZONE_NIGHT:
                 binding.timeZoneDay.setTextColor(requireActivity().getColor(R.color.contents_light));
@@ -106,10 +90,10 @@ public class MeasurementFragment extends Fragment {
                 break;
         }
 
-        // 시위 개최 장소 변경
+        // 시위 개최 장소 반영
         binding.demonstrationPlaceDetail.setText(demonstrationInfo.getPlace());
 
-        // 시위 개최 장소대 변경 (주거 지역, 학교 | 공공 도서관 | 그 밖)
+        // 시위 개최 장소대 반영 (주거 지역, 학교 | 공공 도서관 | 그 밖)
         switch (demonstrationInfo.getPlaceZone()) {
             case PLACE_ZONE_PUBLIC:
                 binding.placeZoneHome.setTextColor(requireActivity().getColor(R.color.contents_light));
@@ -123,60 +107,20 @@ public class MeasurementFragment extends Fragment {
                 break;
         }
 
-        // 주최자 성명, 연락처, 직책 변경
+        // 주최자 성명, 연락처, 직책 반영
         binding.nameDetail.setText(demonstrationInfo.getOrganizerName());
         binding.phoneNumberDetail.setText(demonstrationInfo.getOrganizerPhoneNumber());
         binding.positionDetail.setText(demonstrationInfo.getOrganizerPosition());
 
-        // 배경 소음도 변경
+        // 배경 소음도 반영
         String backgroundNoise = demonstrationInfo.getBackgroundNoiseLevel() + requireActivity().getString(R.string.space) + requireActivity().getString(R.string.decibel);
         binding.backgroundNoiseDetail.setText(backgroundNoise);
 
-        // 등가 소음, 최고 소음 설정 (시간대와 장소대를 기준으로 설정)
-        int timeZone = demonstrationInfo.getTimeZone();
-        int placeZone = demonstrationInfo.getPlaceZone();
+        // 기준 등가 소음, 기준 최고 소음 반영
+        String equivalentNoise = demonstrationInfo.getStandardEquivalent() + getString(R.string.space) + getString(R.string.decibel);
+        String highestNoise = demonstrationInfo.getStandardHighest() + getString(R.string.space) + getString(R.string.decibel);
 
-        String equivalentNoise = getString(R.string.space);
-        String highestNoise = getString(R.string.space);
-
-        if (timeZone == TIME_ZONE_DAY) {
-            if (placeZone == PLACE_ZONE_HOME) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_DAY_HOME + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_DAY_HOME + highestNoise;
-            } else if (placeZone == PLACE_ZONE_PUBLIC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_DAY_PUBLIC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_DAY_PUBLIC + highestNoise;
-            } else if (placeZone == PLACE_ZONE_ETC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_DAY_ETC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_ETC + highestNoise;
-            }
-        } else if (timeZone == TIME_ZONE_NIGHT) {
-            if (placeZone == PLACE_ZONE_HOME) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_NIGHT_HOME + highestNoise;
-            } else if (placeZone == PLACE_ZONE_PUBLIC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_NIGHT_PUBLIC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_NIGHT_PUBLIC + highestNoise;
-            } else if (placeZone == PLACE_ZONE_ETC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_ETC + highestNoise;
-            }
-        } else if (timeZone == TIME_ZONE_LATE_NIGHT) {
-            if (placeZone == PLACE_ZONE_HOME) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME + highestNoise;
-            } else if (placeZone == PLACE_ZONE_PUBLIC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_PUBLIC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC + highestNoise;
-            } else if (placeZone == PLACE_ZONE_ETC) {
-                equivalentNoise = DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC + equivalentNoise;
-                highestNoise = DEFAULT_HIGHEST_NOISE_ETC + highestNoise;
-            }
-        }
-        equivalentNoise += getString(R.string.decibel);
-        highestNoise += getString(R.string.decibel);
-
-        // 등가 소음, 최고 소음 변경
+        // 등가 소음, 최고 소음 반영
         binding.equivalentNoiseDetail.setText(equivalentNoise);
         binding.highestNoiseDetail.setText(highestNoise);
     }

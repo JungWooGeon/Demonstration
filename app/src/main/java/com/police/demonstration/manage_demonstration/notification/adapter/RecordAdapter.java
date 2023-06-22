@@ -62,13 +62,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         holder.binding.checkbox.setChecked(checkList.get(position));
         holder.binding.checkbox.setOnClickListener(e -> checkList.set(position, !checkList.get(position)));
 
-        String measurementTime = measurementList.get(position).getMeasurementTime();
-        Log.d("테스트", measurementTime);
-        String[] times = measurementTime.split(resources.getString(R.string.dash));
-        Log.d("테스트", String.valueOf(times.length));
-        String contentText = times[3] + resources.getString(R.string.hour) + resources.getString(R.string.space) + times[4] + resources.getString(R.string.minute)
+        String contentText = measurementList.get(position).getStartTime()
                + resources.getString(R.string.space) + resources.getString(R.string.slash) + resources.getString(R.string.space) + measurementList.get(position).getPlace();
-        Log.d("테스트", contentText);
         holder.binding.content.setText(contentText);
     }
 

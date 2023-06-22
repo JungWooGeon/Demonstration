@@ -12,7 +12,7 @@ import com.police.demonstration.database.measurement.MeasurementInfo;
 public class MeasurementViewModel extends ViewModel {
     MeasurementModel model = new MeasurementModel();
 
-    // 시위 추가 기능 -> model 에 시위 추가 함수 실행 후 LiveData 에 반영
+    // 측정 데이터 추가 기능 -> model 에 측정 추가 함수 실행 후 LiveData 에 반영
     public void addMeasurement(Context context, MeasurementInfo measurementInfo) {
         model.addMeasurement(context, measurementInfo);
     }

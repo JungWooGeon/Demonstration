@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -180,9 +181,6 @@ public class AddMeasurementActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.plz_input_measurement), Toast.LENGTH_SHORT).show();
             } else {
                 // 입력된 정보들 (측정 정보) 을 setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
-                @SuppressLint("SimpleDateFormat")
-                SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
-
                 Intent intent = new Intent();
                 MeasurementInfo measurementInfo = new MeasurementInfo(
                         demonstrationInfo.getId(),
@@ -195,12 +193,10 @@ public class AddMeasurementActivity extends AppCompatActivity {
                         Objects.requireNonNull(binding.inputMeasurementEquivalentDetail.getText()).toString(),
                         Objects.requireNonNull(binding.inputMeasurementHighestDetail.getText()).toString(),
                         binding.correctionValueEquivalentDetail.getText().toString(),
-                        binding.correctionValueHighestDetail.getText().toString(),
-                        binding.standardNoiseEquivalentDetail.getText().toString(),
-                        binding.standardNoiseHighestDetail.getText().toString(),
-                        formatter.format(new Date(System.currentTimeMillis()))
+                        binding.correctionValueHighestDetail.getText().toString()
                 );
                 intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -217,8 +213,9 @@ public class AddMeasurementActivity extends AppCompatActivity {
         if (differenceNoise < 3.0) {
             // 배경 소음도와 입력한 소음도의 차이가 3.0 미만일 경우 대상 소음도 0
             noise = 0;
-        } else if (differenceNoise <= 10.0) {
+        } else if (differenceNoise <= 9.9) {
             // 배경 소음도와 입력한 소음도의 차이가 3 dB 이상 10 dB 미만일 경우 보정
+            Log.d("테스트", String.valueOf(differenceNoise));
             Double correction = STANDARD_CORRECTION_NOISE.get(differenceNoise);
             assert correction != null;
 

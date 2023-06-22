@@ -21,16 +21,11 @@ public class MeasurementInfo implements Parcelable {
     @ColumnInfo(name = "measurementHighest") String measurementHighest;
     @ColumnInfo(name = "correctionEquivalent") String correctionEquivalent;
     @ColumnInfo(name = "correctionHighest") String correctionHighest;
-    @ColumnInfo(name = "standardEquivalent") String standardEquivalent;
-    @ColumnInfo(name = "standardHighest") String standardHighest;
-    @ColumnInfo(name = "measurementTime") String measurementTime;
 
     public MeasurementInfo(int demonstrationId, String startTime, String endTime, String place,
                            String detailPlace, String distance, String winterSpeed,
                            String measurementEquivalent, String measurementHighest,
-                           String correctionEquivalent, String correctionHighest,
-                           String standardEquivalent, String standardHighest,
-                           String measurementTime) {
+                           String correctionEquivalent, String correctionHighest) {
         this.demonstrationId = demonstrationId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -42,9 +37,6 @@ public class MeasurementInfo implements Parcelable {
         this.measurementHighest = measurementHighest;
         this.correctionEquivalent = correctionEquivalent;
         this.correctionHighest = correctionHighest;
-        this.standardEquivalent = standardEquivalent;
-        this.standardHighest = standardHighest;
-        this.measurementTime = measurementTime;
     }
 
     protected MeasurementInfo(Parcel in) {
@@ -60,17 +52,14 @@ public class MeasurementInfo implements Parcelable {
         measurementHighest = in.readString();
         correctionEquivalent = in.readString();
         correctionHighest = in.readString();
-        standardEquivalent = in.readString();
-        standardHighest = in.readString();
-        measurementTime = in.readString();
     }
 
-    public String getMeasurementTime() { return this.measurementTime; }
+    public String getStartTime() { return this.startTime; }
     public String getPlace() { return this.place; }
     public String getCorrectionEquivalent() { return this.correctionEquivalent; }
     public String getCorrectionHighest() { return this.correctionHighest; }
-    public String getStandardEquivalent() { return this.standardEquivalent; }
-    public String getStandardHighest() { return this.standardEquivalent; }
+
+    public void setDemonstrationId(int demonstrationId) { this.demonstrationId = demonstrationId; }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -86,9 +75,6 @@ public class MeasurementInfo implements Parcelable {
         dest.writeString(measurementHighest);
         dest.writeString(correctionEquivalent);
         dest.writeString(correctionHighest);
-        dest.writeString(standardEquivalent);
-        dest.writeString(standardHighest);
-        dest.writeString(measurementTime);
     }
 
     @Override
