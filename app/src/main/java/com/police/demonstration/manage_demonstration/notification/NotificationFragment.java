@@ -1,7 +1,10 @@
 package com.police.demonstration.manage_demonstration.notification;
 
-import static com.police.demonstration.Constants.INTENT_NAME_DEMONSTRATION_ID;
+import static com.police.demonstration.Constants.INTENT_NAME_NOTIFICATION_TYPE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,12 +49,37 @@ public class NotificationFragment extends Fragment {
     private void initButton() {
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
 
-        binding.maintenanceOrderButton.setOnClickListener(e -> {
-            Intent intent = new Intent(requireActivity(), RecordListActivity.class);
-            // Intent 로 전달 받은 시위 정보의 ID 를 activity 에 전달
-            intent.putExtra(INTENT_NAME_DEMONSTRATION_ID, demonstrationInfo.getId());
-            startActivity(intent);
+        // 유지 명령 - 최고 소음 초과 클릭 이벤트
+        binding.maintenanceOrder1.setOnClickListener(e-> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE);
         });
+        binding.maintenanceOrder1Detail.setOnClickListener(e -> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE);
+        });
+
+        // 유지 명령 - 등가 소음 초과 클릭 이벤트
+        binding.maintenanceOrder2.setOnClickListener(e-> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE);
+        });
+        binding.maintenanceOrder2Detail.setOnClickListener(e -> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE);
+        });
+
+        // 유지 명령 - 최고 소음 위반 클릭 이벤트
+        binding.maintenanceOrder3.setOnClickListener(e-> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE);
+        });
+        binding.maintenanceOrder3Detail.setOnClickListener(e -> {
+            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE);
+        });
+    }
+
+    private void startRecordListActivity(int notificationType) {
+        Intent intent = new Intent(requireActivity(), RecordListActivity.class);
+        // Intent 로 전달 받은 시위 정보를 activity 에 전달
+        intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+        intent.putExtra(INTENT_NAME_NOTIFICATION_TYPE, notificationType);
+        startActivity(intent);
     }
 }
 

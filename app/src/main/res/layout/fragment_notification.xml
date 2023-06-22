@@ -52,6 +52,7 @@
             android:id="@+id/maintenanceOrderButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:clickable="false"
             android:text="@string/maintenance_order"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -69,9 +70,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_one"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -82,9 +85,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder1Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/exceed_highest_noise"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -103,9 +108,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_two"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -116,9 +123,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder2Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/exceed_equivalent_noise"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -137,9 +146,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_three"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -150,9 +161,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/maintenanceOrder3Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exceed_equivalent_noise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/highest_noise_violation"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -168,7 +181,7 @@
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.38" />
+            app:layout_constraintVertical_bias="0.4" />
 
         <View
             android:id="@+id/lineCol1"
@@ -185,6 +198,7 @@
             android:id="@+id/stopOrderButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:clickable="false"
             android:text="@string/stop_order"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -201,9 +215,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_four"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -214,9 +230,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder4Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exceed_highest_noise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/after_maintenance_order"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -235,9 +253,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_five"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -248,9 +268,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder5Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exceed_equivalent_noise"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/skip_maintenance_order_equivalent"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -269,9 +291,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_six"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -282,9 +306,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/stopOrder6Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/highest_noise_violation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/skip_maintenance_order_highest"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -300,7 +326,7 @@
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.61" />
+            app:layout_constraintVertical_bias="0.64" />
 
         <View
             android:id="@+id/lineCol2"
@@ -317,6 +343,7 @@
             android:id="@+id/temporaryStorageButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:clickable="false"
             android:text="@string/temporary_storage"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -333,9 +360,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_seven"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -346,9 +375,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage7Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/skip_maintenance_order_equivalent"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -367,9 +398,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_eight"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -380,9 +413,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage8Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/skip_maintenance_order_highest"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -401,9 +436,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_nine"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -414,9 +451,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage9Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/skip_stop_order"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -435,9 +474,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_ten"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -448,9 +489,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage10Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/violation_after_a_stop_order"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -469,9 +512,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/number_eleven"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -482,9 +527,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temporaryStorage11Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="@string/returning_temporary_storage"
+            android:textAlignment="center"
             android:textColor="@color/contents"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -500,7 +547,7 @@
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.98" />
+            app:layout_constraintVertical_bias="0.99" />
 
         <View
             android:id="@+id/lineCol3"

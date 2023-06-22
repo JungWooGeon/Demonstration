@@ -30,7 +30,6 @@ public class Constants {
 
     public static final String INTENT_NAME_IS_ADD_BACKGROUND_NOISE = "isAddBackgroundNoise";
     public static final String INTENT_NAME_PARCELABLE_DEMONSTRATION = "parcelableDemonstration";
-    public static final String INTENT_NAME_DEMONSTRATION_ID = "demonstrationId";
 
     public static final int DEFAULT_EQUIVALENT_NOISE_DAY_HOME = 65;
     public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME = 60;
@@ -54,6 +53,17 @@ public class Constants {
     public static final String INTENT_NAME_HIGHEST_NOISE = "highestNoise";
 
     public static final String INTENT_NAME_PARCELABLE_MEASUREMENT = "parcelableMeasurement";
+
+    public static final int NOTIFICATION_NOT = 0;
+    public static final int NOTIFICATION_MAINTENANCE = 1;
+
+    public static final String INTENT_NAME_NOTIFICATION_TYPE = "notificationType";
+    public static final int NOTIFICATION_TYPE_NOT = 0;
+    public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE = 1;
+    public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE = 2;
+    public static final int NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE = 3;
+    public static final int NOTIFICATION_TYPE_STOP = 4;
+    public static final int NOTIFICATION_TYPE_TEMPORARY_STORAGE = 7;
 
     // 소음도 보정치 기준표
     public static Map<Double, Double> STANDARD_CORRECTION_NOISE = Map.<Double, Double>ofEntries(

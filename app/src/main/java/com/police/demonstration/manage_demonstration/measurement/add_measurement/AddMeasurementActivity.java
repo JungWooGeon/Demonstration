@@ -4,6 +4,9 @@ import static com.police.demonstration.Constants.INTENT_NAME_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_NOT;
 import static com.police.demonstration.Constants.STANDARD_CORRECTION_NOISE;
 
 import android.app.TimePickerDialog;
@@ -176,6 +179,19 @@ public class AddMeasurementActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.plz_input_measurement), Toast.LENGTH_SHORT).show();
             } else {
                 // 입력된 정보들 (측정 정보) 을 setResult 를 사용하여 이전 화면으로 정보 전달 후 화면 종료
+                String correctionEquivalent = binding.correctionValueEquivalentDetail.getText().toString().split(getString(R.string.split_space))[0];
+                String correctionHighest = binding.correctionValueHighestDetail.getText().toString().split(getString(R.string.split_space))[0];
+                // 위반 사항 없음
+                int notificationType = NOTIFICATION_TYPE_NOT;
+
+                if (Integer.parseInt(correctionEquivalent) > Integer.parseInt(demonstrationInfo.getStandardEquivalent())) {
+                    // 등가 소음 초과
+                    notificationType = NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
+                } else if (Integer.parseInt(correctionHighest) > Integer.parseInt(demonstrationInfo.getStandardHighest())) {
+                    // 최고 소음 초과
+                    notificationType = NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
+                }
+
                 Intent intent = new Intent();
                 MeasurementInfo measurementInfo = new MeasurementInfo(
                         demonstrationInfo.getId(),
@@ -187,8 +203,7 @@ public class AddMeasurementActivity extends AppCompatActivity {
                         Objects.requireNonNull(binding.windSpeedDetail.getText()).toString(),
                         Objects.requireNonNull(binding.inputMeasurementEquivalentDetail.getText()).toString(),
                         Objects.requireNonNull(binding.inputMeasurementHighestDetail.getText()).toString(),
-                        binding.correctionValueEquivalentDetail.getText().toString(),
-                        binding.correctionValueHighestDetail.getText().toString()
+                        correctionEquivalent, correctionHighest, notificationType
                 );
                 intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
 
