@@ -166,4 +166,9 @@
 
     <string name="notification_not">비고지</string>
     <string name="notification_maintenance">유지 고지</string>
+
+    <string name="place_zone">대상 지역</string>
+    <string name="place_zone_example">[ 주거 지역 ]</string>
+    <string name="time_zone">시간대</string>
+    <string name="time_zone_example">[ 주간 ]</string>
 </resources>
