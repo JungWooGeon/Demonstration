@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.police.demonstration.databinding.FragmentNotificationBinding;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
-import com.police.demonstration.manage_demonstration.notification.create_notification.NotificationActivity;
+import com.police.demonstration.manage_demonstration.notification.create_notification.NotificationDocumentActivity;
 import com.police.demonstration.manage_demonstration.notification.record_list.RecordListActivity;
 
 public class NotificationFragment extends Fragment {
@@ -52,7 +52,7 @@ public class NotificationFragment extends Fragment {
 
         // 안내문 발송 버튼 클릭 이벤트 - > 고지 화면으로 전환
         binding.sendNoticeButton.setOnClickListener(e -> {
-            Intent intent = new Intent(requireActivity(), NotificationActivity.class);
+            Intent intent = new Intent(requireActivity(), NotificationDocumentActivity.class);
             intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
             startActivity(intent);
         });

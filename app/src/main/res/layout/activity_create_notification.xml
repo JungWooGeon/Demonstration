@@ -510,7 +510,7 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:background="@drawable/box_border"
-            android:text="@string/addTextEditTextHint"
+            android:hint="@string/addTextEditTextHint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintStart_toStartOf="parent"

@@ -62,6 +62,7 @@ public class MeasurementInfo implements Parcelable {
         notificationType = in.readInt();
     }
 
+    public int getId() { return this.id; }
     public String getStartTime() { return this.startTime; }
     public String getEndTime() { return this.endTime; }
     public String getPlace() { return this.place; }

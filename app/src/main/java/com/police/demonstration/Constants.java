@@ -6,6 +6,9 @@ import java.util.Map;
  * 상수 관리 class
  */
 public class Constants {
+
+    public static final String API_NOTIFICATION_BASE_URL = "http://34.64.142.115:8080/";
+
     // 시간대
     public static final int TIME_ZONE_DAY = 0;
     public static final int TIME_ZONE_NIGHT = 1;

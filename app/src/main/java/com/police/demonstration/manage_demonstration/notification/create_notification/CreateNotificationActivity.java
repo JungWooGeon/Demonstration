@@ -140,9 +140,10 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding.backButton.setOnClickListener(e -> finish());
 
         binding.createNotificationButton.setOnClickListener(e -> {
-            Intent intent = new Intent(this, NotificationActivity.class);
+            Intent intent = new Intent(this, NotificationDocumentActivity.class);
             intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
             intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+            intent.putExtra(INTENT_NAME_ADD_TEXT_MESSAGE, binding.addTextTextView.getText());
             startActivity(intent);
         });
     }

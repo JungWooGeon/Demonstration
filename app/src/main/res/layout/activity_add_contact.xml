@@ -93,7 +93,7 @@
             android:layout_height="0dp"
             android:background="@drawable/box_border"
             android:hint="@string/number_phone_example"
-            android:inputType="phone"
+            android:inputType="number"
             android:padding="10dp"
             android:textColorHint="@color/contents"
             app:layout_constraintBottom_toBottomOf="@id/number"

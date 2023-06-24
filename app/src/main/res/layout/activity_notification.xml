@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.police.demonstration.manage_demonstration.notification.create_notification.NotificationActivity" />
+            type="com.police.demonstration.manage_demonstration.notification.create_notification.NotificationDocumentActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,10 +88,10 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line"
-            app:layout_constraintBottom_toTopOf="@id/measurementTime" />
+            app:layout_constraintBottom_toTopOf="@id/currentTime" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/measurementTime"
+            android:id="@+id/currentTime"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:autoSizeMaxTextSize="18sp"
@@ -124,8 +124,18 @@
             android:layout_height="wrap_content"
             android:text="@string/notification"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/notificationFinishButton"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow4" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/notificationFinishButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/finish_notification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/notificationButton"
             app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

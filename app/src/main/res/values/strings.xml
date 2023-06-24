@@ -191,4 +191,6 @@
 
     <string name="maintenance">유지</string>
     <string name="plz_retry">다시 실행해주세요.</string>
+
+    <string name="finish_notification">고지 내용 저장</string>
 </resources>
