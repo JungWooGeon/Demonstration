@@ -23,6 +23,12 @@ import com.police.demonstration.manage_demonstration.notification.create_notific
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * 기록 리스트 화면
+ * 1. 화면에 측정 기록 리스트 보여주기
+ * 2. 측정 기록 리스트 클릭하여 선택
+ * 3. 선택한 측정 기록을 토대로 고지 생성 -> CreateNotificationAcvitivy 화면으로 전환
+ */
 public class RecordListActivity extends AppCompatActivity {
 
     private ActivityRecordListBinding binding;

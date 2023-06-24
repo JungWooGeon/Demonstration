@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+/**
+ * RecordListViewModel Model
+ * room db 를 사용하여 측정 기록 데이터 관리
+ */
 public class RecordListModel {
 
     // 측정 기록 리스트

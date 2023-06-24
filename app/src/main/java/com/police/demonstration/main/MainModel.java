@@ -213,7 +213,7 @@ public class MainModel {
         }
     }
 
-    // DB 비동기 작업 완료를 알리는 listener 역할
+    // 비동기 작업 완료를 알리는 listener 역할
     public interface DatabaseListener {
         void onChanged();
     }

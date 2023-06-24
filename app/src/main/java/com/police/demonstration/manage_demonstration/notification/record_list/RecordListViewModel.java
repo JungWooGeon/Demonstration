@@ -9,6 +9,11 @@ import com.police.demonstration.database.measurement.MeasurementInfo;
 
 import java.util.ArrayList;
 
+/**
+ * RecordListActivity 에서 사용하는 ViewModel
+ * 1. 측정 기록 데이터를 MutableLiveData 로 관리
+ */
+
 public class RecordListViewModel extends ViewModel {
 
     // RecordListViewModel Model

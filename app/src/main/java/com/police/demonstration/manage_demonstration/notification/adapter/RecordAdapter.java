@@ -22,11 +22,18 @@ import com.police.demonstration.database.measurement.MeasurementInfo;
 
 import java.util.ArrayList;
 
+/**
+ * 기록 리스트 RecyclerView Adapter
+ */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
 
+    // RecyclerView 를 표시하기 위한 ArrayList -> 측정 기록 정보
     private final ArrayList<MeasurementInfo> measurementList;
+
+    // 체크 표시를 기록하기 위한 리스트
     private final ArrayList<Boolean> checkList;
 
+    // 화면에서 설정된 고지 타입 (해당 기록 선택 비활성화 여부를 정하기 위한 변수)
     private final int notificationType;
 
     // string.xml 을 사용하기 위한 resources
@@ -47,6 +54,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     public RecordAdapter(ArrayList<MeasurementInfo> dataSet, int notificationType) {
         measurementList = dataSet;
+        
+        // 체크 리스트 초기화
         checkList = new ArrayList<>();
         for (int i = 0; i < measurementList.size(); i++) {
             checkList.add(false);
@@ -83,6 +92,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
                 + resources.getString(R.string.space) + resources.getString(R.string.slash) + resources.getString(R.string.space) + measurementList.get(position).getPlace();
         holder.binding.content.setText(contentText);
 
+        // 이 기록의 고지 타입과 유지 상태를 표시
         String text = "";
 
         switch (measurementList.get(position).getNotificationType()) {

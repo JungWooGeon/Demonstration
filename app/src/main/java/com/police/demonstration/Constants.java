@@ -7,6 +7,7 @@ import java.util.Map;
  */
 public class Constants {
 
+    public static final String PACKAGE_NAME = "com.police.demonstration.fileprovider";
     public static final String API_NOTIFICATION_BASE_URL = "http://34.64.142.115:8080/";
 
     // 시간대

@@ -5,6 +5,7 @@ import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTR
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
+import static com.police.demonstration.Constants.PACKAGE_NAME;
 import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 
 import android.annotation.SuppressLint;
@@ -13,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -36,6 +36,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 고지서 문서 확인 화면
+ * 1. 생성된 고지서를 확인 (클릭 시 ImageViewActivity 로 전환하여 이미지 확대/축소 가능)
+ * 2. '고지' 버튼 클릭하여 안드로이드 기본 메시지 앱으로 전환
+ */
 public class NotificationDocumentActivity extends AppCompatActivity {
 
     private ActivityNotificationDocumentBinding binding;
@@ -55,12 +60,14 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         viewModel = new ViewModelProvider(this).get(NotificationDocumentViewModel.class);
-        // 이미지 내용 변경 시 화면에 대응
+
+        // 이미지 내용 변경(업로드 완료) 시 화면에 대응
         viewModel.getMeasurementList().observe(this, uri -> {
             imageUri = uri;
             loadImage(uri);
         });
 
+        // 시위 정보, 측정 정보, 추가 텍스트 메시지 저장
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
         measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
         textMessage = getIntent().getStringExtra(INTENT_NAME_ADD_TEXT_MESSAGE);
@@ -70,43 +77,43 @@ public class NotificationDocumentActivity extends AppCompatActivity {
             initNotificationTypeNotTextView();
             viewModel.getNotificationUriOne(this, demonstrationInfo);
         } else {
-            initTextView();
+            // 고지 타입 반영
+            String titleText = "";
+            switch (measurementInfo.getNotificationType()) {
+                case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE:
+                    // 최고 소음 초과(유지) 일 때, 제목 반영, 최고소음초과(유지) 고지서 받아오기
+                    titleText = getString(R.string.exceed_highest_noise) + getString(R.string.space) + getString(R.string.open_bracket) + getString(R.string.space) + getString(R.string.maintenance) + getString(R.string.space) + getString(R.string.close_bracket);
+                    viewModel.getNotificationUriTwo(this, demonstrationInfo, measurementInfo);
+                    break;
+                case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE:
+                    // 등가 소음 초과(유지) 일 때, 제목 반영, 등가소음초과(유지) 고지서 받아오기
+                    titleText = getString(R.string.exceed_equivalent_noise) + getString(R.string.space) + getString(R.string.open_bracket) + getString(R.string.space) + getString(R.string.maintenance) + getString(R.string.space) + getString(R.string.close_bracket);
+                    viewModel.getNotificationThree(this, demonstrationInfo, measurementInfo);
+                    break;
+                default:
+                    break;
+            }
+            binding.measurementType.setText(titleText);
 
-            // 이미지 가져오기
-            viewModel.getNotificationUriTwo(this, demonstrationInfo, measurementInfo);
+            // 고지 시간 반영
+            binding.currentTime.setText(getCurrentTime());
         }
 
         initButton();
     }
 
-    private void initTextView() {
-        // 고지 타입 반영
-        String titleText = "";
-        switch (measurementInfo.getNotificationType()) {
-            case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE:
-                titleText = getString(R.string.exceed_highest_noise) + getString(R.string.space) + getString(R.string.open_bracket) + getString(R.string.space) + getString(R.string.maintenance) + getString(R.string.space) + getString(R.string.close_bracket);
-                break;
-            case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE:
-                titleText = getString(R.string.exceed_equivalent_noise) + getString(R.string.space) + getString(R.string.open_bracket) + getString(R.string.space) + getString(R.string.maintenance) + getString(R.string.space) + getString(R.string.close_bracket);
-                break;
-            default:
-                break;
-        }
-        binding.measurementType.setText(titleText);
-
-        // 고지 시간 반영
-        binding.currentTime.setText(getCurrentTime());
-    }
-
     @SuppressLint("QueryPermissionsNeeded")
     private void initButton() {
+        // 뒤로 가기 버튼 클릭 이벤트 -> 화면 종료
         binding.backButton.setOnClickListener(e -> finish());
+
+        // '고지' 버튼 클릭 이벤트 -> 기본 메시지 앱으로 화면 전환
         binding.notificationButton.setOnClickListener(e -> {
             // MMS를 보내기 위한 Intent 생성
             // FileUriExposedException (Android 7.0 이상에서 발생하는 예외) 를 피하기 위하여
             // FileProvider 사용
             File file = new File(imageUri.getPath());
-            Uri imageFileUri = FileProvider.getUriForFile(this, "com.police.demonstration.fileprovider", file);
+            Uri imageFileUri = FileProvider.getUriForFile(this, PACKAGE_NAME, file);
 
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.putExtra(Intent.EXTRA_TEXT, textMessage); // 텍스트 메시지 내용
@@ -119,20 +126,10 @@ public class NotificationDocumentActivity extends AppCompatActivity {
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
             }
-
-//            // 메시지 앱 실행을 위한 Intent 생성
-//            Intent intent = new Intent(Intent.ACTION_SENDTO);
-//            intent.setData(Uri.parse("smsto:" + Uri.encode(demonstrationInfo.getOrganizerPhoneNumber())));
-//
-//            if (textMessage != null) {
-//                // 메시지 내용 추가
-//                intent.putExtra("sms_body", textMessage);
-//            }
-//
-//            startActivity(intent);
         });
     }
 
+    // 현재 시간 계산
     private String getCurrentTime() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
@@ -159,11 +156,12 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         binding.currentTime.setText(getCurrentTime());
     }
 
+    // 이미지를 ImageView 에 보여주고, 로드 성공과 실패 시 이벤트 등록
     private void loadImage(Uri uri) {
-        // 이미지 로딩이 시작되기 전에 로딩 화면을 표시합니다.
+        // 이미지 로딩이 시작되기 전에 로딩 화면을 표시
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        // Glide를 사용하여 이미지를 로딩합니다.
+        // Glide를 사용하여 이미지를 로딩
         Glide.with(this)
                 .load(uri)
                 .listener(new RequestListener<Drawable>() {
@@ -180,11 +178,12 @@ public class NotificationDocumentActivity extends AppCompatActivity {
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         // 이미지 로딩 성공 시 프로그래스바 숨김, 화면 버튼 클릭 활성화
                         binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
-                        binding.notificationButton.setEnabled(true);
-                        binding.notificationFinishButton.setEnabled(true);
+                        binding.notificationButton.setEnabled(true); // '고지' 버튼 활성화
+                        binding.notificationFinishButton.setEnabled(true); // '고지 저장' 버튼 활성화
 
                         // 이미지 뷰 클릭 이벤트
                         binding.notificationImage.setOnClickListener(e -> {
+                            // ImageViewActivity 로 전환
                             Intent intent = new Intent(binding.getActivity(), ImageViewActivity.class);
                             intent.setData(imageUri);
                             startActivity(intent);

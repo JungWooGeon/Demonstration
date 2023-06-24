@@ -14,6 +14,11 @@ import com.police.demonstration.databinding.ActivityAddTextMessageBinding;
 
 import java.util.Objects;
 
+/**
+ * 추가 텍스트 메시지 입력 화면
+ * 1. 텍스트 메시지 입력
+ * 2. 저장 버튼 클릭 시 setResult() 를 통해 메시지 정보를 이전 화면(CreateNotificationActivity)으로 전달
+ */
 public class AddTextMessageActivity extends AppCompatActivity {
 
     ActivityAddTextMessageBinding binding;

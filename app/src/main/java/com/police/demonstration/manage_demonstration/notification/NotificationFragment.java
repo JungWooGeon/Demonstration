@@ -4,7 +4,6 @@ import static com.police.demonstration.Constants.INTENT_NAME_NOTIFICATION_TYPE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
-import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +29,9 @@ public class NotificationFragment extends Fragment {
         binding = FragmentNotificationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // 시위 정보 저장
         demonstrationInfo = requireActivity().getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
+
         initButton();
         initTextView();
 
@@ -48,6 +49,7 @@ public class NotificationFragment extends Fragment {
     }
 
     private void initButton() {
+        // 뒤로 가기 버튼 클릭 이벤트 -> 화면 종료
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
 
         // 안내문 발송 버튼 클릭 이벤트 - > 고지 화면으로 전환
@@ -64,15 +66,11 @@ public class NotificationFragment extends Fragment {
         // 유지 명령 - 등가 소음 초과 클릭 이벤트
         binding.maintenanceOrder2.setOnClickListener(e-> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE));
         binding.maintenanceOrder2Detail.setOnClickListener(e -> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE));
-
-        // 유지 명령 - 최고 소음 위반 클릭 이벤트
-        binding.maintenanceOrder3.setOnClickListener(e-> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE));
-        binding.maintenanceOrder3Detail.setOnClickListener(e -> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE));
     }
 
     private void startRecordListActivity(int notificationType) {
         Intent intent = new Intent(requireActivity(), RecordListActivity.class);
-        // Intent 로 전달 받은 시위 정보를 activity 에 전달
+        // Intent 로 전달 받은 시위 정보를 '기록 리스트' activity 에 전달하면서 화면 전환
         intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
         intent.putExtra(INTENT_NAME_NOTIFICATION_TYPE, notificationType);
         startActivity(intent);

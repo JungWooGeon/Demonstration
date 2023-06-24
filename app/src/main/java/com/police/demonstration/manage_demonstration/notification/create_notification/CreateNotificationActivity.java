@@ -26,6 +26,12 @@ import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
 import com.police.demonstration.databinding.ActivityCreateNotificationBinding;
 
+/**
+ * 고지서 만들기를 할 수 있는 화면
+ * 1. 고지서 만들 정보를 확인
+ * 2. 추가로 보낼 텍스트 메시지를 적기 위해 AddTextMessageActivity 로 전환
+ * 3. '고지서 만들기' 버튼을 통해 NotificationDocumentActivity 로 전환
+ */
 public class CreateNotificationActivity extends AppCompatActivity {
 
     ActivityCreateNotificationBinding binding;
@@ -40,6 +46,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_notification);
         binding.setActivity(this);
 
+        // 시위 정보, 측정 정보 저장
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
         measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
 
@@ -54,7 +61,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding.measurementPlaceDetail.setText(measurementInfo.getPlace());
         binding.detailAddressDetail.setText(measurementInfo.getDetailPlace());
 
-        // 대상지역 반영
+        // 대상 지역 반영
         String placeZoneText = "";
         switch (demonstrationInfo.getPlaceZone()) {
             case PLACE_ZONE_HOME:
@@ -88,7 +95,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         }
         binding.timeZoneDetail.setText(timeZoneText);
 
-        // 측정거리 반영
+        // 측정 거리 반영
         String distanceText = measurementInfo.getDistance() + getString(R.string.space) + getString(R.string.meter);
         binding.distanceDetail.setText(distanceText);
 
@@ -129,7 +136,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding.standardNoise.setText(standardNoiseText);
         binding.standardNoiseDetail.setText(standardNoise);
 
-        // 텍스트 추가 기능 -> 텍스트 저장 화면으로 전환
+        // 텍스트 추가 기능 -> 텍스트 저장 화면으로 전환 후 callback 받아 텍스트 메시지 반영
         binding.addTextTextView.setOnClickListener(e -> {
             Intent intent = new Intent(this, AddTextMessageActivity.class);
             addTextMessageLauncher.launch(intent);
@@ -137,9 +144,12 @@ public class CreateNotificationActivity extends AppCompatActivity {
     }
 
     private void initButton() {
+        // 뒤로 가기 버튼 클릭 이벤트 -> 화면 종료
         binding.backButton.setOnClickListener(e -> finish());
 
+        // 고지서 만들기 버튼 클릭 이벤트
         binding.createNotificationButton.setOnClickListener(e -> {
+            // 시위 정보, 측정 정보, 추가 텍스트 정보를 담아서 NotificationDocumentActivity 로 화면 전환
             Intent intent = new Intent(this, NotificationDocumentActivity.class);
             intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
             intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);

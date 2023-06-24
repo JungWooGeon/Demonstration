@@ -11,4 +11,7 @@ public interface NotificationApi {
 
     @POST("/two")
     Observable<ResponseBody> getNotificationImageTwo(@Body NotificationRequest request);
+
+    @POST("/three")
+    Observable<ResponseBody> getNotificationImageThree(@Body NotificationRequest request);
 }
