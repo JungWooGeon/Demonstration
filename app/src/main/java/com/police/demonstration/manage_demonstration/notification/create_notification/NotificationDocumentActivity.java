@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -80,6 +81,13 @@ public class NotificationDocumentActivity extends AppCompatActivity {
                             binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
                             binding.notificationButton.setEnabled(true);
                             binding.notificationFinishButton.setEnabled(true);
+
+                            // 이미지 뷰 클릭 이벤트
+                            binding.notificationImage.setOnClickListener(e -> {
+                                Intent intent = new Intent(binding.getActivity(), ImageViewActivity.class);
+                                intent.setData(imageUri);
+                                startActivity(intent);
+                            });
                             return false;
                         }
                     })
