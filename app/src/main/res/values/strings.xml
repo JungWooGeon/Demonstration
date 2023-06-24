@@ -45,6 +45,7 @@
     <string name="minute">분</string>
     <string name="month">월</string>
     <string name="day_month">일</string>
+    <string name="year">년</string>
     <string name="input_end_time">마침 시간 입력</string>
     <string name="input_end_date">마침 날짜 입력</string>
     <string name="input_start_time">시작 시간 입력</string>
@@ -184,4 +185,10 @@
     <string name="plz_input_content">내용을 입력해주세요.</string>
     <string name="save">저장</string>
     <string name="plz_input_text_message">메시지 내용을 입력해주세요.</string>
+    <string name="notice_document">고지서</string>
+
+    <string name="example_measurement_time">[ 0000 ] 년 [ 0 ] 월 [ 0 ] 일 [ 0 ] 시 [ 0 ] 분</string>
+
+    <string name="maintenance">유지</string>
+    <string name="plz_retry">다시 실행해주세요.</string>
 </resources>

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SEND_MMS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -28,6 +31,7 @@
         <activity android:name=".manage_demonstration.notification.record_list.RecordListActivity" />
         <activity android:name=".manage_demonstration.notification.create_notification.CreateNotificationActivity" />
         <activity android:name=".manage_demonstration.notification.create_notification.AddTextMessageActivity" />
+        <activity android:name=".manage_demonstration.notification.create_notification.NotificationActivity" />
     </application>
 
 </manifest>

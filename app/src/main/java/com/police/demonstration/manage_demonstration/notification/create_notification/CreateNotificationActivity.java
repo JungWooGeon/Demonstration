@@ -15,7 +15,6 @@ import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -141,7 +140,10 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding.backButton.setOnClickListener(e -> finish());
 
         binding.createNotificationButton.setOnClickListener(e -> {
-
+            Intent intent = new Intent(this, NotificationActivity.class);
+            intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+            intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+            startActivity(intent);
         });
     }
 
