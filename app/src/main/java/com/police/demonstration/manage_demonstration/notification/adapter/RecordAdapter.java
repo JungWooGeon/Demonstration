@@ -32,6 +32,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     // string.xml 을 사용하기 위한 resources
     private Resources resources;
 
+    public ArrayList<Boolean> getCheckList() { return this.checkList; }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final RecyclerviewRecordListBinding binding;
 

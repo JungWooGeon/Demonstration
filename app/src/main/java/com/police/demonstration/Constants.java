@@ -65,6 +65,8 @@ public class Constants {
     public static final int NOTIFICATION_TYPE_STOP = 4;
     public static final int NOTIFICATION_TYPE_TEMPORARY_STORAGE = 7;
 
+    public static final String INTENT_NAME_ADD_TEXT_MESSAGE = "addTextMessage";
+
     // 소음도 보정치 기준표
     public static Map<Double, Double> STANDARD_CORRECTION_NOISE = Map.<Double, Double>ofEntries(
             Map.entry(3.0, -3.0), Map.entry(3.1, -2.9),

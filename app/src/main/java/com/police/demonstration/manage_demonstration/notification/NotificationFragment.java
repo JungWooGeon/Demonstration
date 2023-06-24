@@ -50,28 +50,16 @@ public class NotificationFragment extends Fragment {
         binding.backButton.setOnClickListener(e -> requireActivity().finish());
 
         // 유지 명령 - 최고 소음 초과 클릭 이벤트
-        binding.maintenanceOrder1.setOnClickListener(e-> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE);
-        });
-        binding.maintenanceOrder1Detail.setOnClickListener(e -> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE);
-        });
+        binding.maintenanceOrder1.setOnClickListener(e-> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE));
+        binding.maintenanceOrder1Detail.setOnClickListener(e -> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE));
 
         // 유지 명령 - 등가 소음 초과 클릭 이벤트
-        binding.maintenanceOrder2.setOnClickListener(e-> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE);
-        });
-        binding.maintenanceOrder2Detail.setOnClickListener(e -> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE);
-        });
+        binding.maintenanceOrder2.setOnClickListener(e-> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE));
+        binding.maintenanceOrder2Detail.setOnClickListener(e -> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE));
 
         // 유지 명령 - 최고 소음 위반 클릭 이벤트
-        binding.maintenanceOrder3.setOnClickListener(e-> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE);
-        });
-        binding.maintenanceOrder3Detail.setOnClickListener(e -> {
-            startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE);
-        });
+        binding.maintenanceOrder3.setOnClickListener(e-> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE));
+        binding.maintenanceOrder3Detail.setOnClickListener(e -> startRecordListActivity(NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE));
     }
 
     private void startRecordListActivity(int notificationType) {

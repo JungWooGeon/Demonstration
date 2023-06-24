@@ -26,6 +26,8 @@
         <activity android:name=".manage_demonstration.ManageDemonstrationActivity" />
         <activity android:name=".manage_demonstration.measurement.add_measurement.AddMeasurementActivity" />
         <activity android:name=".manage_demonstration.notification.record_list.RecordListActivity" />
+        <activity android:name=".manage_demonstration.notification.create_notification.CreateNotificationActivity" />
+        <activity android:name=".manage_demonstration.notification.create_notification.AddTextMessageActivity" />
     </application>
 
 </manifest>

@@ -6,12 +6,13 @@
 
         <variable
             name="activity"
-            type="com.police.demonstration.manage_demonstration.measurement.add_measurement.AddMeasurementActivity" />
+            type="com.police.demonstration.manage_demonstration.notification.create_notification.CreateNotificationActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="407dp"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/backButton"
@@ -157,7 +158,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lineRow3" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/measurementPlaceDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -167,11 +168,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/example_place_demonstration"
             android:inputType="textPostalAddress"
             android:maxLines="1"
+            android:text="@string/example_place_demonstration"
             android:textAlignment="center"
-            android:textColorHint="@color/content_purple"
+            android:textColor="@color/content_purple"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -202,7 +203,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lineRow4" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detailAddressDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -212,11 +213,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/detail_address_example"
             android:inputType="textPostalAddress"
             android:maxLines="1"
+            android:text="@string/detail_address_example"
             android:textAlignment="center"
-            android:textColorHint="@color/content_purple"
+            android:textColor="@color/content_purple"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow5"
             app:layout_constraintEnd_toEndOf="parent"
@@ -248,9 +249,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow5"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/placeZoneDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -258,12 +259,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/place_zone_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/place_zone_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
@@ -288,9 +288,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow5"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/timeZoneDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -298,12 +298,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/time_zone_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/time_zone_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -317,6 +316,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/distance"
             app:layout_constraintTop_toBottomOf="@id/placeZoneDetail" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -335,9 +335,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow6"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/distanceDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -345,18 +345,17 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/measurement_distance_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/measurement_distance_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow7"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/placeZone"
+            app:layout_constraintTop_toBottomOf="@id/distance"
             tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -375,9 +374,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow6"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/windSpeedDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -385,12 +384,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/wind_speed_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/wind_speed_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow7"
             app:layout_constraintEnd_toEndOf="parent"
@@ -404,6 +402,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line"
+            app:layout_constraintBottom_toTopOf="@id/measurementNoise"
             app:layout_constraintTop_toBottomOf="@id/distanceDetail" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -422,9 +421,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow7"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/measurementNoiseDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -432,12 +431,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/measurement_distance_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/measurement_distance_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow8"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
@@ -462,9 +460,9 @@
             app:layout_constraintTop_toBottomOf="@id/lineRow7"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/standardNoiseDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="8sp"
@@ -472,12 +470,11 @@
             android:autoSizeTextType="uniform"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:hint="@string/wind_speed_example"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:text="@string/wind_speed_example"
             android:textAlignment="center"
             android:textColor="@color/content_purple"
-            android:textColorHint="@color/content_purple"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/lineRow8"
             app:layout_constraintEnd_toEndOf="parent"
@@ -492,8 +489,8 @@
             android:layout_height="1dp"
             android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintVertical_bias="0.8" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
 
         <View
             android:id="@+id/lineCol1"
@@ -505,6 +502,29 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lineRow3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/addTextTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:background="@drawable/box_border"
+            android:text="@string/addTextEditTextHint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/lineCol1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createNotificationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/createNotification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lineCol1"
+            app:layout_constraintTop_toBottomOf="@id/lineRow8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

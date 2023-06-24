@@ -63,7 +63,11 @@ public class MeasurementInfo implements Parcelable {
     }
 
     public String getStartTime() { return this.startTime; }
+    public String getEndTime() { return this.endTime; }
     public String getPlace() { return this.place; }
+    public String getDetailPlace() { return this.detailPlace; }
+    public String getDistance() { return this.distance; }
+    public String getWinterSpeed() { return this.winterSpeed; }
     public String getCorrectionEquivalent() { return this.correctionEquivalent; }
     public String getCorrectionHighest() { return this.correctionHighest; }
     public int getNotificationState() {return this.notificationState; }
