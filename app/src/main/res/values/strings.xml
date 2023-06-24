@@ -193,4 +193,6 @@
     <string name="plz_retry">다시 실행해주세요.</string>
 
     <string name="finish_notification">고지 내용 저장</string>
+
+    <string name="plz_retry_connect_network">네트워크를 확인하고 다시 시도해주세요.</string>
 </resources>

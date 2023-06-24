@@ -10,9 +10,6 @@ import static com.police.demonstration.Constants.TIME_ZONE_NIGHT;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
@@ -26,11 +23,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NotificationDocumentModel {
@@ -77,9 +76,11 @@ public class NotificationDocumentModel {
                 break;
         }
 
+        // rxjava3 - retrofit2 -> POST 요청 보내고 응답 받기
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_NOTIFICATION_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
 
         NotificationApi notificationApi = retrofit.create(NotificationApi.class);
@@ -93,58 +94,52 @@ public class NotificationDocumentModel {
                 measurementInfo.getCorrectionHighest(), demonstrationInfo.getOrganizerName()
         );
 
-        // POST 요청 보내고 응답 받기
-        Call<ResponseBody> call = notificationApi.uploadImage(request);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    ResponseBody responseBody = response.body();
+        notificationApi.getNotificationImage(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        // 구독 시 처리할 내용
+                    }
 
-                    // 응답으로 받은 PNG 파일 처리
-                    if (responseBody == null) {
-                        Log.d("이미지 로딩", "이미지 로딩 실패");
-                    } else {
+                    @Override
+                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull ResponseBody responseBody) {
+                        // 결과 데이터 처리
                         Uri imageUri;
                         try {
-                            imageUri = convertResponseToUri(response, context, measurementInfo);
+                            imageUri = convertResponseToUri(responseBody, context, measurementInfo);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                         notificationUri = imageUri;
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        // 에러 처리
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        // 작업 완료 처리
                         callbackListener.onFinish();
                     }
-                } else {
-                    // 오류 처리
-                    Log.d("Response 오류", "response 오류");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // 통신 실패 처리
-                Log.d("통신 실패", t.getMessage());
-            }
-        });
+                });
     }
 
-    private Uri convertResponseToUri(Response<ResponseBody> response, Context context, MeasurementInfo measurementInfo) throws IOException {
-        if (response.isSuccessful()) {
-            // ResponseBody에서 이미지 데이터를 읽어옵니다.
-            ResponseBody responseBody = response.body();
-            InputStream inputStream = responseBody.byteStream();
+    private Uri convertResponseToUri(ResponseBody responseBody, Context context, MeasurementInfo measurementInfo) throws IOException {
+        // ResponseBody에서 이미지 데이터를 읽어옵니다.
+        InputStream inputStream = responseBody.byteStream();
 
-            // 이미지를 기기 내부에 저장할 파일을 생성합니다.
-            File tempFile = createFile(context, measurementInfo);
+        // 이미지를 기기 내부에 저장할 파일을 생성합니다.
+        File tempFile = createFile(context, measurementInfo);
 
-            // 파일에 이미지 데이터를 저장합니다.
-            writeInputStreamToFile(inputStream, tempFile);
+        // 파일에 이미지 데이터를 저장합니다.
+        writeInputStreamToFile(inputStream, tempFile);
 
-            // 파일의 경로를 Uri로 변환합니다.
-            return Uri.fromFile(tempFile);
-        } else {
-            throw new IOException("Response was not successful: " + response.code());
-        }
+        // 파일의 경로를 Uri로 변환합니다.
+        return Uri.fromFile(tempFile);
     }
 
     private File createFile(Context context, MeasurementInfo measurementInfo) throws IOException {

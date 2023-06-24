@@ -9,19 +9,27 @@ import static com.police.demonstration.Constants.SIMPLE_DATE_FORMAT;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
-import com.police.demonstration.databinding.ActivityNotificationBinding;
+import com.police.demonstration.databinding.ActivityNotificationDocumentBinding;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -29,7 +37,7 @@ import java.util.Date;
 
 public class NotificationDocumentActivity extends AppCompatActivity {
 
-    private ActivityNotificationBinding binding;
+    private ActivityNotificationDocumentBinding binding;
     private NotificationDocumentViewModel viewModel;
 
     private DemonstrationInfo demonstrationInfo;
@@ -42,14 +50,40 @@ public class NotificationDocumentActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_notification);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_notification_document);
         binding.setActivity(this);
 
         viewModel = new ViewModelProvider(this).get(NotificationDocumentViewModel.class);
         // 이미지 내용 변경 시 화면에 대응
         viewModel.getMeasurementList().observe(this, uri -> {
-            Glide.with(getApplicationContext()).load(uri).into(binding.notificationImage);
             imageUri = uri;
+
+            // 이미지 로딩이 시작되기 전에 로딩 화면을 표시합니다.
+            binding.progressBar.setVisibility(View.VISIBLE);
+
+            // Glide를 사용하여 이미지를 로딩합니다.
+            Glide.with(this)
+                    .load(uri)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            // 이미지 로딩 실패 시 경고 토스트 메시지 출력 후 화면 종료
+                            binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
+                            Toast.makeText(binding.getActivity(), getString(R.string.plz_retry_connect_network), Toast.LENGTH_SHORT).show();
+                            finish();
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            // 이미지 로딩 성공 시 프로그래스바 숨김, 화면 버튼 클릭 활성화
+                            binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
+                            binding.notificationButton.setEnabled(true);
+                            binding.notificationFinishButton.setEnabled(true);
+                            return false;
+                        }
+                    })
+                    .into(binding.notificationImage);
         });
 
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
