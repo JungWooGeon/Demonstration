@@ -33,7 +33,7 @@
     <string name="name_phone">이름 :&#160;</string>
     <string name="name_phone_example">ex) 김아무개</string>
     <string name="number_phone">번호 :&#160;</string>
-    <string name="number_phone_example">ex) 010–0000–0000</string>
+    <string name="number_phone_example">ex) 01012345678</string>
     <string name="number_position">직책 :&#160;</string>
     <string name="number_position_example">ex) 대표자</string>
     <string name="add">추가하기</string>

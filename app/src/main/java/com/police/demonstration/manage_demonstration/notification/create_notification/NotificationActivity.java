@@ -41,7 +41,13 @@ public class NotificationActivity extends AppCompatActivity {
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
         measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
 
-        initTextView();
+        if (measurementInfo == null) {
+            // 안내문 발송
+            initNotificationTypeNotTextView();
+        } else {
+            initTextView();
+        }
+
         initButton();
     }
 
@@ -61,22 +67,7 @@ public class NotificationActivity extends AppCompatActivity {
         binding.measurementType.setText(titleText);
 
         // 고지 시간 반영
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
-        Date currentDate = new Date(System.currentTimeMillis());
-        String[] current = formatter.format(currentDate).split(getString(R.string.dash));
-
-        if (current.length == 5) {
-            String measurementTime = current[0] + getString(R.string.year) + getString(R.string.space)
-                    + current[1] + getString(R.string.month) + getString(R.string.space)
-                    + current[2] + getString(R.string.day_month) + getString(R.string.space)
-                    + current[3] + getString(R.string.hour) + getString(R.string.space)
-                    + current[4] + getString(R.string.minute);
-            binding.measurementTime.setText(measurementTime);
-        } else {
-            Toast.makeText(this, getString(R.string.plz_retry), Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        binding.measurementTime.setText(getCurrentTime());
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -98,16 +89,38 @@ public class NotificationActivity extends AppCompatActivity {
 
             // 메시지 앱 실행을 위한 Intent 생성
             Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("smsto:" + Uri.encode("01086006255")));
+            intent.setData(Uri.parse("smsto:" + Uri.encode(demonstrationInfo.getOrganizerPhoneNumber())));
 
             // 메시지 내용 추가
             intent.putExtra("sms_body", "안녕하세요! 메시지 내용입니다.");
 
-            // 메시지 앱 실행
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                Log.d("테스트", "메시지 앱 실행");
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
+    }
+
+    private String getCurrentTime() {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat(SIMPLE_DATE_FORMAT);
+        Date currentDate = new Date(System.currentTimeMillis());
+        String[] current = formatter.format(currentDate).split(getString(R.string.dash));
+
+        if (current.length == 5) {
+            return current[0] + getString(R.string.year) + getString(R.string.space)
+                    + current[1] + getString(R.string.month) + getString(R.string.space)
+                    + current[2] + getString(R.string.day_month) + getString(R.string.space)
+                    + current[3] + getString(R.string.hour) + getString(R.string.space)
+                    + current[4] + getString(R.string.minute);
+        } else {
+            return "";
+        }
+    }
+
+    // 안내문 발송 TextView 초기화
+    private void initNotificationTypeNotTextView() {
+        // 고지 타입 변경
+        binding.measurementType.setText(getString(R.string.send_notice));
+
+        // 고지 시간 반영
+        binding.measurementTime.setText(getCurrentTime());
     }
 }

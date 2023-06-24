@@ -6,24 +6,21 @@ import java.util.Map;
  * 상수 관리 class
  */
 public class Constants {
+    // 시간대
     public static final int TIME_ZONE_DAY = 0;
     public static final int TIME_ZONE_NIGHT = 1;
     public static final int TIME_ZONE_LATE_NIGHT = 2;
 
+    // 대상 지역
     public static final int PLACE_ZONE_HOME = 0;
     public static final int PLACE_ZONE_PUBLIC = 1;
     public static final int PLACE_ZONE_ETC = 2;
 
-    public static final String INTENT_NAME_NAME_DETAIL = "name";
-    public static final String INTENT_NAME_PHONE_NUMBER_DETAIL = "number";
-    public static final String INTENT_NAME_POSITION_DETAIL = "position";
-
-    public final static int DATE_DETAIL_START_DATE_IDX = 0;
-    public final static int DATE_DETAIL_END_DATE_IDX = 1;
-
+    // DATE format
     public final static String SIMPLE_DATE_FORMAT = "yyyy-MM-dd-hh-mm";
     public final static String YEAR_DATE_FORMAT = "yyyy";
 
+    // 시위 상태 (진행중, 진행 예정, 종료)
     public final static int STATUS_ING = 0;
     public final static int STATUS_PRE = 1;
     public final static int STATUS_POST = 2;
@@ -31,6 +28,7 @@ public class Constants {
     public static final String INTENT_NAME_IS_ADD_BACKGROUND_NOISE = "isAddBackgroundNoise";
     public static final String INTENT_NAME_PARCELABLE_DEMONSTRATION = "parcelableDemonstration";
 
+    // 기본 등가 소음
     public static final int DEFAULT_EQUIVALENT_NOISE_DAY_HOME = 65;
     public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_HOME = 60;
     public static final int DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_HOME = 55;
@@ -41,6 +39,7 @@ public class Constants {
     public static final int DEFAULT_EQUIVALENT_NOISE_NIGHT_ETC = 65;
     public static final int DEFAULT_EQUIVALENT_NOISE_LATE_NIGHT_ETC = 65;
 
+    // 기본 최고 소음
     public static final int DEFAULT_HIGHEST_NOISE_DAY_HOME = 85;
     public static final int DEFAULT_HIGHEST_NOISE_NIGHT_HOME = 80;
     public static final int DEFAULT_HIGHEST_NOISE_LATE_NIGHT_HOME = 75;
@@ -49,23 +48,27 @@ public class Constants {
     public static final int DEFAULT_HIGHEST_NOISE_LATE_NIGHT_PUBLIC = 80;
     public static final int DEFAULT_HIGHEST_NOISE_ETC = 95;
 
+    // Intent Name 목록
+    public static final String INTENT_NAME_NAME_DETAIL = "name";
+    public static final String INTENT_NAME_PHONE_NUMBER_DETAIL = "number";
+    public static final String INTENT_NAME_POSITION_DETAIL = "position";
     public static final String INTENT_NAME_EQUIVALENT_NOISE = "equivalentNoise";
     public static final String INTENT_NAME_HIGHEST_NOISE = "highestNoise";
-
     public static final String INTENT_NAME_PARCELABLE_MEASUREMENT = "parcelableMeasurement";
+    public static final String INTENT_NAME_NOTIFICATION_TYPE = "notificationType";
+    public static final String INTENT_NAME_ADD_TEXT_MESSAGE = "addTextMessage";
 
+    // 고지 상태 (비고지, 고지(유지))
     public static final int NOTIFICATION_NOT = 0;
     public static final int NOTIFICATION_MAINTENANCE = 1;
 
-    public static final String INTENT_NAME_NOTIFICATION_TYPE = "notificationType";
+    // 고지 타입 (안내문, 최고소음 초과(유지), 등가소음 초과(유지), 최고소음 위반(유지)
     public static final int NOTIFICATION_TYPE_NOT = 0;
     public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE = 1;
     public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE = 2;
     public static final int NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE = 3;
     public static final int NOTIFICATION_TYPE_STOP = 4;
     public static final int NOTIFICATION_TYPE_TEMPORARY_STORAGE = 7;
-
-    public static final String INTENT_NAME_ADD_TEXT_MESSAGE = "addTextMessage";
 
     // 소음도 보정치 기준표
     public static Map<Double, Double> STANDARD_CORRECTION_NOISE = Map.<Double, Double>ofEntries(

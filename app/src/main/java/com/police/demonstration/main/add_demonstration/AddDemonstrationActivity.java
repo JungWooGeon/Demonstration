@@ -1,7 +1,5 @@
 package com.police.demonstration.main.add_demonstration;
 
-import static com.police.demonstration.Constants.DATE_DETAIL_END_DATE_IDX;
-import static com.police.demonstration.Constants.DATE_DETAIL_START_DATE_IDX;
 import static com.police.demonstration.Constants.INTENT_NAME_IS_ADD_BACKGROUND_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_NAME_DETAIL;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
@@ -318,8 +316,8 @@ public class AddDemonstrationActivity extends AppCompatActivity {
     private String[] getStartEndDate(String stringDateDetail, String startYear, String endYear) {
         String[] dateDetail = stringDateDetail.split(getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space));
 
-        String[] startDetail = dateDetail[DATE_DETAIL_START_DATE_IDX].split(getString(R.string.split_space));
-        String[] endDetail = dateDetail[DATE_DETAIL_END_DATE_IDX].split(getString(R.string.split_space));
+        String[] startDetail = dateDetail[0].split(getString(R.string.split_space));
+        String[] endDetail = dateDetail[1].split(getString(R.string.split_space));
 
         String startMonth = startDetail[0].split(getString(R.string.month))[0];
         String startDay = startDetail[1].split(getString(R.string.day_month))[0];

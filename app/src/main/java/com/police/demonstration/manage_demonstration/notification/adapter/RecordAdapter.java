@@ -69,12 +69,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // layout 클릭 이벤트
-        holder.binding.layout.setOnClickListener(e -> {
-            checkList.set(position, !checkList.get(position));
-            holder.binding.checkbox.setChecked(!holder.binding.checkbox.isChecked());
-        });
-
         // 번호 TextView 반영
         String numberText = position + 1 + resources.getString(R.string.dot);
         holder.binding.numberTextView.setText(numberText);
@@ -127,6 +121,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             holder.binding.content.setTextColor(Color.parseColor("#9A9A9A"));
             holder.binding.contentDetail.setTextColor(Color.parseColor("#9A9A9A"));
             holder.binding.checkbox.setEnabled(false);
+        } else {
+            // 위반 사항 없을 경우 클릭 가능
+            // layout 클릭 이벤트
+            holder.binding.layout.setOnClickListener(e -> {
+                checkList.set(position, !checkList.get(position));
+                holder.binding.checkbox.setChecked(!holder.binding.checkbox.isChecked());
+            });
         }
     }
 

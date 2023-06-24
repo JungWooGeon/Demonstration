@@ -25,7 +25,7 @@ public class DemonstrationInfo implements Parcelable {
     @ColumnInfo(name = "standardEquivalent") String standardEquivalent;
     @ColumnInfo(name = "standardHighest") String standardHighest;
 
-    public DemonstrationInfo(String name, String groupName, String startDate, String endDate, String timeZone, String place, String placeZone, String organizerName, String organizerPosition, String organizerPhoneNumber, String backgroundNoiseLevel) {
+    public DemonstrationInfo(String name, String groupName, String startDate, String endDate, String timeZone, String place, String placeZone, String organizerName, String organizerPhoneNumber, String organizerPosition, String backgroundNoiseLevel) {
         this.name = name;
         this.groupName = groupName;
         this.startDate = startDate;
