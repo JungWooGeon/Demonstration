@@ -45,7 +45,53 @@ public class NotificationDocumentModel {
         this.callbackListener = callbackListener;
     }
 
-    public void getNotificationUri(Context context, DemonstrationInfo demonstrationInfo, MeasurementInfo measurementInfo) {
+    // 안내문 발송
+    public void getNotificationUriOne(Context context, DemonstrationInfo demonstrationInfo) {
+        // rxjava3 - retrofit2 -> POST 요청 보내고 응답 받기
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_NOTIFICATION_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+
+        NotificationApi notificationApi = retrofit.create(NotificationApi.class);
+        NotificationRequest request = new NotificationRequest(demonstrationInfo.getOrganizerName());
+
+        notificationApi.getNotificationImageOne(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        // 구독 시 처리할 내용
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull ResponseBody responseBody) {
+                        // 결과 데이터 처리
+                        Uri imageUri;
+                        try {
+                            imageUri = convertResponseToUri(responseBody, context, -1);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        notificationUri = imageUri;
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        // 에러 처리
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        // 작업 완료 처리
+                        callbackListener.onFinish();
+                    }
+                });
+    }
+
+    public void getNotificationUriTwo(Context context, DemonstrationInfo demonstrationInfo, MeasurementInfo measurementInfo) {
         String timeZone = "";
         switch (demonstrationInfo.getTimeZone()) {
             case TIME_ZONE_DAY:
@@ -94,7 +140,7 @@ public class NotificationDocumentModel {
                 measurementInfo.getCorrectionHighest(), demonstrationInfo.getOrganizerName()
         );
 
-        notificationApi.getNotificationImage(request)
+        notificationApi.getNotificationImageTwo(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -108,7 +154,7 @@ public class NotificationDocumentModel {
                         // 결과 데이터 처리
                         Uri imageUri;
                         try {
-                            imageUri = convertResponseToUri(responseBody, context, measurementInfo);
+                            imageUri = convertResponseToUri(responseBody, context, -1);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -128,12 +174,12 @@ public class NotificationDocumentModel {
                 });
     }
 
-    private Uri convertResponseToUri(ResponseBody responseBody, Context context, MeasurementInfo measurementInfo) throws IOException {
+    private Uri convertResponseToUri(ResponseBody responseBody, Context context, int measurementInfoId) throws IOException {
         // ResponseBody에서 이미지 데이터를 읽어옵니다.
         InputStream inputStream = responseBody.byteStream();
 
         // 이미지를 기기 내부에 저장할 파일을 생성합니다.
-        File tempFile = createFile(context, measurementInfo);
+        File tempFile = createFile(context, measurementInfoId);
 
         // 파일에 이미지 데이터를 저장합니다.
         writeInputStreamToFile(inputStream, tempFile);
@@ -142,10 +188,10 @@ public class NotificationDocumentModel {
         return Uri.fromFile(tempFile);
     }
 
-    private File createFile(Context context, MeasurementInfo measurementInfo) throws IOException {
+    private File createFile(Context context, int measurementInfoId) throws IOException {
         // 파일을 저장할 경로 및 파일 이름 설정
         String directoryPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
-        String fileName = measurementInfo.getId() + ".png";
+        String fileName = measurementInfoId + ".png";
 
         // 파일 생성
         File tempFile = new File(directoryPath, fileName);

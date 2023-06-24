@@ -6,6 +6,9 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface NotificationApi {
+    @POST("/one")
+    Observable<ResponseBody> getNotificationImageOne(@Body NotificationRequest request);
+
     @POST("/two")
-    Observable<ResponseBody> getNotificationImage(@Body NotificationRequest request);
+    Observable<ResponseBody> getNotificationImageTwo(@Body NotificationRequest request);
 }

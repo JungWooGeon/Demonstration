@@ -23,7 +23,11 @@ public class NotificationDocumentViewModel extends ViewModel {
 
     public MutableLiveData<Uri> getMeasurementList() { return notificationUri; }
 
-    public void getNotificationUri(Context context, DemonstrationInfo demonstrationInfo, MeasurementInfo measurementInfo) {
-        model.getNotificationUri(context, demonstrationInfo, measurementInfo);
+    public void getNotificationUriOne(Context context, DemonstrationInfo demonstrationInfo) {
+        model.getNotificationUriOne(context, demonstrationInfo);
+    }
+
+    public void getNotificationUriTwo(Context context, DemonstrationInfo demonstrationInfo, MeasurementInfo measurementInfo) {
+        model.getNotificationUriTwo(context, demonstrationInfo, measurementInfo);
     }
 }

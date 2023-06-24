@@ -11,6 +11,10 @@ public class NotificationRequest {
     private String noise;
     private String name;
 
+    public NotificationRequest(String name) {
+        this.name = name;
+    }
+
     public NotificationRequest(String caltime, String time, String location,
                         String distance, String region, String wind,
                         String stdnoise, String noise, String name) {

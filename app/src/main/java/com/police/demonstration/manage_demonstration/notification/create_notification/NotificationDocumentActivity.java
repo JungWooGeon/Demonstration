@@ -58,40 +58,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         // 이미지 내용 변경 시 화면에 대응
         viewModel.getMeasurementList().observe(this, uri -> {
             imageUri = uri;
-
-            // 이미지 로딩이 시작되기 전에 로딩 화면을 표시합니다.
-            binding.progressBar.setVisibility(View.VISIBLE);
-
-            // Glide를 사용하여 이미지를 로딩합니다.
-            Glide.with(this)
-                    .load(uri)
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            // 이미지 로딩 실패 시 경고 토스트 메시지 출력 후 화면 종료
-                            binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
-                            Toast.makeText(binding.getActivity(), getString(R.string.plz_retry_connect_network), Toast.LENGTH_SHORT).show();
-                            finish();
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            // 이미지 로딩 성공 시 프로그래스바 숨김, 화면 버튼 클릭 활성화
-                            binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
-                            binding.notificationButton.setEnabled(true);
-                            binding.notificationFinishButton.setEnabled(true);
-
-                            // 이미지 뷰 클릭 이벤트
-                            binding.notificationImage.setOnClickListener(e -> {
-                                Intent intent = new Intent(binding.getActivity(), ImageViewActivity.class);
-                                intent.setData(imageUri);
-                                startActivity(intent);
-                            });
-                            return false;
-                        }
-                    })
-                    .into(binding.notificationImage);
+            loadImage(uri);
         });
 
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
@@ -101,11 +68,12 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         if (measurementInfo == null || textMessage == null) {
             // 안내문 발송
             initNotificationTypeNotTextView();
+            viewModel.getNotificationUriOne(this, demonstrationInfo);
         } else {
             initTextView();
 
             // 이미지 가져오기
-            viewModel.getNotificationUri(this, demonstrationInfo, measurementInfo);
+            viewModel.getNotificationUriTwo(this, demonstrationInfo, measurementInfo);
         }
 
         initButton();
@@ -134,7 +102,6 @@ public class NotificationDocumentActivity extends AppCompatActivity {
     private void initButton() {
         binding.backButton.setOnClickListener(e -> finish());
         binding.notificationButton.setOnClickListener(e -> {
-            //@TODO 고지 버튼 클릭 이벤트 - MMS 전송
             // MMS를 보내기 위한 Intent 생성
             // FileUriExposedException (Android 7.0 이상에서 발생하는 예외) 를 피하기 위하여
             // FileProvider 사용
@@ -190,5 +157,41 @@ public class NotificationDocumentActivity extends AppCompatActivity {
 
         // 고지 시간 반영
         binding.currentTime.setText(getCurrentTime());
+    }
+
+    private void loadImage(Uri uri) {
+        // 이미지 로딩이 시작되기 전에 로딩 화면을 표시합니다.
+        binding.progressBar.setVisibility(View.VISIBLE);
+
+        // Glide를 사용하여 이미지를 로딩합니다.
+        Glide.with(this)
+                .load(uri)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        // 이미지 로딩 실패 시 경고 토스트 메시지 출력 후 화면 종료
+                        binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
+                        Toast.makeText(binding.getActivity(), getString(R.string.plz_retry_connect_network), Toast.LENGTH_SHORT).show();
+                        finish();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        // 이미지 로딩 성공 시 프로그래스바 숨김, 화면 버튼 클릭 활성화
+                        binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
+                        binding.notificationButton.setEnabled(true);
+                        binding.notificationFinishButton.setEnabled(true);
+
+                        // 이미지 뷰 클릭 이벤트
+                        binding.notificationImage.setOnClickListener(e -> {
+                            Intent intent = new Intent(binding.getActivity(), ImageViewActivity.class);
+                            intent.setData(imageUri);
+                            startActivity(intent);
+                        });
+                        return false;
+                    }
+                })
+                .into(binding.notificationImage);
     }
 }
