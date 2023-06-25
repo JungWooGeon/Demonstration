@@ -188,6 +188,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time);
                 binding.demonstrationDateDetail.setText(text);
             });
+            endTimePickerDialog.setCancelable(false);
             endTimePickerDialog.show();
 
             // 마침 날짜 입력 DatePicker
@@ -207,6 +208,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_date) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
+            endDatePickerDialog.setCancelable(false);
             endDatePickerDialog.show();
 
             // 시작 시간 입력 TimePicker
@@ -221,6 +223,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 String text = binding.demonstrationDateDetail.getText().toString() + getString(R.string.example_time) + getString(R.string.space) + getString(R.string.tilde) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
+            startTimePickerDialog.setCancelable(false);
             startTimePickerDialog.show();
 
             // 시작 날짜 입력 DatePicker
@@ -240,6 +243,7 @@ public class AddDemonstrationActivity extends AppCompatActivity {
                 String text = getString(R.string.example_date) + getString(R.string.space);
                 binding.demonstrationDateDetail.setText(text);
             });
+            startDatePickerDialog.setCancelable(false);
             startDatePickerDialog.show();
 
             binding.demonstrationDateDetail.setTextColor(getColor(R.color.contents));

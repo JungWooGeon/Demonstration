@@ -62,6 +62,11 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_notification_document);
         binding.setActivity(this);
 
+        // 시위 정보, 측정 정보, 추가 텍스트 메시지 저장
+        demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
+        measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
+        textMessage = getIntent().getStringExtra(INTENT_NAME_ADD_TEXT_MESSAGE);
+
         viewModel = new ViewModelProvider(this).get(NotificationDocumentViewModel.class);
 
         // 이미지 내용 변경(업로드 완료) 시 화면에 대응
@@ -87,11 +92,6 @@ public class NotificationDocumentActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        // 시위 정보, 측정 정보, 추가 텍스트 메시지 저장
-        demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
-        measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
-        textMessage = getIntent().getStringExtra(INTENT_NAME_ADD_TEXT_MESSAGE);
 
         if (measurementInfo == null || textMessage == null) {
             // 안내문 발송
