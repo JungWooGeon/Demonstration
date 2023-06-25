@@ -31,6 +31,8 @@ import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
 import com.police.demonstration.databinding.ActivityNotificationDocumentBinding;
+import com.police.demonstration.manage_demonstration.ManageDemonstrationActivity;
+import com.police.demonstration.manage_demonstration.notification.record_list.RecordListActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -126,6 +128,24 @@ public class NotificationDocumentActivity extends AppCompatActivity {
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
             }
+
+            // '고지 저장' 버튼 활성화
+            binding.notificationFinishButton.setEnabled(true);
+        });
+
+        // '고지 저장' 버튼 이벤트 -> 고지 기록 추가, 고지 관리 화면으로 이동 (액티비티 종료)
+        binding.notificationFinishButton.setOnClickListener(e -> {
+            //@TODO 고지 기록 추가
+
+            // 현재 액티비티 종료
+            finish();
+
+            // 시위 관리 화면으로 이동 -> Activity Task 정리
+            Intent intent = new Intent(this, ManageDemonstrationActivity.class);
+            intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -179,7 +199,6 @@ public class NotificationDocumentActivity extends AppCompatActivity {
                         // 이미지 로딩 성공 시 프로그래스바 숨김, 화면 버튼 클릭 활성화
                         binding.progressBar.setVisibility(View.GONE); // 로딩 화면 숨김
                         binding.notificationButton.setEnabled(true); // '고지' 버튼 활성화
-                        binding.notificationFinishButton.setEnabled(true); // '고지 저장' 버튼 활성화
 
                         // 이미지 뷰 클릭 이벤트
                         binding.notificationImage.setOnClickListener(e -> {

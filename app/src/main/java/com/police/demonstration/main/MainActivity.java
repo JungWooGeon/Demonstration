@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     // MainActivity ViewModel
     private MainActivityViewModel viewModel;
 
+    // 뒤로 가기 버튼 클릭 체크
+    private boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,19 @@ public class MainActivity extends AppCompatActivity {
         viewModel.readDemonstration(this);
 
         initButton();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.press_the_back_button), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
     private void initButton() {
