@@ -184,12 +184,12 @@ public class MainModel {
                     // 상태가 같다면 start date 기준 현재 시간과 가까운 순으로 정렬
                     assert startDate1 != null;
 
-                    if (infoStatus1 == STATUS_ING) {
-                        // 진행 중인 것은 날짜가 큰 값을 위로
-                        return -startDate1.compareTo(startDate2);
-                    } else {
-                        // 진행 중이 아닌 것은 날짜가 작은 값을 위로
+                    if (infoStatus1 == STATUS_PRE) {
+                        // 시작 예정인 것은 날짜가 작은 값을 위로
                         return startDate1.compareTo(startDate2);
+                    } else {
+                        // 시작 예정이 아닌 것들은 날짜가 큰 값을 위로
+                        return -startDate1.compareTo(startDate2);
                     }
                 }
             } catch (ParseException e) {

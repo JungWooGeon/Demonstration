@@ -12,8 +12,11 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.police.demonstration.R;
+import com.police.demonstration.database.demonstration.DemonstrationDataBase;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
+import com.police.demonstration.database.notification.NotificationDataBase;
+import com.police.demonstration.database.notification.NotificationInfo;
 import com.police.demonstration.manage_demonstration.notification.rest_api.NotificationApi;
 import com.police.demonstration.manage_demonstration.notification.rest_api.NotificationRequest;
 
@@ -34,7 +37,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * NotificationDocumentViewModel Model
- * Rxjava - Retrofit 사용하여 고지서 URI 관리
+ * Rxjava - Retrofit 사용 -> 고지서 URI 관리
+ * - Room 사용 -> Notification Add
  */
 public class NotificationDocumentModel {
 
@@ -50,6 +54,17 @@ public class NotificationDocumentModel {
         this.callbackListener = callbackListener;
     }
 
+    public void addNotification(Context context, NotificationInfo notificationInfo) {
+        // DB 에 add (Rxjava 비동기)
+        NotificationDataBase.getInstance(context)
+                .notificationDao()
+                .addNotification(notificationInfo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> callbackListener.onFinishAddNotification())
+                .subscribe();
+    }
+
     // 안내문 발송 : rxjava3 - retrofit2 -> POST 요청 보내고 응답 받기
     public void getNotificationUriOne(Context context, DemonstrationInfo demonstrationInfo) {
         // Retrofit
@@ -62,7 +77,11 @@ public class NotificationDocumentModel {
         NotificationApi notificationApi = retrofit.create(NotificationApi.class);
 
         // API 파라미터에 필요한 인자들 사용하여 생성
-        NotificationRequest request = new NotificationRequest(demonstrationInfo.getOrganizerName());
+        NotificationRequest request = new NotificationRequest(
+                demonstrationInfo.getOrganizerName(),
+                demonstrationInfo.getStandardEquivalent(),
+                demonstrationInfo.getStandardHighest()
+        );
 
         // RxJava
         notificationApi.getNotificationImageOne(request)
@@ -309,5 +328,7 @@ public class NotificationDocumentModel {
     // 비동기 작업 완료를 알리는 listener 역할
     public interface CallbackListener {
         void onFinish();
+
+        void onFinishAddNotification();
     }
 }

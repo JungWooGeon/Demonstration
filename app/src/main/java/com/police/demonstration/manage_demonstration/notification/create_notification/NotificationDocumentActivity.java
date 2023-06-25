@@ -30,6 +30,7 @@ import com.bumptech.glide.request.target.Target;
 import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
 import com.police.demonstration.database.measurement.MeasurementInfo;
+import com.police.demonstration.database.notification.NotificationInfo;
 import com.police.demonstration.databinding.ActivityNotificationDocumentBinding;
 import com.police.demonstration.manage_demonstration.ManageDemonstrationActivity;
 import com.police.demonstration.manage_demonstration.notification.record_list.RecordListActivity;
@@ -67,6 +68,24 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         viewModel.getMeasurementList().observe(this, uri -> {
             imageUri = uri;
             loadImage(uri);
+        });
+
+        // 고지 기록 저장 완료 시 화면 종료 후 시위 관리 화면으로 이동
+        viewModel.getIsFinish().observe(this, isFinish -> {
+            if (isFinish) {
+                // 고지 기록 저장 완료 토스트 메시지 출력
+                Toast.makeText(this, getString(R.string.complete_add_notification), Toast.LENGTH_SHORT).show();
+
+                // 현재 Activity 종료
+                finish();
+
+                // 시위 관리 화면으로 이동 -> Activity Task 정리
+                Intent intent = new Intent(this, ManageDemonstrationActivity.class);
+                intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
         });
 
         // 시위 정보, 측정 정보, 추가 텍스트 메시지 저장
@@ -135,17 +154,14 @@ public class NotificationDocumentActivity extends AppCompatActivity {
 
         // '고지 저장' 버튼 이벤트 -> 고지 기록 추가, 고지 관리 화면으로 이동 (액티비티 종료)
         binding.notificationFinishButton.setOnClickListener(e -> {
-            //@TODO 고지 기록 추가
-
-            // 현재 액티비티 종료
-            finish();
-
-            // 시위 관리 화면으로 이동 -> Activity Task 정리
-            Intent intent = new Intent(this, ManageDemonstrationActivity.class);
-            intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            // 고지 기록 추가
+            NotificationInfo notificationInfo = new NotificationInfo(
+                    measurementInfo.getId(),
+                    binding.currentTime.getText().toString(),
+                    binding.measurementType.getText().toString(),
+                    imageUri
+            );
+            viewModel.addNotification(this, notificationInfo);
         });
     }
 
@@ -184,7 +200,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         // Glide를 사용하여 이미지를 로딩
         Glide.with(this)
                 .load(uri)
-                .listener(new RequestListener<Drawable>() {
+                .listener(new RequestListener<>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         // 이미지 로딩 실패 시 경고 토스트 메시지 출력 후 화면 종료

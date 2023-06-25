@@ -10,9 +10,13 @@ public class NotificationRequest {
     private String stdnoise;
     private String noise;
     private String name;
+    private String equinoise;
+    private String maxnoise;
 
-    public NotificationRequest(String name) {
+    public NotificationRequest(String name, String equinoise, String maxnoise) {
         this.name = name;
+        this.equinoise = equinoise;
+        this.maxnoise = maxnoise;
     }
 
     public NotificationRequest(String caltime, String time, String location,
