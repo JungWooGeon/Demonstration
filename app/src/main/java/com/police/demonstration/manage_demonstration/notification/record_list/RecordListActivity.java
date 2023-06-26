@@ -38,12 +38,16 @@ public class RecordListActivity extends AppCompatActivity {
     private DemonstrationInfo demonstrationInfo;
     private RecordAdapter recordAdapter;
 
+    private int notificationType;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_record_list);
         binding.setActivity(this);
+
+        notificationType = getIntent().getIntExtra(INTENT_NAME_NOTIFICATION_TYPE, 0);
 
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
 
@@ -71,6 +75,7 @@ public class RecordListActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, CreateNotificationActivity.class);
                 intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
                 intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+                intent.putExtra(INTENT_NAME_NOTIFICATION_TYPE, notificationType);
                 startActivity(intent);
             } else {
                 // 측정 기록을 선택하지 않았을 경우 토스트 메시지 출력
@@ -82,10 +87,7 @@ public class RecordListActivity extends AppCompatActivity {
     private void initRecyclerView(ArrayList<MeasurementInfo> measurementInfoList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recordListRecyclerView.setLayoutManager(linearLayoutManager);
-        recordAdapter = new RecordAdapter(
-                measurementInfoList,
-                getIntent().getIntExtra(INTENT_NAME_NOTIFICATION_TYPE, 0)
-        );
+        recordAdapter = new RecordAdapter(measurementInfoList, notificationType);
         binding.recordListRecyclerView.setAdapter(recordAdapter);
     }
 }

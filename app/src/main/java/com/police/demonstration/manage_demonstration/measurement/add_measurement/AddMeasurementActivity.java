@@ -5,6 +5,7 @@ import static com.police.demonstration.Constants.INTENT_NAME_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_NOT;
 import static com.police.demonstration.Constants.STANDARD_CORRECTION_NOISE;
@@ -184,10 +185,18 @@ public class AddMeasurementActivity extends AppCompatActivity {
                 // 위반 사항 없음
                 int notificationType = NOTIFICATION_TYPE_NOT;
 
-                if (Integer.parseInt(correctionEquivalent) > Integer.parseInt(demonstrationInfo.getStandardEquivalent())) {
+                int inputEquivalent = Integer.parseInt(correctionEquivalent);
+                int stdEquivalent = Integer.parseInt(demonstrationInfo.getStandardEquivalent());
+                int inputHighest = Integer.parseInt(correctionHighest);
+                int stdHighest = Integer.parseInt(demonstrationInfo.getStandardHighest());
+
+                if (inputEquivalent > stdEquivalent && inputHighest > stdHighest) {
+                    // 등가, 최고 소음 초과
+                    notificationType = NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE;
+                } else if (inputEquivalent > stdEquivalent) {
                     // 등가 소음 초과
                     notificationType = NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
-                } else if (Integer.parseInt(correctionHighest) > Integer.parseInt(demonstrationInfo.getStandardHighest())) {
+                } else if (inputHighest > stdHighest) {
                     // 최고 소음 초과
                     notificationType = NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
                 }

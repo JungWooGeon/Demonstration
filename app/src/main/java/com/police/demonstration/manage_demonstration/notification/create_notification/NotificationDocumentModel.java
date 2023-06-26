@@ -1,6 +1,7 @@
 package com.police.demonstration.manage_demonstration.notification.create_notification;
 
 import static com.police.demonstration.Constants.API_NOTIFICATION_BASE_URL;
+import static com.police.demonstration.Constants.NOTIFICATION_MAINTENANCE;
 import static com.police.demonstration.Constants.PLACE_ZONE_ETC;
 import static com.police.demonstration.Constants.PLACE_ZONE_HOME;
 import static com.police.demonstration.Constants.PLACE_ZONE_PUBLIC;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import com.police.demonstration.R;
 import com.police.demonstration.database.demonstration.DemonstrationDataBase;
 import com.police.demonstration.database.demonstration.DemonstrationInfo;
+import com.police.demonstration.database.measurement.MeasurementDataBase;
 import com.police.demonstration.database.measurement.MeasurementInfo;
 import com.police.demonstration.database.notification.NotificationDataBase;
 import com.police.demonstration.database.notification.NotificationInfo;
@@ -54,14 +56,26 @@ public class NotificationDocumentModel {
         this.callbackListener = callbackListener;
     }
 
-    public void addNotification(Context context, NotificationInfo notificationInfo) {
+    public void updateMeasurementNotificationState(Context context, MeasurementInfo measurementInfo) {
+        // 측정 기록 DB에 고지 상태 update
+        measurementInfo.setNotificationState(NOTIFICATION_MAINTENANCE);
+        MeasurementDataBase.getInstance(context)
+                .measurementDao()
+                .updateMeasurement(measurementInfo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> callbackListener.onFinishAddNotification())
+                .subscribe();
+    }
+
+    public void addNotification(Context context, NotificationInfo notificationInfo, MeasurementInfo measurementInfo) {
         // DB 에 add (Rxjava 비동기)
         NotificationDataBase.getInstance(context)
                 .notificationDao()
                 .addNotification(notificationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(() -> callbackListener.onFinishAddNotification())
+                .doOnComplete(() -> updateMeasurementNotificationState(context, measurementInfo))
                 .subscribe();
     }
 

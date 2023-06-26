@@ -70,9 +70,7 @@ public class Constants {
     public static final int NOTIFICATION_TYPE_NOT = 0;
     public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE = 1;
     public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE = 2;
-    public static final int NOTIFICATION_TYPE_MAINTENANCE_VIOLATION_HIGHEST_NOISE = 3;
-    public static final int NOTIFICATION_TYPE_STOP = 4;
-    public static final int NOTIFICATION_TYPE_TEMPORARY_STORAGE = 7;
+    public static final int NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE = 3;
 
     // 소음도 보정치 기준표
     public static Map<Double, Double> STANDARD_CORRECTION_NOISE = Map.<Double, Double>ofEntries(

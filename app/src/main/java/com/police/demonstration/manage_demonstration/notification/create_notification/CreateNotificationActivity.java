@@ -1,6 +1,7 @@
 package com.police.demonstration.manage_demonstration.notification.create_notification;
 
 import static com.police.demonstration.Constants.INTENT_NAME_ADD_TEXT_MESSAGE;
+import static com.police.demonstration.Constants.INTENT_NAME_NOTIFICATION_TYPE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
@@ -39,6 +40,8 @@ public class CreateNotificationActivity extends AppCompatActivity {
     private DemonstrationInfo demonstrationInfo;
     private MeasurementInfo measurementInfo;
 
+    private int notificationType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         // 시위 정보, 측정 정보 저장
+        notificationType = getIntent().getIntExtra(INTENT_NAME_NOTIFICATION_TYPE, 0);
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
         measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
 
@@ -109,7 +113,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
         String measurementNoise = "";
         String standardNoiseText = "";
         String standardNoise = "";
-        switch (measurementInfo.getNotificationType()) {
+        switch (notificationType) {
             case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE:
                 titleText = getString(R.string.exceed_highest_noise);
                 measurementNoiseText = getString(R.string.measurement_highest_noise);
@@ -153,6 +157,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
             Intent intent = new Intent(this, NotificationDocumentActivity.class);
             intent.putExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION, demonstrationInfo);
             intent.putExtra(INTENT_NAME_PARCELABLE_MEASUREMENT, measurementInfo);
+            intent.putExtra(INTENT_NAME_NOTIFICATION_TYPE, notificationType);
             intent.putExtra(INTENT_NAME_ADD_TEXT_MESSAGE, binding.addTextTextView.getText());
             startActivity(intent);
         });

@@ -1,6 +1,7 @@
 package com.police.demonstration.manage_demonstration.notification.create_notification;
 
 import static com.police.demonstration.Constants.INTENT_NAME_ADD_TEXT_MESSAGE;
+import static com.police.demonstration.Constants.INTENT_NAME_NOTIFICATION_TYPE;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_DEMONSTRATION;
 import static com.police.demonstration.Constants.INTENT_NAME_PARCELABLE_MEASUREMENT;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
@@ -54,6 +55,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
 
     private String textMessage;
     private Uri imageUri;
+    private int notificationType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         // 시위 정보, 측정 정보, 추가 텍스트 메시지 저장
+        notificationType = getIntent().getIntExtra(INTENT_NAME_NOTIFICATION_TYPE, 0);
         demonstrationInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_DEMONSTRATION);
         measurementInfo = getIntent().getParcelableExtra(INTENT_NAME_PARCELABLE_MEASUREMENT);
         textMessage = getIntent().getStringExtra(INTENT_NAME_ADD_TEXT_MESSAGE);
@@ -100,7 +103,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
         } else {
             // 고지 타입 반영
             String titleText = "";
-            switch (measurementInfo.getNotificationType()) {
+            switch (notificationType) {
                 case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE:
                     // 최고 소음 초과(유지) 일 때, 제목 반영, 최고소음초과(유지) 고지서 받아오기
                     titleText = getString(R.string.exceed_highest_noise) + getString(R.string.space) + getString(R.string.open_bracket) + getString(R.string.space) + getString(R.string.maintenance) + getString(R.string.space) + getString(R.string.close_bracket);
@@ -161,7 +164,7 @@ public class NotificationDocumentActivity extends AppCompatActivity {
                     binding.measurementType.getText().toString(),
                     imageUri
             );
-            viewModel.addNotification(this, notificationInfo);
+            viewModel.addNotification(this, notificationInfo, measurementInfo);
         });
     }
 

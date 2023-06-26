@@ -3,6 +3,7 @@ package com.police.demonstration.manage_demonstration.notification.adapter;
 import static com.police.demonstration.Constants.NOTIFICATION_MAINTENANCE;
 import static com.police.demonstration.Constants.NOTIFICATION_NOT;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE;
+import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE;
 import static com.police.demonstration.Constants.NOTIFICATION_TYPE_NOT;
 
@@ -13,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.police.demonstration.R;
@@ -39,7 +39,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     // string.xml 을 사용하기 위한 resources
     private Resources resources;
 
-    public ArrayList<Boolean> getCheckList() { return this.checkList; }
+    public ArrayList<Boolean> getCheckList() {
+        return this.checkList;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final RecyclerviewRecordListBinding binding;
@@ -54,7 +56,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     public RecordAdapter(ArrayList<MeasurementInfo> dataSet, int notificationType) {
         measurementList = dataSet;
-        
+
         // 체크 리스트 초기화
         checkList = new ArrayList<>();
         for (int i = 0; i < measurementList.size(); i++) {
@@ -98,7 +100,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         switch (measurementList.get(position).getNotificationType()) {
             case NOTIFICATION_TYPE_NOT:
                 // 위반 사항 TextView 반영
-                text = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.example_content_detail) + resources.getString(R.string.comma)  + resources.getString(R.string.space);
+                text = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.example_content_detail) + resources.getString(R.string.comma) + resources.getString(R.string.space);
                 break;
             case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_NOISE:
                 text = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.exceed_highest_noise) + resources.getString(R.string.comma) + resources.getString(R.string.space);
@@ -106,11 +108,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_EQUIVALENT_NOISE:
                 text = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.exceed_equivalent_noise) + resources.getString(R.string.comma) + resources.getString(R.string.space);
                 break;
+            case NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE:
+                text = resources.getString(R.string.open_bracket) + resources.getString(R.string.space) + resources.getString(R.string.equivalent) + resources.getString(R.string.comma) + resources.getString(R.string.space) + resources.getString(R.string.highest) + resources.getString(R.string.space) + resources.getString(R.string.exceed_noise) + resources.getString(R.string.comma) + resources.getString(R.string.space);
+                break;
             default:
                 break;
         }
 
-        switch(measurementList.get(position).getNotificationState()) {
+        switch (measurementList.get(position).getNotificationState()) {
             case NOTIFICATION_NOT:
                 text += resources.getString(R.string.notification_not);
                 break;
@@ -125,14 +130,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         holder.binding.contentDetail.setText(text);
 
         // 위반사항에 따른 레이아웃 비활성화
-        if (notificationType != measurementList.get(position).getNotificationType()) {
+        if (measurementList.get(position).getNotificationType() != NOTIFICATION_TYPE_MAINTENANCE_EXCEED_HIGHEST_EQUIVALENT_NOISE
+                && notificationType != measurementList.get(position).getNotificationType()) {
             holder.binding.layout.setBackgroundColor(Color.parseColor("#FEFEFE"));
             holder.binding.numberTextView.setTextColor(Color.parseColor("#9A9A9A"));
             holder.binding.content.setTextColor(Color.parseColor("#9A9A9A"));
             holder.binding.contentDetail.setTextColor(Color.parseColor("#9A9A9A"));
             holder.binding.checkbox.setEnabled(false);
         } else {
-            // 위반 사항 없을 경우 클릭 가능
             // layout 클릭 이벤트
             holder.binding.layout.setOnClickListener(e -> {
                 checkList.set(position, !checkList.get(position));

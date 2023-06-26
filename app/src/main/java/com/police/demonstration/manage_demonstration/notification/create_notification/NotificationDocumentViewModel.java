@@ -65,7 +65,7 @@ public class NotificationDocumentViewModel extends ViewModel {
         model.getNotificationThree(context, demonstrationInfo, measurementInfo);
     }
 
-    public void addNotification(Context context, NotificationInfo notificationInfo) {
-        model.addNotification(context, notificationInfo);
+    public void addNotification(Context context, NotificationInfo notificationInfo, MeasurementInfo measurementInfo) {
+        model.addNotification(context, notificationInfo, measurementInfo);
     }
 }
