@@ -14,15 +14,372 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButton2"
+            android:layout_width="38dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="28dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toTopOf="@+id/lineCol5"
+            app:layout_constraintEnd_toStartOf="@+id/demstartion_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.761"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/demstartion_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="기록"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="[시위 명]"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Mesuare_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="10dp"
+            android:enabled="false"
+            android:text="측정 기록 내역"
+            app:layout_constraintBottom_toBottomOf="@+id/lineCol5"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol5"
+            app:layout_constraintHorizontal_bias="0.372"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineCol"
+            app:layout_constraintVertical_bias="0.59" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tax_send_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="true"
+            android:text="고지서 발송 내역"
+            app:layout_constraintBottom_toBottomOf="@+id/lineCol5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toEndOf="@+id/lineCol5"
+            app:layout_constraintTop_toTopOf="@+id/Mesuare_record_button"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/Maintain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유지"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow16"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol5"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toEndOf="@+id/lineCol"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow20"
+            app:layout_constraintVertical_bias="0.478" />
+
+        <TextView
+            android:id="@+id/Maintain_row2_col1"
+            android:layout_width="10dp"
+            android:layout_height="16dp"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow"
+            app:layout_constraintStart_toEndOf="@+id/lineCol"
+            app:layout_constraintStart_toStartOf="@+id/Maintain_row1_col1"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow18"
+            app:layout_constraintVertical_bias="0.512" />
+
+        <TextView
+            android:id="@+id/Maintain_row3_col1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow19"
+            app:layout_constraintStart_toEndOf="@+id/lineCol"
+            app:layout_constraintStart_toStartOf="@+id/Maintain_row2_col1"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow"
+            app:layout_constraintVertical_bias="0.567" />
+
+        <TextView
+            android:id="@+id/Maintain_row1_col1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol5"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toEndOf="@+id/lineCol"
+            app:layout_constraintTop_toTopOf="@+id/Pause_row1_col2" />
+
+        <TextView
+            android:id="@+id/equaly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등가"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow18"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow16"
+            app:layout_constraintVertical_bias="0.488" />
+
+        <TextView
+            android:id="@+id/Pasue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중지"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol6"
+            app:layout_constraintHorizontal_bias="0.436"
+            app:layout_constraintStart_toEndOf="@+id/lineCol5"
+            app:layout_constraintTop_toTopOf="@+id/Maintain" />
+
+        <TextView
+            android:id="@+id/Temp_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="임시저장"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toEndOf="@+id/lineCol6"
+            app:layout_constraintTop_toTopOf="@+id/Pasue" />
+
+        <TextView
+            android:id="@+id/Max_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최고 3회"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow19"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <TextView
+            android:id="@+id/Pause_row1_col2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol6"
+            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintStart_toEndOf="@+id/lineCol5"
+            app:layout_constraintTop_toTopOf="@+id/Temp_save_row1_col3" />
+
+        <TextView
+            android:id="@+id/Pause_row2_col2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow"
+            app:layout_constraintStart_toEndOf="@+id/lineCol5"
+            app:layout_constraintStart_toStartOf="@+id/Pause_row1_col2"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow18"
+            app:layout_constraintVertical_bias="0.552" />
+
+        <TextView
+            android:id="@+id/Pause_row3_col2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow19"
+            app:layout_constraintStart_toEndOf="@+id/lineCol5"
+            app:layout_constraintStart_toStartOf="@+id/Pause_row2_col2"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow"
+            app:layout_constraintVertical_bias="0.567" />
+
+        <TextView
+            android:id="@+id/Temp_save_row1_col3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toEndOf="@+id/lineCol6"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow16"
+            app:layout_constraintVertical_bias="0.463" />
+
+        <TextView
+            android:id="@+id/Temp_save_row2_col3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow"
+            app:layout_constraintStart_toEndOf="@+id/lineCol6"
+            app:layout_constraintStart_toStartOf="@+id/Temp_save_row1_col3"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow18"
+            app:layout_constraintVertical_bias="0.552" />
+
+        <TextView
+            android:id="@+id/Temp_save_row3_col3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/lineCol6"
+            app:layout_constraintStart_toEndOf="@+id/lineCol6"
+            app:layout_constraintStart_toStartOf="@+id/Temp_save_row2_col3"
+            app:layout_constraintTop_toBottomOf="@+id/lineRow"
+            app:layout_constraintVertical_bias="0.605" />
+
+        <TextView
+            android:id="@+id/Max_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최고 1회"
+            app:layout_constraintBottom_toTopOf="@+id/lineRow"
+            app:layout_constraintEnd_toStartOf="@+id/lineCol"
+            app:layout_constraintHorizontal_bias="0.478"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.912" />
+
+        <View
+            android:id="@+id/lineCol5"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lineRow20"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/lineCol6"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.739"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lineRow20"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <View
+            android:id="@+id/lineCol"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="@+id/lineRow19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lineRow20" />
+
+        <View
+            android:id="@+id/lineRow19"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.311" />
+
+        <View
+            android:id="@+id/lineRow21"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
+
+        <View
+            android:id="@+id/lineRow20"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.045" />
+
+        <View
+            android:id="@+id/lineRow16"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.097" />
+
+        <View
+            android:id="@+id/lineRow17"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.097" />
+
+        <View
+            android:id="@+id/lineRow18"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.171" />
+
+        <View
+            android:id="@+id/lineRow"
+            android:layout_width="405dp"
+            android:layout_height="2dp"
+            android:background="@color/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.242" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/record_recycle1"
+            android:layout_width="411dp"
+            android:layout_height="449dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineCol5"
+            app:layout_constraintVertical_bias="0.01">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/record_recycle2"
+            android:visibility="gone"
+            android:layout_width="411dp"
+            android:layout_height="449dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineCol5"
+            app:layout_constraintVertical_bias="0.01"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

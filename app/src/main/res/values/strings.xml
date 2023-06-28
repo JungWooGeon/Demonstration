@@ -187,6 +187,7 @@
     <string name="plz_input_text_message">메시지 내용을 입력해주세요.</string>
     <string name="notice_document">고지서</string>
 
+
     <string name="example_measurement_time">[ 0000 ] 년 [ 0 ] 월 [ 0 ] 일 [ 0 ] 시 [ 0 ] 분</string>
 
     <string name="maintenance">유지</string>
@@ -198,5 +199,9 @@
     <string name="press_the_back_button">\'뒤로\' 버튼을 한 번 더 누르면 종료됩니다.</string>
 
     <string name="complete_add_notification">고지 내용이 저장되었습니다.</string>
+    <string name="notify_hanguel">고지</string>
+    <string name="_number_notify">[0]번고지</string>
     <string name="exceed_noise">소음 초과</string>
+
+    <string name="text_message">text message</string>
 </resources>

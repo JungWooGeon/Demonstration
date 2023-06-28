@@ -33,6 +33,8 @@
         <activity android:name=".manage_demonstration.notification.create_notification.AddTextMessageActivity" />
         <activity android:name=".manage_demonstration.notification.create_notification.NotificationDocumentActivity" />
         <activity android:name=".manage_demonstration.notification.create_notification.ImageViewActivity" />
+        <activity android:name=".manage_demonstration.record.record_check"/>
+        <activity android:name=".manage_demonstration.notification.create_notification.NotificationDocumentV2"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

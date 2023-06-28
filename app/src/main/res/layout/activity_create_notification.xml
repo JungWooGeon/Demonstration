@@ -10,7 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="407dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp">
 
@@ -508,8 +508,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="30dp"
-            android:gravity="center"
             android:background="@drawable/box_border"
+            android:gravity="center"
             android:hint="@string/addTextEditTextHint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/lineCol1"
